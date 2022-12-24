@@ -1,0 +1,16 @@
+- name: Blog
+  link: /blog/
+- name: Projects
+  dropdown:
+    - name: Leading Indicators
+      link: /ljleadingindicators/
+    - name: Mental Health
+      link: /mhealth/
+    - name: Nucleus Segmentation
+      link: /nucleussegmentation/
+- name: Tutorials
+  dropdown: 
+    - name: R, the tidyverse, and Machine Learning
+      link: /hack-cwru-workshop/
+- name: Contact
+  link: /contact/
