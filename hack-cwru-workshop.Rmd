@@ -11,9 +11,8 @@ output:
     toc_float: true
     df_print: kable
     number_sections: false
-permalink: /hack-cwru-workshop/
+    css: "/assets/css/style.css"
 fontsize: 12
-number_sections: false
 geometry: "left=1cm,right=1cm,top=1.5cm,bottom=1.5cm"
 always_allow_html: yes
 editor_options: 
@@ -112,7 +111,7 @@ vector1
 
 This is different than printing out the object. Although it might look the same, printing is only used for the purpose of seeing stuff. "Calling" an object means that you want to interact with it.
 
-One of the characteristics of any object in R is it's class. We can get the class by applying the function "class()". Functions are really important in programming. The define a set of operations that are performed on whatever is inside the function. Here, R is telling us that it recognizes the elementsof "vector1" as numeric.
+One of the characteristics of any object in R is it's class. We can get the class by applying the function "class()". Functions are really important in programming. The define a set of operations that are performed on whatever is inside the function. Here, R is telling us that it recognizes the elements of "vector1" as numeric.
 
 ```{r}
 print(vector1)
@@ -386,8 +385,8 @@ mtcars %>%
     class()
 ```
 
-One more concept in the tidyverse is lazy evaluation and data masking.
-This sounds fancy, but really all it means is that once we pass data to
+One more thing to know about the tidyverse is that it utilizes lazy evaluation and data masking.
+This sounds fancy, but all it really means is that once we pass data to
 a tidyverse function, we don't have to call the data anymore, just the
 column that we are interested in. No more `data$column`! That's good for
 us because that's less typing and faster analysis.
@@ -465,7 +464,7 @@ hist(mtcars$cyl, xlab = "Cylinders", main = "Histogram of Cylinders")
 
 ### tidyverse
 
-The package responsible for handling most graphics in the tidyverse
+The package responsible for handling most graphics in the tidyverse is
 called ggplot2. ggplot2 uses a layering system to build a graph, where
 each layer supplies information that is just laid on top of the
 information that came previously. There are a few quirks to this package
@@ -498,14 +497,14 @@ ggplot(mtcars) + geom_histogram(aes(x = cyl)) +
     # Since the default ggplot theme is bare-bones, I usually throw on a built-in theme
     
     theme_classic()
+
 ```
 
 # Machine Learning {.tabset}
 
 There are two main classes of ML:
 
-![Regression and
-Classification](figs/regression-vs-classification-in-machine-learning.png)
+![Regression and Classification](/figs/regression-vs-classification-in-machine-learning.png)
 
 -   Regression
     -   Line of best fit
@@ -536,8 +535,8 @@ job, it stops.
 Once the model is trained and a relationship is established, then we can
 give it new input and receive an expected output. There are many
 considerations, evaluations, and tests that should be made along the
-way, but the model should be generalization enough to produce insight
-into data not available for standard data analysis.
+way, but the model should be able to produce insights
+into data not available for standard data analysis using this relationship of input-output.
 
 Using real data, lets see what ML looks like in R. I'll be using a
 combination of the tidyverse and base R for this, and I won't delve too
