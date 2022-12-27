@@ -1,0 +1,49 @@
+/* Define the color palette */
+:root {
+  --dutch-white: #e7ddbcff;
+  --ecru: #cdbd85ff;
+  --satin-sheen-gold: #b39c4dff;
+  --moss-green: #768948ff;
+  --fern-green: #607744ff;
+  --hunter-green: #34623fff;
+  --pine-tree: #1e2f23ff;
+}
+
+/* Top navigation bar */
+nav {
+  background-color: var(--satin-sheen-gold);
+}
+
+nav ul li a {
+  color: var(--pine-tree);
+}
+
+/* Subsections */
+section {
+  background-color: var(--ecru);
+  color: var(--pine-tree);
+}
+
+/* Blog posts */
+article {
+  background-color: var(--dutch-white);
+  color: var(--pine-tree);
+  padding: 20px;
+}
+
+/* Other styles */
+h1, h2, h3 {
+  color: var(--moss-green);
+}
+
+p {
+  color: var(--fern-green);
+}
+
+blockquote {
+  color: var(--hunter-green);
+}
+
+a {
+  color: var(--pine-tree);
+}
