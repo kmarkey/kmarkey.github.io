@@ -9,24 +9,27 @@
   --pine-tree: #1e2f23ff;
 }
 
+/* Set the background color of the entire page to dutch white */
+body {
+  background-color: var(--dutch-white);
+}
+
 /* Top navigation bar */
 nav {
-  background-color: var(--satin-sheen-gold);
+  background-color: var(--pine-tree);
 }
 
 nav ul li a {
-  color: var(--pine-tree);
+  color: var(--dutch-white);
 }
 
 /* Subsections */
 section {
-  background-color: var(--ecru);
   color: var(--pine-tree);
 }
 
 /* Blog posts */
 article {
-  background-color: var(--dutch-white);
   color: var(--pine-tree);
   padding: 20px;
 }
@@ -45,5 +48,5 @@ blockquote {
 }
 
 a {
-  color: var(--pine-tree);
+  color: var(--dutch-white);
 }
