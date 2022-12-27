@@ -3,4 +3,5 @@ layout: page
 title: kmarkey
 remote_theme: chrisrhymes/bulma-clean-theme
 author: Keaton Markey
+timezone: America/New_York
 ---
