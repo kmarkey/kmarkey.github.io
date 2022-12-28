@@ -42,8 +42,12 @@ a {
 
 code {
   color: var(--black-olive);
+  background-color: var(--moss-green);
+}
+
+.code-chunk {
+  color: var(--alabaster);
   background-color: var(--pine-tree);
-  border: 3px var(--satin-sheen-gold);
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus {
@@ -54,7 +58,7 @@ code {
     border-bottom-color: var(--hunter-green);
 }
 
-.nav-tabs>li.active>a:hover {
+.nav-tabs>li.active>a:hover, .nav>li>a:focus, .nav>li>a:hover {
     color: var(--black-olive);
     cursor: default;
     background-color: var(--satin-cheen-gold);
