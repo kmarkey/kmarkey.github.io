@@ -3,38 +3,7 @@ A Taste of R, the tidyverse, and Machine Learning
 Author: Keaton Markey
 Spring 2022
 
-- <a href="#introduction" id="toc-introduction">Introduction</a>
-- <a href="#r-basics" id="toc-r-basics">R Basics</a>
-  - <a href="#creating-objects" id="toc-creating-objects">Creating
-    Objects:</a>
-  - <a href="#indexing" id="toc-indexing">Indexing</a>
-  - <a href="#lists" id="toc-lists">Lists</a>
-  - <a href="#factors" id="toc-factors">Factors</a>
-  - <a href="#matrices" id="toc-matrices">Matrices</a>
-  - <a href="#data-frames" id="toc-data-frames">Data Frames</a>
-  - <a href="#conditional-indexing"
-    id="toc-conditional-indexing">Conditional Indexing</a>
-- <a href="#base-r-vs-tidyverse" id="toc-base-r-vs-tidyverse">Base R
-  vs. tidyverse</a>
-  - <a href="#data-manipulation" id="toc-data-manipulation">Data
-    Manipulation</a>
-    - <a href="#base-r" id="toc-base-r">Base R</a>
-    - <a href="#tidyverse" id="toc-tidyverse">tidyverse</a>
-  - <a href="#visualization" id="toc-visualization">Visualization</a>
-    - <a href="#base-r-1" id="toc-base-r-1">Base R</a>
-    - <a href="#tidyverse-1" id="toc-tidyverse-1">tidyverse</a>
-- <a href="#machine-learning" id="toc-machine-learning">Machine
-  Learning</a>
-  - <a href="#case-1-linear-regression"
-    id="toc-case-1-linear-regression">Case 1: Linear Regression</a>
-    - <a href="#linear-model" id="toc-linear-model">Linear Model</a>
-    - <a href="#polynomial-model" id="toc-polynomial-model">Polynomial
-      Model</a>
-  - <a href="#case-2-logistic-regression"
-    id="toc-case-2-logistic-regression">Case 2: Logistic Regression</a>
-  - <a href="#case-3-random-forest" id="toc-case-3-random-forest">Case 3:
-    Random Forest</a>
-- <a href="#thank-you" id="toc-thank-you">Thank You</a>
+<link href="/assets/css/style.css" rel="stylesheet"></link>
 
 This tutorial was prepared for a quick and dirty overview of R, some of
 its facets, and what machine learning looks like. It is assumed that you
@@ -284,11 +253,11 @@ matrix1
 ```
 
     ##          [,1]     [,2]
-    ## [1,] 4.419795 8.860353
-    ## [2,] 3.463783 7.429112
-    ## [3,] 3.070265 7.951495
-    ## [4,] 4.180873 7.457361
-    ## [5,] 2.777648 6.798499
+    ## [1,] 5.230363 6.853838
+    ## [2,] 3.018820 7.418476
+    ## [3,] 3.374763 8.743426
+    ## [4,] 4.823487 6.488034
+    ## [5,] 3.844354 8.806494
 
 To index this class of object, the column names and row names give us a
 pretty good idea. To get a specific element, index the row then column.
@@ -297,7 +266,7 @@ pretty good idea. To get a specific element, index the row then column.
 matrix1[3,1]
 ```
 
-    ## [1] 3.070265
+    ## [1] 3.374763
 
 Matrices can also be indexed as one-dimensional by supplying one index.
 The columns wrap to the next one.
@@ -306,13 +275,13 @@ The columns wrap to the next one.
 matrix1[6]
 ```
 
-    ## [1] 8.860353
+    ## [1] 6.853838
 
 ``` r
 matrix1[1,2]
 ```
 
-    ## [1] 8.860353
+    ## [1] 6.853838
 
 To get a full row or column, just leave the other dimension blank.
 
@@ -320,7 +289,7 @@ To get a full row or column, just leave the other dimension blank.
 matrix1[1,]
 ```
 
-    ## [1] 4.419795 8.860353
+    ## [1] 5.230363 6.853838
 
 ## Data Frames
 
@@ -344,16 +313,16 @@ dataframe1
 
 |      col1 | col2 |
 |----------:|-----:|
-|  4.419795 |    1 |
-|  3.463783 |    2 |
-|  3.070266 |    3 |
-|  4.180873 |    4 |
-|  2.777648 |    5 |
-|  8.860353 |    6 |
-|  7.429112 |    7 |
-|  7.951495 |    8 |
-|  7.457361 |    9 |
-|  6.798499 |   10 |
+|  5.230363 |    1 |
+|  3.018820 |    2 |
+|  3.374763 |    3 |
+|  4.823487 |    4 |
+|  3.844353 |    5 |
+|  6.853838 |    6 |
+|  7.418476 |    7 |
+|  8.743426 |    8 |
+|  6.488034 |    9 |
+|  8.806494 |   10 |
 | 78.000000 |   11 |
 | 44.000000 |   12 |
 
@@ -366,8 +335,8 @@ returns a vector.
 dataframe1$col1
 ```
 
-    ##  [1]  4.419795  3.463783  3.070265  4.180873  2.777648  8.860353  7.429112
-    ##  [8]  7.951495  7.457361  6.798499 78.000000 44.000000
+    ##  [1]  5.230363  3.018820  3.374763  4.823487  3.844354  6.853838  7.418476
+    ##  [8]  8.743426  6.488034  8.806494 78.000000 44.000000
 
 You can also index like you do with matrices, but since it’s a
 dataframe, the first method is preferred.
@@ -376,8 +345,8 @@ dataframe, the first method is preferred.
 dataframe1[,1]
 ```
 
-    ##  [1]  4.419795  3.463783  3.070265  4.180873  2.777648  8.860353  7.429112
-    ##  [8]  7.951495  7.457361  6.798499 78.000000 44.000000
+    ##  [1]  5.230363  3.018820  3.374763  4.823487  3.844354  6.853838  7.418476
+    ##  [8]  8.743426  6.488034  8.806494 78.000000 44.000000
 
 ## Conditional Indexing
 
@@ -404,14 +373,14 @@ from col1 where greater_than_1 is equal to True.
 dataframe1$col1
 ```
 
-    ##  [1]  4.419795  3.463783  3.070265  4.180873  2.777648  8.860353  7.429112
-    ##  [8]  7.951495  7.457361  6.798499 78.000000 44.000000
+    ##  [1]  5.230363  3.018820  3.374763  4.823487  3.844354  6.853838  7.418476
+    ##  [8]  8.743426  6.488034  8.806494 78.000000 44.000000
 
 ``` r
 dataframe1$col1[greater_than_1]
 ```
 
-    ## [1]  4.419795  4.180873  8.860353  7.429112  7.951495  7.457361  6.798499
+    ## [1]  5.230363  4.823487  6.853838  7.418476  8.743426  6.488034  8.806494
     ## [8] 78.000000 44.000000
 
 This is an extremely powerful tool in base R. You can also create other
@@ -752,7 +721,7 @@ ggplot(mtcars) + geom_histogram(aes(x = cyl)) +
 There are two main classes of ML:
 
 ![Regression and
-Classification](figs/regression-vs-classification-in-machine-learning.png)
+Classification](../figs/regression-vs-classification-in-machine-learning.png)
 
 - Regression
   - Line of best fit
@@ -813,7 +782,7 @@ traveled according to the device `TrackerDistance`.
 ``` r
 # Read in the csv with "read_csv()" from the tidyverse
 
-fitbit <- read_csv("data/Daily_Activity_2022_27_02.csv")
+fitbit <- read_csv("../data/Daily_Activity_2022_27_02.csv")
 ```
 
     ## New names:
@@ -1068,7 +1037,7 @@ more accurately represent the relationship between `Calories` and
 
 ## Case 2: Logistic Regression
 
-![Simple Logistic Regression](figs/Simple-Logistic-Regression.jpg)
+![Simple Logistic Regression](../figs/Simple-Logistic-Regression.jpg)
 
 Even though regression is in the name, it is used for binary
 classification (TRUE/FALSE, white/black etc.). This model estimates the
