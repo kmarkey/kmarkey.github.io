@@ -27,21 +27,6 @@ body {
   padding: 20px;
 }
 
-.table>thead>tr>th {
-    vertical-align: bottom;
-    color: var(--alabaster);
-    background-color: var(--brunswick-green);
-    border-bottom: 3px solid var(--pine-tree);
-}
-
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-    border-top: 1px solid var(--pine-tree);
-    background-color: var(--asparagus);
-}
-
 /* Other styles */
 h1, h2, h3 {
   background-color: var(--alabaster);
@@ -65,20 +50,24 @@ blockquote {
   padding: 10px 20px;
   margin: 0 0 20px;
   font-size: 17.5px;
-  background-color: var(--moss-green);
+  background-color: var(--alabaster);
   border-left: 5px solid var(--brunswick-green);
 }
 
 .code-chunk {
-  color: var(--black-olive);
+  color: var(--alabaster);
   background-color: var(--pine-tree);
-  border: 3px solid var(--satin-sheen-gold);
+  border: 1px solid var(--hunter-green);
 }
 
 pre:not([class]) {
     color: var(--black-olive);
-    background-color: var(--ecru);
-    border: 3px solid var(--satin-sheen-gold);
+    background-color: var(--dutch-white);
+    border: 1px solid var(--satin-sheen-gold);
+}
+
+.nav-tabs {
+    border-bottom: 1px solid var(--hunter-green);
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
@@ -92,8 +81,8 @@ pre:not([class]) {
 .nav>li>a:focus, .nav>li>a:hover {
     color: var(--black-olive);
     cursor: default;
-    background-color: var(--satin-sheen-gold);
-    border: 3px solid var(--moss-green);
+    background-color: var(--dutch-white);
+    border: 1px solid var(--moss-green);
     border-bottom-color: var(--moss-green);
 }
 
@@ -105,7 +94,7 @@ pre:not([class]) {
 }
 
 .hljs-number {
-    color: var(--moss-green);
+    color: var(--asparagus);
 }
 
 .hljs-keyword {
@@ -114,5 +103,5 @@ pre:not([class]) {
 }
 
 .hljs-string {
-    color: var(--moss-green);
+    color: var(--asparagus);
 }
