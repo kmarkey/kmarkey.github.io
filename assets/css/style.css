@@ -38,12 +38,34 @@ p {
 }
 
 a {
-  color: var(--pine-tree);
+  outline: none;
+  text-decoration: none;
+  padding: 2px 1px 0;
+}
+
+a:link {
+  color: var(--moss-green);
+}
+
+a:focus {
+  border-bottom: 1px solid;
+  background: var(--pine-tree);
+}
+
+a:hover {
+  color: var(--alabaster);
+  border-bottom: 1px solid var(--pine-tree);
+  background: var(--brunswick-green);
+}
+
+a:active {
+  background: var(--brunswick-green);
+  color: var(--alabaster);
 }
 
 code {
   color: var(--black-olive);
-  background-color: var(--moss-green);
+  background-color: var(--asparagus);
 }
 
 blockquote {
@@ -57,13 +79,25 @@ blockquote {
 .code-chunk {
   color: var(--alabaster);
   background-color: var(--pine-tree);
-  border: 1px solid var(--hunter-green);
+  border: 1px solid var(--moss-green);
 }
 
 pre:not([class]) {
     color: var(--black-olive);
     background-color: var(--dutch-white);
     border: 1px solid var(--satin-sheen-gold);
+}
+
+.table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom: 2px solid var(--pine-tree);
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid var(--pine-tree);
 }
 
 .nav-tabs {
@@ -104,4 +138,20 @@ pre:not([class]) {
 
 .hljs-string {
     color: var(--asparagus);
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
 }
