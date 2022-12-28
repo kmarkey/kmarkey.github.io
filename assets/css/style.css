@@ -4,6 +4,7 @@
   --dutch-white: #e7ddbcff;
   --ecru: #cdbd85ff;
   --satin-sheen-gold: #b39c4dff;
+  --asparagus: #9Cab73ff;
   --moss-green: #768948ff;
   --fern-green: #607744ff;
   --hunter-green: #34623fff;
@@ -26,6 +27,21 @@ body {
   padding: 20px;
 }
 
+.table>thead>tr>th {
+    vertical-align: bottom;
+    color: var(--alabaster);
+    background-color: var(--brunswick-green);
+    border-bottom: 3px solid var(--pine-tree);
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid var(--pine-tree);
+    background-color: var(--asparagus);
+}
+
 /* Other styles */
 h1, h2, h3 {
   background-color: var(--alabaster);
@@ -45,12 +61,27 @@ code {
   background-color: var(--moss-green);
 }
 
-.code-chunk {
-  color: var(--alabaster);
-  background-color: var(--pine-tree);
+blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 17.5px;
+  background-color: var(--moss-green);
+  border-left: 5px solid var(--brunswick-green);
 }
 
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus {
+.code-chunk {
+  color: var(--black-olive);
+  background-color: var(--pine-tree);
+  border: 3px solid var(--satin-sheen-gold);
+}
+
+pre:not([class]) {
+    color: var(--black-olive);
+    background-color: var(--ecru);
+    border: 3px solid var(--satin-sheen-gold);
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     color: var(--alabaster);
     cursor: default;
     background-color: var(--fern-green);
@@ -58,11 +89,11 @@ code {
     border-bottom-color: var(--hunter-green);
 }
 
-.nav-tabs>li.active>a:hover, .nav>li>a:focus, .nav>li>a:hover {
+.nav>li>a:focus, .nav>li>a:hover {
     color: var(--black-olive);
     cursor: default;
-    background-color: var(--satin-cheen-gold);
-    border: 1px solid var(--moss-green);
+    background-color: var(--satin-sheen-gold);
+    border: 3px solid var(--moss-green);
     border-bottom-color: var(--moss-green);
 }
 
@@ -74,7 +105,7 @@ code {
 }
 
 .hljs-number {
-    color: var(--brunswick-green);
+    color: var(--moss-green);
 }
 
 .hljs-keyword {
@@ -83,10 +114,5 @@ code {
 }
 
 .hljs-string {
-    color: var(--brunswick-green);
-}
-
-pre:not([class]) {
-    color: var(--black-olive);
-    background-color: var(--ecru);
+    color: var(--moss-green);
 }
