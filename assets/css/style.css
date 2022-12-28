@@ -1,5 +1,6 @@
 /* Define the color palette */
 :root {
+  --alabaster: #f5f1e5ff;
   --dutch-white: #e7ddbcff;
   --ecru: #cdbd85ff;
   --satin-sheen-gold: #b39c4dff;
@@ -12,13 +13,13 @@
 
 /* Subsections */
 section {
-  background-color: var(--dutch-white);
+  background-color: var(--alabaster);
   color: var(--black-olive);
 }
 
 /* Body sections */
 body {
-  background-color: var(--ecru);
+  background-color: var(--alabaster);
   color: var(--pine-tree);
   padding: 20px;
 }
@@ -41,7 +42,16 @@ a {
   color: var(--pine-tree);
 }
 
-code {
+code-chunk {
   color: var(--black-olive);
-  background-color: var(--moss-green);
+  background-color: var(--ecru);
+  border: 3px var(--satin-sheen-gold);
+}
+
+.nav-pills li a:hover, .nav-pills li a:focus, .nav-pills li.active a, .nav-pills li.active a:hover, .nav-pills li.active a:focus {
+     background-color: var(--dutch-white;
+     }
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    background-color: var(--satin-sheen-gold);
 }
