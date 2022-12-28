@@ -1,9 +1,7 @@
-A Taste of R, the tidyverse, and Machine Learning
-================
 Author: Keaton Markey
 Spring 2022
 
-<link href="/assets/css/style.css" rel="stylesheet"></link>
+<link href="assets/css/style.css" rel="stylesheet"></link>
 
 This tutorial was prepared for a quick and dirty overview of R, some of
 its facets, and what machine learning looks like. It is assumed that you
@@ -253,11 +251,11 @@ matrix1
 ```
 
     ##          [,1]     [,2]
-    ## [1,] 5.230363 6.853838
-    ## [2,] 3.018820 7.418476
-    ## [3,] 3.374763 8.743426
-    ## [4,] 4.823487 6.488034
-    ## [5,] 3.844354 8.806494
+    ## [1,] 3.466688 8.712770
+    ## [2,] 4.719003 8.274699
+    ## [3,] 2.707173 7.714953
+    ## [4,] 4.404175 5.787662
+    ## [5,] 2.545032 6.101740
 
 To index this class of object, the column names and row names give us a
 pretty good idea. To get a specific element, index the row then column.
@@ -266,7 +264,7 @@ pretty good idea. To get a specific element, index the row then column.
 matrix1[3,1]
 ```
 
-    ## [1] 3.374763
+    ## [1] 2.707173
 
 Matrices can also be indexed as one-dimensional by supplying one index.
 The columns wrap to the next one.
@@ -275,13 +273,13 @@ The columns wrap to the next one.
 matrix1[6]
 ```
 
-    ## [1] 6.853838
+    ## [1] 8.71277
 
 ``` r
 matrix1[1,2]
 ```
 
-    ## [1] 6.853838
+    ## [1] 8.71277
 
 To get a full row or column, just leave the other dimension blank.
 
@@ -289,7 +287,7 @@ To get a full row or column, just leave the other dimension blank.
 matrix1[1,]
 ```
 
-    ## [1] 5.230363 6.853838
+    ## [1] 3.466688 8.712770
 
 ## Data Frames
 
@@ -313,16 +311,16 @@ dataframe1
 
 |      col1 | col2 |
 |----------:|-----:|
-|  5.230363 |    1 |
-|  3.018820 |    2 |
-|  3.374763 |    3 |
-|  4.823487 |    4 |
-|  3.844353 |    5 |
-|  6.853838 |    6 |
-|  7.418476 |    7 |
-|  8.743426 |    8 |
-|  6.488034 |    9 |
-|  8.806494 |   10 |
+|  3.466688 |    1 |
+|  4.719003 |    2 |
+|  2.707173 |    3 |
+|  4.404175 |    4 |
+|  2.545032 |    5 |
+|  8.712770 |    6 |
+|  8.274699 |    7 |
+|  7.714954 |    8 |
+|  5.787662 |    9 |
+|  6.101740 |   10 |
 | 78.000000 |   11 |
 | 44.000000 |   12 |
 
@@ -335,8 +333,8 @@ returns a vector.
 dataframe1$col1
 ```
 
-    ##  [1]  5.230363  3.018820  3.374763  4.823487  3.844354  6.853838  7.418476
-    ##  [8]  8.743426  6.488034  8.806494 78.000000 44.000000
+    ##  [1]  3.466688  4.719003  2.707173  4.404175  2.545032  8.712770  8.274699
+    ##  [8]  7.714953  5.787662  6.101740 78.000000 44.000000
 
 You can also index like you do with matrices, but since it’s a
 dataframe, the first method is preferred.
@@ -345,8 +343,8 @@ dataframe, the first method is preferred.
 dataframe1[,1]
 ```
 
-    ##  [1]  5.230363  3.018820  3.374763  4.823487  3.844354  6.853838  7.418476
-    ##  [8]  8.743426  6.488034  8.806494 78.000000 44.000000
+    ##  [1]  3.466688  4.719003  2.707173  4.404175  2.545032  8.712770  8.274699
+    ##  [8]  7.714953  5.787662  6.101740 78.000000 44.000000
 
 ## Conditional Indexing
 
@@ -363,7 +361,7 @@ greater_than_1 <- dataframe1$col1 > 4
 greater_than_1
 ```
 
-    ##  [1]  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+    ##  [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 
 Here, we receive a vector of boolean (True or False) values. We can use
 this vector to index the original vector. So we only receive elements
@@ -373,14 +371,14 @@ from col1 where greater_than_1 is equal to True.
 dataframe1$col1
 ```
 
-    ##  [1]  5.230363  3.018820  3.374763  4.823487  3.844354  6.853838  7.418476
-    ##  [8]  8.743426  6.488034  8.806494 78.000000 44.000000
+    ##  [1]  3.466688  4.719003  2.707173  4.404175  2.545032  8.712770  8.274699
+    ##  [8]  7.714953  5.787662  6.101740 78.000000 44.000000
 
 ``` r
 dataframe1$col1[greater_than_1]
 ```
 
-    ## [1]  5.230363  4.823487  6.853838  7.418476  8.743426  6.488034  8.806494
+    ## [1]  4.719003  4.404175  8.712770  8.274699  7.714953  5.787662  6.101740
     ## [8] 78.000000 44.000000
 
 This is an extremely powerful tool in base R. You can also create other
