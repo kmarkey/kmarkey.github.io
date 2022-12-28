@@ -7,6 +7,7 @@
   --moss-green: #768948ff;
   --fern-green: #607744ff;
   --hunter-green: #34623fff;
+  --brunswick-green: #294931ff;
   --pine-tree: #1e2f23ff;
   --black-olive: #40403eff;
   --orange-red: #f25f5cff;
@@ -39,18 +40,26 @@ a {
   color: var(--pine-tree);
 }
 
-.code {
+code {
   color: var(--black-olive);
-  background-color: var(--dutch-white);
+  background-color: var(--pine-tree);
   border: 3px var(--satin-sheen-gold);
 }
 
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-    color: var(--black-olive);
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus {
+    color: var(--alabaster);
     cursor: default;
-    background-color: ;
+    background-color: var(--fern-green);
     border: 1px solid var(--hunter-green);
     border-bottom-color: var(--hunter-green);
+}
+
+.nav-tabs>li.active>a:hover {
+    color: var(--black-olive);
+    cursor: default;
+    background-color: var(--satin-cheen-gold);
+    border: 1px solid var(--moss-green);
+    border-bottom-color: var(--moss-green);
 }
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
@@ -61,7 +70,7 @@ a {
 }
 
 .hljs-number {
-    color: var(--hunter-green);
+    color: var(--brunswick-green);
 }
 
 .hljs-keyword {
@@ -70,5 +79,10 @@ a {
 }
 
 .hljs-string {
-    color: var(--hunter-green);
+    color: var(--brunswick-green);
+}
+
+pre:not([class]) {
+    color: var(--black-olive);
+    background-color: var(--ecru);
 }
