@@ -9,6 +9,6 @@
 - name: Tutorials
   dropdown: 
     - name: R, the tidyverse, and Machine Learning
-      link: https://kmarkey.github.io/HackCWRU-Workshop/hack-cwru-workshop
+      link: /hack-cwru-workshop/
 - name: Contact
   link: /contact/
