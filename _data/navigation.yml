@@ -1,4 +1,5 @@
 - name: Projects
+  link: /projects/
   dropdown:
     - name: Leading Indicators
       link: /ljleadingindicators/
@@ -7,6 +8,7 @@
     - name: Nucleus Segmentation
       link: /nucleussegmentation/
 - name: Tutorials
+  link: /tutorials/
   dropdown: 
     - name: R, the tidyverse, and Machine Learning
       link: /hack-cwru-workshop/
