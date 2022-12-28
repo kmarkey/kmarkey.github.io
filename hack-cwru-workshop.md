@@ -1,7 +1,7 @@
 Author: Keaton Markey
 Spring 2022
 
-<link href="assets/css/style.css" rel="stylesheet"></link>
+<link href="assets/css/style.css" rel="stylesheet">
 
 This tutorial was prepared for a quick and dirty overview of R, some of
 its facets, and what machine learning looks like. It is assumed that you
