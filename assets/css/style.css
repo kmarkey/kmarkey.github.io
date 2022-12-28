@@ -33,10 +33,12 @@ h1, h2, h3 {
   color: var(--black-olive);
 }
 
+/* Paragraph */
 p {
   background-color: var(--alabaster);
 }
 
+/* Links */
 a {
   outline: none;
   text-decoration: none;
@@ -63,11 +65,13 @@ a:active {
   color: var(--alabaster);
 }
 
+/* Inline Code Blocks */
 code {
   color: var(--black-olive);
   background-color: var(--asparagus);
 }
 
+/* Block Quotes */
 blockquote {
   padding: 10px 20px;
   margin: 0 0 20px;
@@ -76,23 +80,27 @@ blockquote {
   border-left: 5px solid var(--brunswick-green);
 }
 
+/* Custom Knitr Class, R Chunks */
 .code-chunk {
   color: var(--alabaster);
   background-color: var(--pine-tree);
   border: 1px solid var(--moss-green);
 }
 
+/* Chunk Output */
 pre:not([class]) {
     color: var(--black-olive);
     background-color: var(--dutch-white);
     border: 1px solid var(--satin-sheen-gold);
 }
 
+/* Table Header */
 .table>thead>tr>th {
     vertical-align: bottom;
     border-bottom: 2px solid var(--pine-tree);
 }
 
+/* Table Body */
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     padding: 8px;
     line-height: 1.42857143;
@@ -100,6 +108,7 @@ pre:not([class]) {
     border-top: 1px solid var(--pine-tree);
 }
 
+/* Sidebar Navigation */
 .nav-tabs {
     border-bottom: 1px solid var(--hunter-green);
 }
@@ -120,6 +129,7 @@ pre:not([class]) {
     border-bottom-color: var(--moss-green);
 }
 
+/* Tabsets */
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     z-index: 2;
     color: var(--alabaster);
@@ -127,19 +137,23 @@ pre:not([class]) {
     border-color: var(--hunter-green);
 }
 
+/* Highlight Numbers */
 .hljs-number {
     color: var(--asparagus);
 }
 
+/* Highlight Keywords */
 .hljs-keyword {
     color: var(--orange-red);
     font-weight: bold;
 }
 
+/* Highlight Strings */
 .hljs-string {
     color: var(--asparagus);
 }
 
+/* Decorate Links */
 a:link {
   text-decoration: none;
 }
