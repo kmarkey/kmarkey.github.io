@@ -21,11 +21,11 @@ section {
 }
 
 /* Body sections */
-body {
+/*body {
   background-color: var(--alabaster);
   color: var(--pine-tree);
   padding: 20px;
-}
+} */
 
 /* Other styles */
 h1, h2, h3 {
@@ -98,6 +98,7 @@ pre:not([class]) {
 .table>thead>tr>th {
     vertical-align: bottom;
     border-bottom: 2px solid var(--pine-tree);
+    background-color: inherit;
 }
 
 /* Table Body */
@@ -106,6 +107,8 @@ pre:not([class]) {
     line-height: 1.42857143;
     vertical-align: top;
     border-top: 1px solid var(--pine-tree);
+    background-color: inherit;
+
 }
 
 /* Sidebar Navigation */
