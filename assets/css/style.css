@@ -9,6 +9,7 @@
   --hunter-green: #34623fff;
   --pine-tree: #1e2f23ff;
   --black-olive: #40403eff;
+  --orange-red: #f25f5cff;
 }
 
 /* Subsections */
@@ -26,7 +27,7 @@ body {
 
 /* Other styles */
 h1, h2, h3 {
-  background-color: var(--dutch-white);
+  background-color: var(--alabaster);
   color: var(--black-olive);
 }
 
@@ -38,9 +39,7 @@ a {
   color: var(--pine-tree);
 }
 
-.code
-
-.r.code-chunk {
+.code {
   color: var(--black-olive);
   background-color: var(--dutch-white);
   border: 3px var(--satin-sheen-gold);
@@ -49,16 +48,16 @@ a {
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     color: var(--black-olive);
     cursor: default;
-    background-color: inherit;
-    border: 1px solid var(--pine-tree);
-    border-bottom-color: transparent;
+    background-color: ;
+    border: 1px solid var(--hunter-green);
+    border-bottom-color: var(--hunter-green);
 }
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     z-index: 2;
-    color: #fff;
+    color: var(--alabaster);
     background-color: var(--fern-green);
-    border-color: var(--fern-green);
+    border-color: var(--hunter-green);
 }
 
 .hljs-number {
@@ -66,10 +65,10 @@ a {
 }
 
 .hljs-keyword {
-    color: var(--pine-tree);
+    color: var(--orange-red);
     font-weight: bold;
 }
 
 .hljs-string {
-    color: var(--moss-green);
+    color: var(--hunter-green);
 }
