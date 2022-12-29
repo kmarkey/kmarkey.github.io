@@ -125,7 +125,6 @@ h1, h2, h3 {
 
 .highlight .o {
     color: var(--alabaster);
-    font-weight: bold;
 }
 
 /* Links */
@@ -139,11 +138,10 @@ a:hover {
   color: var(--alabaster);
   background: var(--brunswick-green);
   text-decoration: none;
-  border-bottom: 1px solid var(--pine-tree);
   border-radius: 3px
 }
 
-/* DOnt underline nav */
+/* Dont underline nav */
 .navbar-item, .navbar-link {
   text-decoration: none;
 }
@@ -286,14 +284,3 @@ a:hover {
 
 /* scrollbar */
 /* width */
-::-webkit-scrollbar-track {
-  width: 20px;
-  background-color: var(--dutch-white);
-  border-color: var(--ecru);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background-color: var(--fern-green);
-  border-radius: 7px;
-}
