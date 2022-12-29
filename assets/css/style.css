@@ -20,10 +20,23 @@ section {
   color: var(--black-olive);
 }
 
+pre code {
+    background-color: transparent;
+    color: var(--alabaster);
+}
+
 code {
   color: var(--pine-tree);
   background-color: var(--asparagus);
   border-radius: 7px;
+}
+
+.content blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 17.5px;
+  background-color: var(--alabaster);
+  border-left: 5px solid var(--brunswick-green);
 }
 
 .hero.is-primary .title {
@@ -68,10 +81,6 @@ h1, h2, h3 {
   background-color: var(--dutch-white);
   border: 1px solid var(--satin-sheen-gold);
   border-radius: 7px;
-}
-
-.highlight {
-  color: var(--alabaster);
 }
 
 /* Strings */
@@ -139,13 +148,13 @@ a:hover {
 /* Inline Code Blocks */
 
 /* Block Quotes */
-blockquote {
+/* blockquote {
   padding: 10px 20px;
   margin: 0 0 20px;
   font-size: 17.5px;
   background-color: var(--alabaster);
   border-left: 5px solid var(--brunswick-green);
-}
+} */
 
 /* Custom Knitr Class, R Chunks */
 /* .code-chunk {
