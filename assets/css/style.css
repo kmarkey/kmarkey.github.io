@@ -20,6 +20,20 @@ section {
   color: var(--black-olive);
 }
 
+/* Menubar */
+.menu-list a {
+    border-radius: 7px;
+    color: var(--black-olive);
+    text-decoration: none;
+    display: block;
+    padding: 0.5em 0.75em;
+}
+
+.menu-list a:hover {
+  color: var(--alabaster);
+  background: var(--brunswick-green);
+}
+
 pre code {
     background-color: transparent;
     color: var(--alabaster);
@@ -248,3 +262,17 @@ a:hover {
 /* a:active {
   text-decoration: underline;
 } */
+
+/* scrollbar */
+/* width */
+::-webkit-scrollbar-track {
+  width: 20px;
+  color: var(--dutch-white);
+  border-color: var(--ecru);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--fern-green);
+  border-radius: 7px;
+}
