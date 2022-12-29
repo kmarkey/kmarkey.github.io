@@ -29,8 +29,7 @@ section {
 
 /* Other styles */
 h1, h2, h3 {
-  background-color: var(--alabaster);
-  color: var(--black-olive);
+  background-color: transparent;
 }
 
 /* Paragraph */
@@ -71,6 +70,17 @@ code {
   background-color: var(--asparagus);
 }
 
+.hero.is-primary .title {
+    color: var(--alabaster);
+}
+
+h1.title.is-2 {
+  
+}
+
+p.subtitle.is-3 {
+  
+}
 /* Block Quotes */
 blockquote {
   padding: 10px 20px;
