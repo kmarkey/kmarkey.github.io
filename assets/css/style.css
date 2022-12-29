@@ -18,7 +18,14 @@
 section {
   background-color: var(--alabaster);
   color: var(--black-olive);
-  overflow-x: hidden;
+}
+
+.content pre {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    padding: 1.25em 1.5em;
+    white-space: pre;
+    word-wrap: normal;
 }
 
 /* Menubar */
