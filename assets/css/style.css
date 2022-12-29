@@ -98,7 +98,7 @@ h1, h2, h3 {
 }
 
 /* Strings */
-.highlight .s2 {
+.highlight .s1, .highlight .s2 {
     color: var(--moss-green);
 }
 
@@ -110,6 +110,13 @@ h1, h2, h3 {
 /* keywords */
 .highlight .nf {
     color: var(--orange-red);
+    font-weight: bold;
+}
+
+/* weird characters?  */
+
+.highlight .o {
+    color: var(--alabaster);
     font-weight: bold;
 }
 
