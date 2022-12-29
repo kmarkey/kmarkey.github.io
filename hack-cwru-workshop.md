@@ -261,11 +261,11 @@ matrix1
 ```
 
     ##          [,1]     [,2]
-    ## [1,] 3.204092 5.606968
-    ## [2,] 3.622807 7.002204
-    ## [3,] 5.440479 6.731488
-    ## [4,] 4.750156 6.669378
-    ## [5,] 5.197283 7.417072
+    ## [1,] 3.480571 6.927518
+    ## [2,] 4.727471 5.678969
+    ## [3,] 5.637461 6.807035
+    ## [4,] 4.166759 6.234917
+    ## [5,] 2.270474 5.353819
 
 To index this class of object, the column names and row names give us a
 pretty good idea. To get a specific element, index the row then column.
@@ -274,7 +274,7 @@ pretty good idea. To get a specific element, index the row then column.
 matrix1[3,1]
 ```
 
-    ## [1] 5.440479
+    ## [1] 5.637461
 
 Matrices can also be indexed as one-dimensional by supplying one index.
 The columns wrap to the next one.
@@ -283,13 +283,13 @@ The columns wrap to the next one.
 matrix1[6]
 ```
 
-    ## [1] 5.606968
+    ## [1] 6.927518
 
 ``` r
 matrix1[1,2]
 ```
 
-    ## [1] 5.606968
+    ## [1] 6.927518
 
 To get a full row or column, just leave the other dimension blank.
 
@@ -297,7 +297,7 @@ To get a full row or column, just leave the other dimension blank.
 matrix1[1,]
 ```
 
-    ## [1] 3.204092 5.606968
+    ## [1] 3.480571 6.927518
 
 ## Data Frames
 
@@ -318,16 +318,16 @@ dataframe1
 ```
 
     ##         col1 col2
-    ## 1   3.204092    1
-    ## 2   3.622807    2
-    ## 3   5.440479    3
-    ## 4   4.750156    4
-    ## 5   5.197283    5
-    ## 6   5.606968    6
-    ## 7   7.002204    7
-    ## 8   6.731488    8
-    ## 9   6.669378    9
-    ## 10  7.417072   10
+    ## 1   3.480571    1
+    ## 2   4.727471    2
+    ## 3   5.637461    3
+    ## 4   4.166759    4
+    ## 5   2.270474    5
+    ## 6   6.927518    6
+    ## 7   5.678969    7
+    ## 8   6.807035    8
+    ## 9   6.234917    9
+    ## 10  5.353819   10
     ## 11 78.000000   11
     ## 12 44.000000   12
 
@@ -338,8 +338,8 @@ returns a vector.
 dataframe1$col1
 ```
 
-    ##  [1]  3.204092  3.622807  5.440479  4.750156  5.197283  5.606968  7.002204
-    ##  [8]  6.731488  6.669378  7.417072 78.000000 44.000000
+    ##  [1]  3.480571  4.727471  5.637461  4.166759  2.270474  6.927518  5.678969
+    ##  [8]  6.807035  6.234917  5.353819 78.000000 44.000000
 
 You can also index like you do with matrices, but since it’s a
 dataframe, the first method is preferred.
@@ -348,8 +348,8 @@ dataframe, the first method is preferred.
 dataframe1[,1]
 ```
 
-    ##  [1]  3.204092  3.622807  5.440479  4.750156  5.197283  5.606968  7.002204
-    ##  [8]  6.731488  6.669378  7.417072 78.000000 44.000000
+    ##  [1]  3.480571  4.727471  5.637461  4.166759  2.270474  6.927518  5.678969
+    ##  [8]  6.807035  6.234917  5.353819 78.000000 44.000000
 
 ## Conditional Indexing
 
@@ -366,7 +366,7 @@ greater_than_1 <- dataframe1$col1 > 4
 greater_than_1
 ```
 
-    ##  [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+    ##  [1] FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 
 Here, we receive a vector of boolean (True or False) values. We can use
 this vector to index the original vector. So we only receive elements
@@ -376,15 +376,15 @@ from col1 where greater_than_1 is equal to True.
 dataframe1$col1
 ```
 
-    ##  [1]  3.204092  3.622807  5.440479  4.750156  5.197283  5.606968  7.002204
-    ##  [8]  6.731488  6.669378  7.417072 78.000000 44.000000
+    ##  [1]  3.480571  4.727471  5.637461  4.166759  2.270474  6.927518  5.678969
+    ##  [8]  6.807035  6.234917  5.353819 78.000000 44.000000
 
 ``` r
 dataframe1$col1[greater_than_1]
 ```
 
-    ##  [1]  5.440479  4.750156  5.197283  5.606968  7.002204  6.731488  6.669378
-    ##  [8]  7.417072 78.000000 44.000000
+    ##  [1]  4.727471  5.637461  4.166759  6.927518  5.678969  6.807035  6.234917
+    ##  [8]  5.353819 78.000000 44.000000
 
 This is an extremely powerful tool in base R. You can also create other
 conditionals with:
@@ -571,7 +571,8 @@ mtcars %>%
     
     group_by(cyl) %>%
   
-# Now we tell R to use the grouped df to take the mean of "mpg" based on each "cyl" group, independently of one another
+# Now we tell R to use the grouped df to take the mean of "mpg" based on each "cyl" group, 
+# independently of one another
 # Lastly we just create a new column for the mean.
 # We can easily create new columns inside "summarise()"  and "mutate()" with the "=" operator
     
@@ -1100,7 +1101,8 @@ To create this model, we can use `glm()` again, but this time set the
 
 y <- as.factor(fit_new$dvcal)
 
-logmodel <- glm(formula = y ~  SedentaryMinutes + LightlyActiveMinutes + FairlyActiveMinutes + VeryActiveMinutes, 
+logmodel <- glm(formula = y ~  SedentaryMinutes + LightlyActiveMinutes + 
+                  FairlyActiveMinutes + VeryActiveMinutes, 
                 data = fit_new, 
                 family = "binomial")
 
