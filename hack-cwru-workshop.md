@@ -1,14 +1,7 @@
----
-layout: page
-title: R, the tidyverse, and Machine Learning
-subtitle: "CWRU Hackathon Workshop" 
-author: "Author: Keaton Markey"
-date: "2022/12/28"
-css: "assets/css/style.css"
-menubar_toc: true
-toc_title: Contents
-hero_height: is-fullwidth
----
+R, the tidyverse, and Machine Learning
+================
+Author: Keaton Markey
+2022/12/28
 
 <link href="assets/css/style.css" rel="stylesheet">
 
@@ -260,11 +253,11 @@ matrix1
 ```
 
     ##          [,1]     [,2]
-    ## [1,] 4.909298 7.436061
-    ## [2,] 4.984389 6.312522
-    ## [3,] 3.575596 6.432356
-    ## [4,] 3.067911 5.791846
-    ## [5,] 3.719964 7.112522
+    ## [1,] 5.172809 6.700221
+    ## [2,] 5.106113 7.502721
+    ## [3,] 2.165550 5.083326
+    ## [4,] 3.761543 9.077836
+    ## [5,] 4.537152 6.966988
 
 To index this class of object, the column names and row names give us a
 pretty good idea. To get a specific element, index the row then column.
@@ -273,7 +266,7 @@ pretty good idea. To get a specific element, index the row then column.
 matrix1[3,1]
 ```
 
-    ## [1] 3.575596
+    ## [1] 2.16555
 
 Matrices can also be indexed as one-dimensional by supplying one index.
 The columns wrap to the next one.
@@ -282,13 +275,13 @@ The columns wrap to the next one.
 matrix1[6]
 ```
 
-    ## [1] 7.436061
+    ## [1] 6.700221
 
 ``` r
 matrix1[1,2]
 ```
 
-    ## [1] 7.436061
+    ## [1] 6.700221
 
 To get a full row or column, just leave the other dimension blank.
 
@@ -296,7 +289,7 @@ To get a full row or column, just leave the other dimension blank.
 matrix1[1,]
 ```
 
-    ## [1] 4.909298 7.436061
+    ## [1] 5.172809 6.700221
 
 ## Data Frames
 
@@ -317,16 +310,16 @@ dataframe1
 ```
 
     ##         col1 col2
-    ## 1   4.909298    1
-    ## 2   4.984389    2
-    ## 3   3.575596    3
-    ## 4   3.067911    4
-    ## 5   3.719964    5
-    ## 6   7.436061    6
-    ## 7   6.312522    7
-    ## 8   6.432356    8
-    ## 9   5.791846    9
-    ## 10  7.112522   10
+    ## 1   5.172809    1
+    ## 2   5.106113    2
+    ## 3   2.165550    3
+    ## 4   3.761543    4
+    ## 5   4.537152    5
+    ## 6   6.700221    6
+    ## 7   7.502721    7
+    ## 8   5.083326    8
+    ## 9   9.077836    9
+    ## 10  6.966988   10
     ## 11 78.000000   11
     ## 12 44.000000   12
 
@@ -337,8 +330,8 @@ returns a vector.
 dataframe1$col1
 ```
 
-    ##  [1]  4.909298  4.984389  3.575596  3.067911  3.719964  7.436061  6.312522
-    ##  [8]  6.432356  5.791846  7.112522 78.000000 44.000000
+    ##  [1]  5.172809  5.106113  2.165550  3.761543  4.537152  6.700221  7.502721
+    ##  [8]  5.083326  9.077836  6.966988 78.000000 44.000000
 
 You can also index like you do with matrices, but since it’s a
 dataframe, the first method is preferred.
@@ -347,8 +340,8 @@ dataframe, the first method is preferred.
 dataframe1[,1]
 ```
 
-    ##  [1]  4.909298  4.984389  3.575596  3.067911  3.719964  7.436061  6.312522
-    ##  [8]  6.432356  5.791846  7.112522 78.000000 44.000000
+    ##  [1]  5.172809  5.106113  2.165550  3.761543  4.537152  6.700221  7.502721
+    ##  [8]  5.083326  9.077836  6.966988 78.000000 44.000000
 
 ## Conditional Indexing
 
@@ -365,7 +358,7 @@ greater_than_1 <- dataframe1$col1 > 4
 greater_than_1
 ```
 
-    ##  [1]  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+    ##  [1]  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 
 Here, we receive a vector of boolean (True or False) values. We can use
 this vector to index the original vector. So we only receive elements
@@ -375,15 +368,15 @@ from col1 where greater_than_1 is equal to True.
 dataframe1$col1
 ```
 
-    ##  [1]  4.909298  4.984389  3.575596  3.067911  3.719964  7.436061  6.312522
-    ##  [8]  6.432356  5.791846  7.112522 78.000000 44.000000
+    ##  [1]  5.172809  5.106113  2.165550  3.761543  4.537152  6.700221  7.502721
+    ##  [8]  5.083326  9.077836  6.966988 78.000000 44.000000
 
 ``` r
 dataframe1$col1[greater_than_1]
 ```
 
-    ## [1]  4.909298  4.984389  7.436061  6.312522  6.432356  5.791846  7.112522
-    ## [8] 78.000000 44.000000
+    ##  [1]  5.172809  5.106113  4.537152  6.700221  7.502721  5.083326  9.077836
+    ##  [8]  6.966988 78.000000 44.000000
 
 This is an extremely powerful tool in base R. You can also create other
 conditionals with:
@@ -524,7 +517,18 @@ For example:
 
 ``` r
 library(tidyverse)
+```
 
+    ## -- Attaching packages --------------------------------------- tidyverse 1.3.2 --
+    ## v ggplot2 3.4.0      v purrr   0.3.5 
+    ## v tibble  3.1.8      v dplyr   1.0.10
+    ## v tidyr   1.2.1      v stringr 1.5.0 
+    ## v readr   2.1.3      v forcats 0.5.2 
+    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+    ## x dplyr::filter() masks stats::filter()
+    ## x dplyr::lag()    masks stats::lag()
+
+``` r
 class(mtcars)
 ```
 
@@ -720,7 +724,7 @@ Data visualization is really important for the analyst to figure out
 what’s going on and to ensure that the information is accurately
 communicated to others. There are lots of industry-leading tools besides
 R that use can use to visualize data. More info about one of these tools
-can be found at [the Tableau
+can be found on [the Tableau
 website](https://www.tableau.com/learn/articles/data-visualization).
 
 # Machine Learning
@@ -728,7 +732,7 @@ website](https://www.tableau.com/learn/articles/data-visualization).
 There are two main classes of ML:
 
 ![Regression and
-Classification](assets/hack-cwru-workshop_files/img-gfm/regression-vs-classification-in-machine-learning.png)
+Classification](hack-cwru-workshop_files/img-gfm/regression-vs-classification-in-machine-learning.png)
 
 - Classification
   - Predicts discrete classes
@@ -900,10 +904,11 @@ what our model did, and review some statistics to evaluate it.
 
 This model created a linear relationship or linear function between the
 input and output. This means that the function we should expect to see
-will be in the form of `mx + b` (the function of a line) where `x` is
-`TrackerDistance`. The best relationship it could create says that
-`Calories` can be best estimated by 118.610 \* `TrackerDistance` +
-1654.77.
+will be in the form of $mx + b$ (the function of a line) where `x` is
+`TrackerDistance`. Our model says that:
+
+> `Calories` can be best estimated by
+> $118.610 \times `TrackerDistance` + 1654.77$
 
 Let’s see what this looks like on a graph.
 
@@ -991,15 +996,15 @@ summary(pmodel)
     ## 
     ## Number of Fisher Scoring iterations: 2
 
-Here are the coefficeents of a polynomial relationship between
-`Calories` and `TrackerDistance`. According to the model,`Calories` is
-best described by -1286.74 \* `TrackerDistance`^3 + -1688.80 \*
-`TrackerDistance`^2 + 14201.32 \* `TrackerDistance` + 2303.61.
+Here are the coefficents of a polynomial relationship between `Calories`
+and `TrackerDistance`. According to the model:
+
+> $`Calories` = -1286.74 \times `TrackerDistance`^{3} + -1688.80 \times `TrackerDistance`^{2} + 14201.32 \times `TrackerDistance` + 2303.61$
 
 When coefficients are calculated, we can get an estimate of how likely
 they are to exist as a predictor of the output. The colloquial threshold
-for this is 0.05. All of the relationships show a significance
-(`Pr(>|t|)`) below this threshold.
+for this is 0.05. All of the relationships show a significance (
+`Pr(>|t|)` ) below this threshold.
 
 Let’s plot both models together.
 
@@ -1043,7 +1048,7 @@ more accurately represent the relationship between `Calories` and
 ## Case 2: Logistic Regression
 
 ![Simple Logistic
-Regression](assets/hack-cwru-workshop_files/img-gfm/Simple-Logistic-Regression.jpg)
+Regression](hack-cwru-workshop_files/img-gfm/Simple-Logistic-Regression.jpg)
 
 Even though regression is in the name, it is used for binary
 classification (TRUE/FALSE, white/black etc.). This model estimates the
@@ -1216,7 +1221,18 @@ Random forests are a higher class of ML model, and may be a little to
 complex for this problem we are working on. They are very powerful for
 classification, but they can be used for regression too.
 
-First, we need to load a special package.
+An common issue with more complex ML models is the loss of
+interpretability. This means that at the end of the modeling process,
+even though the model may be more accurate, we can’t always define an
+expression that directly relates the input and output. This is
+especially true for a random forest, because under the hood, its a lot
+of little models deciding for themselves what the relationship should
+be. This conflict between model complexity and accuracy is a big issue
+in ML. Check out [this towardsdatascience.com
+article](https://towardsdatascience.com/model-complexity-accuracy-and-interpretability-59888e69ab3d)
+to join the conversation.
+
+To get started with random forest, we need to load a package.
 
 ``` r
 library(caret)
@@ -1275,7 +1291,7 @@ The accuracy of the random forest model is better than the logistic
 regression, and we successfully improved upon the simpler model. Now, we
 could use this trained model to predict the class of future data.
 
-# Thank You
+================================================================================
 
 Thanks for taking a look at this tutorial. You can check out a version
 of this document on [my Github
