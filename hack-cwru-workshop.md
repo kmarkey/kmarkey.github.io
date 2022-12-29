@@ -1,14 +1,7 @@
----
-layout: page
-title: R, the tidyverse, and Machine Learning
-subtitle: "CWRU Hackathon Workshop" 
-author: "Author: Keaton Markey"
-date: "2022/12/28"
-css: "assets/css/style.css"
-menubar_toc: true
-toc_title: Contents
-hero_height: is-fullwidth
----
+R, the tidyverse, and Machine Learning
+================
+Author: Keaton Markey
+2022/12/28
 
 <link href="assets/css/style.css" rel="stylesheet">
 
@@ -260,11 +253,11 @@ matrix1
 ```
 
     ##          [,1]     [,2]
-    ## [1,] 4.327522 6.682276
-    ## [2,] 3.672691 6.595569
-    ## [3,] 2.965676 5.909040
-    ## [4,] 4.446773 6.574380
-    ## [5,] 4.607758 7.539130
+    ## [1,] 5.196904 5.531134
+    ## [2,] 4.672826 5.818441
+    ## [3,] 4.231695 8.348017
+    ## [4,] 5.485531 7.226275
+    ## [5,] 2.902765 7.240789
 
 To index this class of object, the column names and row names give us a
 pretty good idea. To get a specific element, index the row then column.
@@ -273,7 +266,7 @@ pretty good idea. To get a specific element, index the row then column.
 matrix1[3,1]
 ```
 
-    ## [1] 2.965676
+    ## [1] 4.231695
 
 Matrices can also be indexed as one-dimensional by supplying one index.
 The columns wrap to the next one.
@@ -282,13 +275,13 @@ The columns wrap to the next one.
 matrix1[6]
 ```
 
-    ## [1] 6.682276
+    ## [1] 5.531134
 
 ``` r
 matrix1[1,2]
 ```
 
-    ## [1] 6.682276
+    ## [1] 5.531134
 
 To get a full row or column, just leave the other dimension blank.
 
@@ -296,7 +289,7 @@ To get a full row or column, just leave the other dimension blank.
 matrix1[1,]
 ```
 
-    ## [1] 4.327522 6.682276
+    ## [1] 5.196904 5.531134
 
 ## Data Frames
 
@@ -317,16 +310,16 @@ dataframe1
 ```
 
     ##         col1 col2
-    ## 1   4.327522    1
-    ## 2   3.672691    2
-    ## 3   2.965676    3
-    ## 4   4.446773    4
-    ## 5   4.607758    5
-    ## 6   6.682276    6
-    ## 7   6.595569    7
-    ## 8   5.909040    8
-    ## 9   6.574380    9
-    ## 10  7.539130   10
+    ## 1   5.196904    1
+    ## 2   4.672826    2
+    ## 3   4.231695    3
+    ## 4   5.485531    4
+    ## 5   2.902765    5
+    ## 6   5.531134    6
+    ## 7   5.818441    7
+    ## 8   8.348017    8
+    ## 9   7.226275    9
+    ## 10  7.240789   10
     ## 11 78.000000   11
     ## 12 44.000000   12
 
@@ -337,8 +330,8 @@ returns a vector.
 dataframe1$col1
 ```
 
-    ##  [1]  4.327522  3.672691  2.965676  4.446773  4.607758  6.682276  6.595569
-    ##  [8]  5.909040  6.574380  7.539130 78.000000 44.000000
+    ##  [1]  5.196904  4.672826  4.231695  5.485531  2.902765  5.531134  5.818441
+    ##  [8]  8.348017  7.226275  7.240789 78.000000 44.000000
 
 You can also index like you do with matrices, but since it’s a
 dataframe, the first method is preferred.
@@ -347,8 +340,8 @@ dataframe, the first method is preferred.
 dataframe1[,1]
 ```
 
-    ##  [1]  4.327522  3.672691  2.965676  4.446773  4.607758  6.682276  6.595569
-    ##  [8]  5.909040  6.574380  7.539130 78.000000 44.000000
+    ##  [1]  5.196904  4.672826  4.231695  5.485531  2.902765  5.531134  5.818441
+    ##  [8]  8.348017  7.226275  7.240789 78.000000 44.000000
 
 ## Conditional Indexing
 
@@ -365,7 +358,7 @@ greater_than_1 <- dataframe1$col1 > 4
 greater_than_1
 ```
 
-    ##  [1]  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+    ##  [1]  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 
 Here, we receive a vector of boolean (True or False) values. We can use
 this vector to index the original vector. So we only receive elements
@@ -375,15 +368,15 @@ from col1 where greater_than_1 is equal to True.
 dataframe1$col1
 ```
 
-    ##  [1]  4.327522  3.672691  2.965676  4.446773  4.607758  6.682276  6.595569
-    ##  [8]  5.909040  6.574380  7.539130 78.000000 44.000000
+    ##  [1]  5.196904  4.672826  4.231695  5.485531  2.902765  5.531134  5.818441
+    ##  [8]  8.348017  7.226275  7.240789 78.000000 44.000000
 
 ``` r
 dataframe1$col1[greater_than_1]
 ```
 
-    ##  [1]  4.327522  4.446773  4.607758  6.682276  6.595569  5.909040  6.574380
-    ##  [8]  7.539130 78.000000 44.000000
+    ##  [1]  5.196904  4.672826  4.231695  5.485531  5.531134  5.818441  8.348017
+    ##  [8]  7.226275  7.240789 78.000000 44.000000
 
 This is an extremely powerful tool in base R. You can also create other
 conditionals with:
@@ -648,7 +641,7 @@ axis. We can supply our own labels too.
 plot(x = mtcars$hp, mtcars$mpg, xlab = "Horsepower", ylab = "MPG")
 ```
 
-![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
+![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
 
 We can make a histogram too. `hist()` only takes one data argument and
 automatically counts each group
@@ -657,7 +650,7 @@ automatically counts each group
 hist(mtcars$cyl, xlab = "Cylinders", main = "Histogram of Cylinders")
 ```
 
-![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
+![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
 
 ### tidyverse
 
@@ -680,7 +673,7 @@ ggplot(mtcars) +
     geom_point(aes(x = hp, y = mpg))
 ```
 
-![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
+![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
 
 We can make a histogram too.
 
@@ -700,7 +693,7 @@ ggplot(mtcars) + geom_histogram(aes(x = cyl)) +
 
     ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
-![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
+![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
 
 # Machine Learning
 
@@ -768,7 +761,7 @@ traveled according to the device `TrackerDistance`.
 ``` r
 # Read in the csv with "read_csv()" from the tidyverse
 
-fitbit <- read_csv("../data/Daily_Activity_2022_27_02.csv")
+fitbit <- read_csv("data/Daily_Activity_2022_27_02.csv")
 ```
 
     ## New names:
@@ -823,7 +816,7 @@ Let’s see what our variables of interest look like.
 plot(fitbit$TrackerDistance, fitbit$Calories, xlab = "Distance", ylab = "Calories")
 ```
 
-![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-37-1.png)<!-- -->
+![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-37-1.png)<!-- -->
 
 ### Linear Model
 
@@ -892,7 +885,7 @@ ggplot(data = fitbit) +
     
     # Create a line with slope and intercept
     
-    geom_abline(slope = 118.610, intercept = 1654.77, color = "red", lwd = 3) + 
+    geom_abline(slope = 118.610, intercept = 1654.77, color = "red", linewidth = 3) + 
     
     # Add title and model call
     
@@ -904,10 +897,7 @@ ggplot(data = fitbit) +
     theme_classic()
 ```
 
-    ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-    ## i Please use `linewidth` instead.
-
-![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-40-1.png)<!-- -->
+![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-40-1.png)<!-- -->
 
 How many calories would we expect someone to burn if they ran 40 miles?
 
@@ -995,9 +985,9 @@ ggplot(data = fitbit) +
     
     geom_point(aes(x = `TrackerDistance`, y = Calories)) +
     
-    geom_abline(slope = 118.610, intercept = 1654.77, color = "red", lwd = 3) + 
+    geom_abline(slope = 118.610, intercept = 1654.77, color = "red", linewidth = 3) + 
     
-    geom_line(aes(x = `TrackerDistance`, y = pred), color = "blue", lwd = 3) +
+    geom_line(aes(x = `TrackerDistance`, y = pred), color = "blue", linewidth = 3) +
     
     # Add title and model call
     
@@ -1008,7 +998,7 @@ ggplot(data = fitbit) +
     theme_classic()
 ```
 
-![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
+![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
 
 The polynomial model in blue seems to follow the linear model exactly
 until we reach a `TrackerDistance` of about 18. Then, it bends toward
@@ -1057,7 +1047,7 @@ ggplot(fit_new) +
     ## Warning in geom_histogram(aes(x = dvcal, fill = dvcal), stat = "count"):
     ## Ignoring unknown parameters: `binwidth`, `bins`, and `pad`
 
-![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
+![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
 
 To create this model, we can use `glm()` again, but this time set the
 `family` argument to “binomial”.
