@@ -87,7 +87,7 @@ make it easier to write and edit code.
 To grasp some of the basic principles in R, we’ll fist use base R, and
 then demonstrate some of the capabilities of the tidyverse.
 
-## Creating Objects:
+## Creating Objects
 
 (Using Base R)
 
@@ -260,11 +260,11 @@ matrix1
 ```
 
     ##          [,1]     [,2]
-    ## [1,] 5.196904 5.531134
-    ## [2,] 4.672826 5.818441
-    ## [3,] 4.231695 8.348017
-    ## [4,] 5.485531 7.226275
-    ## [5,] 2.902765 7.240789
+    ## [1,] 4.909298 7.436061
+    ## [2,] 4.984389 6.312522
+    ## [3,] 3.575596 6.432356
+    ## [4,] 3.067911 5.791846
+    ## [5,] 3.719964 7.112522
 
 To index this class of object, the column names and row names give us a
 pretty good idea. To get a specific element, index the row then column.
@@ -273,7 +273,7 @@ pretty good idea. To get a specific element, index the row then column.
 matrix1[3,1]
 ```
 
-    ## [1] 4.231695
+    ## [1] 3.575596
 
 Matrices can also be indexed as one-dimensional by supplying one index.
 The columns wrap to the next one.
@@ -282,13 +282,13 @@ The columns wrap to the next one.
 matrix1[6]
 ```
 
-    ## [1] 5.531134
+    ## [1] 7.436061
 
 ``` r
 matrix1[1,2]
 ```
 
-    ## [1] 5.531134
+    ## [1] 7.436061
 
 To get a full row or column, just leave the other dimension blank.
 
@@ -296,7 +296,7 @@ To get a full row or column, just leave the other dimension blank.
 matrix1[1,]
 ```
 
-    ## [1] 5.196904 5.531134
+    ## [1] 4.909298 7.436061
 
 ## Data Frames
 
@@ -317,16 +317,16 @@ dataframe1
 ```
 
     ##         col1 col2
-    ## 1   5.196904    1
-    ## 2   4.672826    2
-    ## 3   4.231695    3
-    ## 4   5.485531    4
-    ## 5   2.902765    5
-    ## 6   5.531134    6
-    ## 7   5.818441    7
-    ## 8   8.348017    8
-    ## 9   7.226275    9
-    ## 10  7.240789   10
+    ## 1   4.909298    1
+    ## 2   4.984389    2
+    ## 3   3.575596    3
+    ## 4   3.067911    4
+    ## 5   3.719964    5
+    ## 6   7.436061    6
+    ## 7   6.312522    7
+    ## 8   6.432356    8
+    ## 9   5.791846    9
+    ## 10  7.112522   10
     ## 11 78.000000   11
     ## 12 44.000000   12
 
@@ -337,8 +337,8 @@ returns a vector.
 dataframe1$col1
 ```
 
-    ##  [1]  5.196904  4.672826  4.231695  5.485531  2.902765  5.531134  5.818441
-    ##  [8]  8.348017  7.226275  7.240789 78.000000 44.000000
+    ##  [1]  4.909298  4.984389  3.575596  3.067911  3.719964  7.436061  6.312522
+    ##  [8]  6.432356  5.791846  7.112522 78.000000 44.000000
 
 You can also index like you do with matrices, but since it’s a
 dataframe, the first method is preferred.
@@ -347,8 +347,8 @@ dataframe, the first method is preferred.
 dataframe1[,1]
 ```
 
-    ##  [1]  5.196904  4.672826  4.231695  5.485531  2.902765  5.531134  5.818441
-    ##  [8]  8.348017  7.226275  7.240789 78.000000 44.000000
+    ##  [1]  4.909298  4.984389  3.575596  3.067911  3.719964  7.436061  6.312522
+    ##  [8]  6.432356  5.791846  7.112522 78.000000 44.000000
 
 ## Conditional Indexing
 
@@ -365,7 +365,7 @@ greater_than_1 <- dataframe1$col1 > 4
 greater_than_1
 ```
 
-    ##  [1]  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+    ##  [1]  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 
 Here, we receive a vector of boolean (True or False) values. We can use
 this vector to index the original vector. So we only receive elements
@@ -375,15 +375,15 @@ from col1 where greater_than_1 is equal to True.
 dataframe1$col1
 ```
 
-    ##  [1]  5.196904  4.672826  4.231695  5.485531  2.902765  5.531134  5.818441
-    ##  [8]  8.348017  7.226275  7.240789 78.000000 44.000000
+    ##  [1]  4.909298  4.984389  3.575596  3.067911  3.719964  7.436061  6.312522
+    ##  [8]  6.432356  5.791846  7.112522 78.000000 44.000000
 
 ``` r
 dataframe1$col1[greater_than_1]
 ```
 
-    ##  [1]  5.196904  4.672826  4.231695  5.485531  5.531134  5.818441  8.348017
-    ##  [8]  7.226275  7.240789 78.000000 44.000000
+    ## [1]  4.909298  4.984389  7.436061  6.312522  6.432356  5.791846  7.112522
+    ## [8] 78.000000 44.000000
 
 This is an extremely powerful tool in base R. You can also create other
 conditionals with:
@@ -524,18 +524,7 @@ For example:
 
 ``` r
 library(tidyverse)
-```
 
-    ## -- Attaching packages --------------------------------------- tidyverse 1.3.2 --
-    ## v ggplot2 3.4.0      v purrr   0.3.5 
-    ## v tibble  3.1.8      v dplyr   1.0.10
-    ## v tidyr   1.2.1      v stringr 1.5.0 
-    ## v readr   2.1.3      v forcats 0.5.2 
-    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-``` r
 class(mtcars)
 ```
 
@@ -651,10 +640,33 @@ plot(x = mtcars$hp, mtcars$mpg, xlab = "Horsepower", ylab = "MPG")
 ![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
 
 We can make a histogram too. `hist()` only takes one data argument and
-automatically counts each group
+automatically counts each group. Although its the more basic of the two
+methods, plotting in Base R can look quite nice.
 
 ``` r
-hist(mtcars$cyl, xlab = "Cylinders", main = "Histogram of Cylinders")
+# "par()" is a function that adds some extra pizzazz to plots
+
+par(mar = c(3, 3, 2, 1), # margins
+    
+    las = 1, # Y axis text rotated
+    
+    xaxs = "i", yaxs = "i") # Remove plot padding
+
+barplot(tapply(mtcars$mpg, mtcars$cyl, length),
+        
+        col = unique(mtcars$cyl), # Fill color
+        
+        xlab = "Cylinders", ylab = "Count", # x and y labels
+        
+        xlim = c(0, 4), ylim = c(0, 20)) # Limits
+
+title("Cylinders of mtcars", 
+      
+      adj = 0.2, # adjust location of the x axis
+      
+      cex.main = 1.5, font.main = 1, # font size and type
+      
+      col.main = "black")
 ```
 
 ![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
@@ -682,12 +694,16 @@ ggplot(mtcars) +
 
 ![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
 
-We can make a histogram too.
+We can make a barplot too.
 
 ``` r
-ggplot(mtcars) + geom_histogram(aes(x = cyl)) +
-      
-    # We can rename the axes here too with the "labs()" function
+ggplot(mtcars) + geom_bar(aes(x = cyl, fill = factor(cyl)), stat = 'count') +
+    
+    # Change the colors of the bars
+    
+    scale_fill_manual(values = c("green", "darkgreen", "grey")) +
+    
+    # We can rename the axes here with the "labs()" function
     
     labs(x = "Cylinders",
          y = "Count",
@@ -698,9 +714,14 @@ ggplot(mtcars) + geom_histogram(aes(x = cyl)) +
     theme_classic()
 ```
 
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-
 ![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
+
+Data visualization is really important for the analyst to figure out
+what’s going on and to ensure that the information is accurately
+communicated to others. There are lots of industry-leading tools besides
+R that use can use to visualize data. More info about one of these tools
+can be found at [the Tableau
+website](https://www.tableau.com/learn/articles/data-visualization).
 
 # Machine Learning
 
@@ -709,6 +730,11 @@ There are two main classes of ML:
 ![Regression and
 Classification](assets/hack-cwru-workshop_files/img-gfm/regression-vs-classification-in-machine-learning.png)
 
+- Classification
+  - Predicts discrete classes
+
+  - The model can find parameters that minimize the prediction of
+    incorrect category labels (Decision Boundary)
 - Regression
   - Line of best fit
 
@@ -716,11 +742,6 @@ Classification](assets/hack-cwru-workshop_files/img-gfm/regression-vs-classifica
 
   - It’s the model’s job to find parameters that minimize the distance
     between the line and the observed data
-- Classification
-  - Predicts discrete classes
-
-  - The model can find parameters that minimize the prediction of
-    incorrect category labels (Decision Boundary)
 
 In its simplest form, and the form you will see in this tutorial, are 2
 steps to Machine Learning
@@ -767,6 +788,7 @@ traveled according to the device `TrackerDistance`.
 
 ``` r
 # Read in the csv with "read_csv()" from the tidyverse
+# Specify the path
 
 fitbit <- read_csv("data/Daily_Activity_2022_27_02.csv")
 ```
@@ -834,10 +856,10 @@ We can use the `glm()` function to make a linear model. We supply the
 data and columns to use data masking. The “\~” notation is a part of the
 relationship/function. In English, this is:
 
-> “`Calories` as a function of Tracker Distance”
+> “`Calories` as a function of `TrackerDistance`”
 
 ``` r
-lmodel <- glm(Calories ~ `TrackerDistance`, data = fitbit)
+lmodel <- glm(Calories ~ TrackerDistance, data = fitbit)
 ```
 
 Now that we have a model, we can view some information about it. This
@@ -888,7 +910,7 @@ Let’s see what this looks like on a graph.
 ``` r
 ggplot(data = fitbit) +
     
-    geom_point(aes(x = `TrackerDistance`, y = Calories)) +
+    geom_point(aes(x = TrackerDistance, y = Calories)) +
     
     # Create a line with slope and intercept
     
