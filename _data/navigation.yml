@@ -11,6 +11,6 @@
   link: /tutorials/
   dropdown: 
     - name: R, the tidyverse, and Machine Learning
-      link: /hack-cwru-workshop/
+      link: /hack-cwru-workshop
 - name: Contact
   link: /contact/
