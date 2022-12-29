@@ -34,11 +34,7 @@ section {
   background: var(--brunswick-green);
 }
 
-pre code {
-    background-color: transparent;
-    color: var(--alabaster);
-}
-
+/* inline code */
 code {
   color: var(--pine-tree);
   background-color: var(--asparagus);
@@ -49,20 +45,24 @@ code {
   padding: 10px 20px;
   margin: 0 0 20px;
   font-size: 17.5px;
-  background-color: var(--alabaster);
+  background-color: var(--dutch-white);
+  border-radius: 0px 7px 7px 0px;
+  border: 1px solid var(--satin-sheen-gold);
   border-left: 5px solid var(--brunswick-green);
 }
 
+/* title */
 .hero.is-primary .title {
-    color: var(--alabaster);
-}
-
-.hero.is-primary .subtitle {
     color: var(--alabaster);
 }
 
 h1.title.is-2 {
   background-color: transparent;
+}
+
+/* subtitle */
+.hero.is-primary .subtitle {
+    color: var(--alabaster);
 }
 
 p.subtitle.is-3 {
@@ -99,7 +99,7 @@ h1, h2, h3 {
 
 /* Strings */
 .highlight .s2 {
-    color: var(--fern-green);
+    color: var(--moss-green);
 }
 
 /* numbers */
@@ -123,8 +123,14 @@ a {
 a:hover {
   color: var(--alabaster);
   background: var(--brunswick-green);
+  text-decoration: none;
   border-bottom: 1px solid var(--pine-tree);
-  border-radius: 7px
+  border-radius: 3px
+}
+
+/* DOnt underline nav */
+.navbar-item, .navbar-link {
+  text-decoration: none;
 }
 
 /* Paragraph */
@@ -267,12 +273,12 @@ a:hover {
 /* width */
 ::-webkit-scrollbar-track {
   width: 20px;
-  color: var(--dutch-white);
+  background-color: var(--dutch-white);
   border-color: var(--ecru);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--fern-green);
+  background-color: var(--fern-green);
   border-radius: 7px;
 }
