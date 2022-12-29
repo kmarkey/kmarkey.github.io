@@ -146,6 +146,12 @@ a:hover {
   text-decoration: none;
 }
 
+.footer {
+    background-color: var(--pine-tree);
+    padding: 3rem 1.5rem 6rem;
+}
+
+
 /* Paragraph */
 /* p {
   background-color: var(--alabaster);
