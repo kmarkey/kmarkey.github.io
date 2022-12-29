@@ -21,9 +21,9 @@ section {
 }
 
 code {
-  color: var(--alabaster);
+  color: var(--pine-tree);
   background-color: var(--asparagus);
-  border-radius: 10px;
+  border-radius: 7px;
 }
 
 .hero.is-primary .title {
@@ -59,6 +59,7 @@ h1, h2, h3 {
   color: var(--alabaster);
   background-color: var(--pine-tree);
   border: 1px solid var(--moss-green);
+  border-radius: 7px;
 }
 
 /* Output */
@@ -66,16 +67,41 @@ h1, h2, h3 {
   color: var(--black-olive);
   background-color: var(--dutch-white);
   border: 1px solid var(--satin-sheen-gold);
+  border-radius: 7px;
+}
+
+.highlight {
+  color: var(--alabaster);
 }
 
 /* Strings */
 .highlight .s2 {
-    color: var(--moss-green);
+    color: var(--fern-green);
 }
 
 /* numbers */
 .highlight .m, .highlight .mb, .highlight .mx {
     color: var(--moss-green);
+}
+
+/* keywords */
+.highlight .nf {
+    color: var(--orange-red);
+    font-weight: bold;
+}
+
+/* Links */
+a {
+    color: var(--pine-tree);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+a:hover {
+  color: var(--alabaster);
+  background: var(--brunswick-green);
+  border-bottom: 1px solid var(--pine-tree);
+  border-radius: 7px
 }
 
 /* Paragraph */
@@ -113,13 +139,13 @@ h1, h2, h3 {
 /* Inline Code Blocks */
 
 /* Block Quotes */
-/* blockquote {
+blockquote {
   padding: 10px 20px;
   margin: 0 0 20px;
   font-size: 17.5px;
   background-color: var(--alabaster);
   border-left: 5px solid var(--brunswick-green);
-} */
+}
 
 /* Custom Knitr Class, R Chunks */
 /* .code-chunk {
