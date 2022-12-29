@@ -3,13 +3,7 @@ layout: page
 title: R, the tidyverse, and Machine Learning
 subtitle: "CWRU Hackathon Workshop" 
 author: "Author: Keaton Markey"
-date:  "Spring, 2022"
-output:
-  github_document:
-    toc: false
-    toc_depth: 4
-    df_print: kable
-    number_sections: false
+date: "2022/12/28"
 css: "assets/css/style.css"
 menubar_toc: true
 toc_title: TOC Title
