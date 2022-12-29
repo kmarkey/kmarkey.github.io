@@ -1,25 +1,12 @@
-<<<<<<< Updated upstream
----
-layout: page
-title: R, the tidyverse, and Machine Learning
-subtitle: "CWRU Hackathon Workshop" 
-author: "Author: Keaton Markey"
-date: "2022/12/28"
-menubar_toc: true
-toc_title: Contents
-hero_height: is-fullwidth
----
-=======
 R, the tidyverse, and Machine Learning
 ================
 Keaton Markey
 2022/12/28
->>>>>>> Stashed changes
 
 <link href="assets/css/style.css" rel="stylesheet">
 
 This tutorial was prepared for a light overview of R, some of its
-capabilties, and what machine learning looks like using the {glm} and
+capabilities, and what machine learning looks like using the {glm} and
 {caret} packages. It is assumed that you have some knowledge of
 programming concepts, maybe some statistics,, but not necessarily any
 experience with R or ML.
@@ -267,11 +254,11 @@ matrix1
 ```
 
     ##          [,1]     [,2]
-    ## [1,] 4.543454 6.833709
-    ## [2,] 3.988832 5.948588
-    ## [3,] 4.225037 8.298415
-    ## [4,] 2.368237 7.234554
-    ## [5,] 3.094646 7.591800
+    ## [1,] 3.204092 5.606968
+    ## [2,] 3.622807 7.002204
+    ## [3,] 5.440479 6.731488
+    ## [4,] 4.750156 6.669378
+    ## [5,] 5.197283 7.417072
 
 To index this class of object, the column names and row names give us a
 pretty good idea. To get a specific element, index the row then column.
@@ -280,7 +267,7 @@ pretty good idea. To get a specific element, index the row then column.
 matrix1[3,1]
 ```
 
-    ## [1] 4.225037
+    ## [1] 5.440479
 
 Matrices can also be indexed as one-dimensional by supplying one index.
 The columns wrap to the next one.
@@ -289,13 +276,13 @@ The columns wrap to the next one.
 matrix1[6]
 ```
 
-    ## [1] 6.833709
+    ## [1] 5.606968
 
 ``` r
 matrix1[1,2]
 ```
 
-    ## [1] 6.833709
+    ## [1] 5.606968
 
 To get a full row or column, just leave the other dimension blank.
 
@@ -303,7 +290,7 @@ To get a full row or column, just leave the other dimension blank.
 matrix1[1,]
 ```
 
-    ## [1] 4.543454 6.833709
+    ## [1] 3.204092 5.606968
 
 ## Data Frames
 
@@ -324,16 +311,16 @@ dataframe1
 ```
 
     ##         col1 col2
-    ## 1   4.543454    1
-    ## 2   3.988832    2
-    ## 3   4.225037    3
-    ## 4   2.368237    4
-    ## 5   3.094646    5
-    ## 6   6.833709    6
-    ## 7   5.948588    7
-    ## 8   8.298415    8
-    ## 9   7.234554    9
-    ## 10  7.591800   10
+    ## 1   3.204092    1
+    ## 2   3.622807    2
+    ## 3   5.440479    3
+    ## 4   4.750156    4
+    ## 5   5.197283    5
+    ## 6   5.606968    6
+    ## 7   7.002204    7
+    ## 8   6.731488    8
+    ## 9   6.669378    9
+    ## 10  7.417072   10
     ## 11 78.000000   11
     ## 12 44.000000   12
 
@@ -344,8 +331,8 @@ returns a vector.
 dataframe1$col1
 ```
 
-    ##  [1]  4.543454  3.988832  4.225037  2.368237  3.094646  6.833709  5.948588
-    ##  [8]  8.298415  7.234554  7.591800 78.000000 44.000000
+    ##  [1]  3.204092  3.622807  5.440479  4.750156  5.197283  5.606968  7.002204
+    ##  [8]  6.731488  6.669378  7.417072 78.000000 44.000000
 
 You can also index like you do with matrices, but since it’s a
 dataframe, the first method is preferred.
@@ -354,8 +341,8 @@ dataframe, the first method is preferred.
 dataframe1[,1]
 ```
 
-    ##  [1]  4.543454  3.988832  4.225037  2.368237  3.094646  6.833709  5.948588
-    ##  [8]  8.298415  7.234554  7.591800 78.000000 44.000000
+    ##  [1]  3.204092  3.622807  5.440479  4.750156  5.197283  5.606968  7.002204
+    ##  [8]  6.731488  6.669378  7.417072 78.000000 44.000000
 
 ## Conditional Indexing
 
@@ -372,7 +359,7 @@ greater_than_1 <- dataframe1$col1 > 4
 greater_than_1
 ```
 
-    ##  [1]  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+    ##  [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 
 Here, we receive a vector of boolean (True or False) values. We can use
 this vector to index the original vector. So we only receive elements
@@ -382,15 +369,15 @@ from col1 where greater_than_1 is equal to True.
 dataframe1$col1
 ```
 
-    ##  [1]  4.543454  3.988832  4.225037  2.368237  3.094646  6.833709  5.948588
-    ##  [8]  8.298415  7.234554  7.591800 78.000000 44.000000
+    ##  [1]  3.204092  3.622807  5.440479  4.750156  5.197283  5.606968  7.002204
+    ##  [8]  6.731488  6.669378  7.417072 78.000000 44.000000
 
 ``` r
 dataframe1$col1[greater_than_1]
 ```
 
-    ## [1]  4.543454  4.225037  6.833709  5.948588  8.298415  7.234554  7.591800
-    ## [8] 78.000000 44.000000
+    ##  [1]  5.440479  4.750156  5.197283  5.606968  7.002204  6.731488  6.669378
+    ##  [8]  7.417072 78.000000 44.000000
 
 This is an extremely powerful tool in base R. You can also create other
 conditionals with:
