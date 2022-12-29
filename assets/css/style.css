@@ -19,9 +19,11 @@ section {
   background-color: var(--alabaster);
   color: var(--black-olive);
 }
+
 code {
   color: var(--alabaster);
   background-color: var(--asparagus);
+  border-radius: 10px;
 }
 
 .hero.is-primary .title {
@@ -34,7 +36,6 @@ code {
 
 h1.title.is-2 {
   background-color: transparent;
-  color: var(--pine-tree);
 }
 
 p.subtitle.is-3 {
@@ -53,16 +54,18 @@ h1, h2, h3 {
   background-color: transparent;
 }
 
-/* Code chunks? */
-
-.highlight {
-    background-color: var(--ecru);
-    color: var(--pine-tree);
+/* Code chunks */
+.language-r.highlighter-rouge pre.highlight {
+  color: var(--alabaster);
+  background-color: var(--pine-tree);
+  border: 1px solid var(--moss-green);
 }
 
+/* Output */
 .language-plaintext.highlighter-rouge pre.highlight {
-  background-color: var(--pine-tree);
-  color: var(--alabaster);
+  color: var(--black-olive);
+  background-color: var(--dutch-white);
+  border: 1px solid var(--satin-sheen-gold);
 }
 
 /* Strings */
