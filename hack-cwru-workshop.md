@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ---
 layout: page
 title: R, the tidyverse, and Machine Learning
@@ -8,12 +9,19 @@ menubar_toc: true
 toc_title: Contents
 hero_height: is-fullwidth
 ---
+=======
+R, the tidyverse, and Machine Learning
+================
+Keaton Markey
+2022/12/28
+>>>>>>> Stashed changes
 
 <link href="assets/css/style.css" rel="stylesheet">
 
-This tutorial was prepared for a quick and dirty overview of R, some of
-its facets, and what machine learning looks like. It is assumed that you
-have some knowledge of programming concepts, but not necessarily any
+This tutorial was prepared for a light overview of R, some of its
+capabilties, and what machine learning looks like using the {glm} and
+{caret} packages. It is assumed that you have some knowledge of
+programming concepts, maybe some statistics,, but not necessarily any
 experience with R or ML.
 
 # Introduction
@@ -259,11 +267,11 @@ matrix1
 ```
 
     ##          [,1]     [,2]
-    ## [1,] 5.172809 6.700221
-    ## [2,] 5.106113 7.502721
-    ## [3,] 2.165550 5.083326
-    ## [4,] 3.761543 9.077836
-    ## [5,] 4.537152 6.966988
+    ## [1,] 4.543454 6.833709
+    ## [2,] 3.988832 5.948588
+    ## [3,] 4.225037 8.298415
+    ## [4,] 2.368237 7.234554
+    ## [5,] 3.094646 7.591800
 
 To index this class of object, the column names and row names give us a
 pretty good idea. To get a specific element, index the row then column.
@@ -272,7 +280,7 @@ pretty good idea. To get a specific element, index the row then column.
 matrix1[3,1]
 ```
 
-    ## [1] 2.16555
+    ## [1] 4.225037
 
 Matrices can also be indexed as one-dimensional by supplying one index.
 The columns wrap to the next one.
@@ -281,13 +289,13 @@ The columns wrap to the next one.
 matrix1[6]
 ```
 
-    ## [1] 6.700221
+    ## [1] 6.833709
 
 ``` r
 matrix1[1,2]
 ```
 
-    ## [1] 6.700221
+    ## [1] 6.833709
 
 To get a full row or column, just leave the other dimension blank.
 
@@ -295,7 +303,7 @@ To get a full row or column, just leave the other dimension blank.
 matrix1[1,]
 ```
 
-    ## [1] 5.172809 6.700221
+    ## [1] 4.543454 6.833709
 
 ## Data Frames
 
@@ -316,16 +324,16 @@ dataframe1
 ```
 
     ##         col1 col2
-    ## 1   5.172809    1
-    ## 2   5.106113    2
-    ## 3   2.165550    3
-    ## 4   3.761543    4
-    ## 5   4.537152    5
-    ## 6   6.700221    6
-    ## 7   7.502721    7
-    ## 8   5.083326    8
-    ## 9   9.077836    9
-    ## 10  6.966988   10
+    ## 1   4.543454    1
+    ## 2   3.988832    2
+    ## 3   4.225037    3
+    ## 4   2.368237    4
+    ## 5   3.094646    5
+    ## 6   6.833709    6
+    ## 7   5.948588    7
+    ## 8   8.298415    8
+    ## 9   7.234554    9
+    ## 10  7.591800   10
     ## 11 78.000000   11
     ## 12 44.000000   12
 
@@ -336,8 +344,8 @@ returns a vector.
 dataframe1$col1
 ```
 
-    ##  [1]  5.172809  5.106113  2.165550  3.761543  4.537152  6.700221  7.502721
-    ##  [8]  5.083326  9.077836  6.966988 78.000000 44.000000
+    ##  [1]  4.543454  3.988832  4.225037  2.368237  3.094646  6.833709  5.948588
+    ##  [8]  8.298415  7.234554  7.591800 78.000000 44.000000
 
 You can also index like you do with matrices, but since it’s a
 dataframe, the first method is preferred.
@@ -346,8 +354,8 @@ dataframe, the first method is preferred.
 dataframe1[,1]
 ```
 
-    ##  [1]  5.172809  5.106113  2.165550  3.761543  4.537152  6.700221  7.502721
-    ##  [8]  5.083326  9.077836  6.966988 78.000000 44.000000
+    ##  [1]  4.543454  3.988832  4.225037  2.368237  3.094646  6.833709  5.948588
+    ##  [8]  8.298415  7.234554  7.591800 78.000000 44.000000
 
 ## Conditional Indexing
 
@@ -364,7 +372,7 @@ greater_than_1 <- dataframe1$col1 > 4
 greater_than_1
 ```
 
-    ##  [1]  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+    ##  [1]  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 
 Here, we receive a vector of boolean (True or False) values. We can use
 this vector to index the original vector. So we only receive elements
@@ -374,15 +382,15 @@ from col1 where greater_than_1 is equal to True.
 dataframe1$col1
 ```
 
-    ##  [1]  5.172809  5.106113  2.165550  3.761543  4.537152  6.700221  7.502721
-    ##  [8]  5.083326  9.077836  6.966988 78.000000 44.000000
+    ##  [1]  4.543454  3.988832  4.225037  2.368237  3.094646  6.833709  5.948588
+    ##  [8]  8.298415  7.234554  7.591800 78.000000 44.000000
 
 ``` r
 dataframe1$col1[greater_than_1]
 ```
 
-    ##  [1]  5.172809  5.106113  4.537152  6.700221  7.502721  5.083326  9.077836
-    ##  [8]  6.966988 78.000000 44.000000
+    ## [1]  4.543454  4.225037  6.833709  5.948588  8.298415  7.234554  7.591800
+    ## [8] 78.000000 44.000000
 
 This is an extremely powerful tool in base R. You can also create other
 conditionals with:
@@ -911,10 +919,10 @@ what our model did, and review some statistics to evaluate it.
 This model created a linear relationship or linear function between the
 input and output. This means that the function we should expect to see
 will be in the form of $mx + b$ (the function of a line) where `x` is
-`TrackerDistance`. Our model says that:
+`TrackerDistance`. Our model says that `Calories` can be best estimated
+by:
 
-> `Calories` can be best estimated by
-> $118.610 \times `TrackerDistance` + 1654.77$
+> 118.610 × `TrackerDistance` + 1654.77
 
 Let’s see what this looks like on a graph.
 
@@ -1002,10 +1010,11 @@ summary(pmodel)
     ## 
     ## Number of Fisher Scoring iterations: 2
 
-Here are the coefficents of a polynomial relationship between `Calories`
-and `TrackerDistance`. According to the model:
+Here are the coefficients of a polynomial relationship between
+`Calories` and `TrackerDistance`. According to the model:
 
-> $`Calories` = -1286.74 \times `TrackerDistance`^{3} + -1688.80 \times `TrackerDistance`^{2} + 14201.32 \times `TrackerDistance` + 2303.61$
+> `Calories` = -1286.74 × `TrackerDistance`³ + -1688.80 ×
+> `TrackerDistance`² + 14201.32 × `TrackerDistance` + 2303.61
 
 When coefficients are calculated, we can get an estimate of how likely
 they are to exist as a predictor of the output. The colloquial threshold
@@ -1188,7 +1197,7 @@ The model guessed right about 69% of the time. Lets remove
 ``` r
 # Create model without FairlyActiveMinutes
 
-logmodel2 <- glm(formula = y ~  SedentaryMinutes + LightlyActiveMinutes + VeryActiveMinutes, 
+logmodel2 <- glm(formula = y ~ SedentaryMinutes + LightlyActiveMinutes + VeryActiveMinutes, 
                  data = fit_new, 
                  family = "binomial")
 
@@ -1207,10 +1216,10 @@ sum(diag(cmat))/sum(cmat)
 
     ## [1] 0.7
 
-The model without `FairlyyActiveMinutes` achieved a slightly better
-accuracy than the model with it, but does that matter? If you’re
-interested in the benefits of model complexity, [here’s an article from
-Forbes](https://www.forbes.com/sites/forbestechcouncil/2021/08/10/five-reasons-why-simple-models-are-a-data-scientists-best-friend/).
+The model without `FairlyActiveMinutes` achieved a slightly better
+accuracy than the model with it. Since we achieved a better accuracy
+with a simpler model, it is the clear winner. In ML, simple is almost
+always better. Read on to learn why.
 
 ## Case 3: Random Forest
 
@@ -1296,8 +1305,6 @@ forest$results$Accuracy
 The accuracy of the random forest model is better than the logistic
 regression, and we successfully improved upon the simpler model. Now, we
 could use this trained model to predict the class of future data.
-
-================================================================================
 
 Thanks for taking a look at this tutorial. You can check out a version
 of this document on [my Github
