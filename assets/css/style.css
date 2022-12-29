@@ -18,6 +18,7 @@
 section {
   background-color: var(--alabaster);
   color: var(--black-olive);
+  overflow-x: hidden;
 }
 
 /* Menubar */
