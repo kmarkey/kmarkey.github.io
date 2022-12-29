@@ -1,0 +1,27 @@
+<link href="assets/css/style.css" rel="stylesheet"><\link>
+
+<footer class="footer">
+    <div class="container">
+        
+        {% if site.footer_menu %}
+        <div class="columns is-multiline">
+            {% for item in site.data[site.footer_menu] %}
+            <div class="column has-text-centered">
+                <div>
+                    <a href="{{ item.link | relative_url }}" class="link">{{ item.name }}</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <a class="linkedin-logo" href="my-website.com">
+            <img src="assets/logos/LI-Logo.png" alt="LinkedIn" style="border-radius: 3px; width: 50px; height: 50px;">
+        </a>
+
+
+        <div class="content is-small has-text-centered">
+            <p class="">Theme built by <a href="https://www.csrhymes.com">C.S. Rhymes</a></p>
+        </div>
+    </div>
+</footer>
