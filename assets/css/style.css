@@ -33,40 +33,40 @@ h1, h2, h3 {
 }
 
 /* Paragraph */
-p {
+/* p {
   background-color: var(--alabaster);
-}
+} */
 
 /* Links */
-a {
+/* a {
   outline: none;
   text-decoration: none;
   padding: 2px 1px 0;
-}
+} */
 
-a:link {
+/* a:link {
   color: var(--moss-green);
-}
+} */
 
-a:focus {
+/* a:focus {
   border-bottom: 1px solid;
   background: var(--pine-tree);
-}
+} */
 
-a:hover {
+/* a:hover {
   color: var(--alabaster);
   border-bottom: 1px solid var(--pine-tree);
   background: var(--brunswick-green);
-}
+} */
 
-a:active {
+/* a:active {
   background: var(--brunswick-green);
   color: var(--alabaster);
-}
+} */
 
 /* Inline Code Blocks */
 code {
-  color: var(--black-olive);
+  color: var(--alabaster);
   background-color: var(--asparagus);
 }
 
@@ -88,103 +88,103 @@ p.subtitle.is-3 {
 }
 
 /* Block Quotes */
-blockquote {
+/* blockquote {
   padding: 10px 20px;
   margin: 0 0 20px;
   font-size: 17.5px;
   background-color: var(--alabaster);
   border-left: 5px solid var(--brunswick-green);
-}
+} */
 
 /* Custom Knitr Class, R Chunks */
-.code-chunk {
+/* .code-chunk {
   color: var(--alabaster);
   background-color: var(--pine-tree);
   border: 1px solid var(--moss-green);
-}
+} */
 
 /* Chunk Output */
-pre:not([class]) {
+/* pre:not([class]) {
     color: var(--black-olive);
     background-color: var(--dutch-white);
     border: 1px solid var(--satin-sheen-gold);
-}
+} */
 
 /* Table Header */
-.table>thead>tr>th {
+/* .table>thead>tr>th {
     vertical-align: bottom;
     border-bottom: 2px solid var(--pine-tree);
     background-color: inherit;
-}
+} */
 
 /* Table Body */
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+/* .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     padding: 8px;
     line-height: 1.42857143;
     vertical-align: top;
     border-top: 1px solid var(--pine-tree);
     background-color: inherit;
 
-}
+} /*
 
 /* Sidebar Navigation */
-.nav-tabs {
+/* .nav-tabs {
     border-bottom: 1px solid var(--hunter-green);
-}
+} */
 
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+/* .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     color: var(--alabaster);
     cursor: default;
     background-color: var(--fern-green);
     border: 1px solid var(--hunter-green);
     border-bottom-color: var(--hunter-green);
-}
+} */
 
-.nav>li>a:focus, .nav>li>a:hover {
+/* .nav>li>a:focus, .nav>li>a:hover {
     color: var(--black-olive);
     cursor: default;
     background-color: var(--dutch-white);
     border: 1px solid var(--moss-green);
     border-bottom-color: var(--moss-green);
-}
+} */
 
 /* Tabsets */
-.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+/* .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     z-index: 2;
     color: var(--alabaster);
     background-color: var(--fern-green);
     border-color: var(--hunter-green);
-}
+} */
 
 /* Highlight Numbers */
-.hljs-number {
+/* .hljs-number {
     color: var(--asparagus);
-}
+} */
 
 /* Highlight Keywords */
-.hljs-keyword {
+/* .hljs-keyword {
     color: var(--orange-red);
     font-weight: bold;
-}
+} */
 
 /* Highlight Strings */
-.hljs-string {
+/* .hljs-string {
     color: var(--asparagus);
-}
+} */
 
 /* Decorate Links */
-a:link {
+/* a:link {
   text-decoration: none;
-}
+} */
 
-a:visited {
+/* a:visited {
   text-decoration: none;
-}
+} */
 
-a:hover {
+/* a:hover {
   text-decoration: underline;
-}
+} */
 
-a:active {
+/* a:active {
   text-decoration: underline;
-}
+} */
