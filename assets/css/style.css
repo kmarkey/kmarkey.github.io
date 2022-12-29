@@ -32,6 +32,22 @@ h1, h2, h3 {
   background-color: transparent;
 }
 
+/* Code chunks? */
+.language-plaintext-highlighter-rouge {
+  background-color: var(--pine-tree);
+  color: var(--alabaster);
+}
+
+/* Strings */
+.highlight .s2 {
+    color: var(--moss-green);
+}
+
+/* numbers */
+.highlight .m, .highlight .mb, .highlight .mx {
+    color: var(--moss-green);
+}
+
 /* Paragraph */
 /* p {
   background-color: var(--alabaster);
