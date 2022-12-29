@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 ---
 layout: page
 title: R, the tidyverse, and Machine Learning
@@ -10,12 +9,6 @@ menubar_toc: true
 toc_title: Contents
 hero_height: is-fullwidth
 ---
-=======
-R, the tidyverse, and Machine Learning
-================
-Author: Keaton Markey
-2022/12/28
->>>>>>> Stashed changes
 
 <link href="assets/css/style.css" rel="stylesheet">
 
@@ -655,7 +648,7 @@ axis. We can supply our own labels too.
 plot(x = mtcars$hp, mtcars$mpg, xlab = "Horsepower", ylab = "MPG")
 ```
 
-![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
+![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
 
 We can make a histogram too. `hist()` only takes one data argument and
 automatically counts each group
@@ -664,7 +657,7 @@ automatically counts each group
 hist(mtcars$cyl, xlab = "Cylinders", main = "Histogram of Cylinders")
 ```
 
-![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
+![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-32-1.png)<!-- -->
 
 ### tidyverse
 
@@ -687,7 +680,7 @@ ggplot(mtcars) +
     geom_point(aes(x = hp, y = mpg))
 ```
 
-![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
+![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-33-1.png)<!-- -->
 
 We can make a histogram too.
 
@@ -707,7 +700,7 @@ ggplot(mtcars) + geom_histogram(aes(x = cyl)) +
 
     ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
-![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
+![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-34-1.png)<!-- -->
 
 # Machine Learning
 
@@ -830,7 +823,7 @@ Let’s see what our variables of interest look like.
 plot(fitbit$TrackerDistance, fitbit$Calories, xlab = "Distance", ylab = "Calories")
 ```
 
-![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-37-1.png)<!-- -->
+![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-37-1.png)<!-- -->
 
 ### Linear Model
 
@@ -914,7 +907,7 @@ ggplot(data = fitbit) +
     ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
     ## i Please use `linewidth` instead.
 
-![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-40-1.png)<!-- -->
+![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-40-1.png)<!-- -->
 
 How many calories would we expect someone to burn if they ran 40 miles?
 
@@ -1015,7 +1008,7 @@ ggplot(data = fitbit) +
     theme_classic()
 ```
 
-![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
+![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-43-1.png)<!-- -->
 
 The polynomial model in blue seems to follow the linear model exactly
 until we reach a `TrackerDistance` of about 18. Then, it bends toward
@@ -1064,7 +1057,7 @@ ggplot(fit_new) +
     ## Warning in geom_histogram(aes(x = dvcal, fill = dvcal), stat = "count"):
     ## Ignoring unknown parameters: `binwidth`, `bins`, and `pad`
 
-![](hack-cwru-workshop_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
+![](assets/hack-cwru-workshop_files/figure-gfm/unnamed-chunk-44-1.png)<!-- -->
 
 To create this model, we can use `glm()` again, but this time set the
 `family` argument to “binomial”.
