@@ -1,7 +1,13 @@
-R, the tidyverse, and Machine Learning
-================
-Author: Keaton Markey
-2022/12/28
+---
+layout: page
+title: R, the tidyverse, and Machine Learning
+subtitle: "CWRU Hackathon Workshop" 
+author: "Author: Keaton Markey"
+date: "2022/12/28"
+menubar_toc: true
+toc_title: Contents
+hero_height: is-fullwidth
+---
 
 <link href="assets/css/style.css" rel="stylesheet">
 
