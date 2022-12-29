@@ -74,13 +74,19 @@ code {
     color: var(--alabaster);
 }
 
+.hero.is-primary .subtitle {
+    color: var(--alabaster);
+}
+
 h1.title.is-2 {
-  
+  background-color: transparent;
+  color: var(--pine-tree);
 }
 
 p.subtitle.is-3 {
-  
+  background-color: transparent;
 }
+
 /* Block Quotes */
 blockquote {
   padding: 10px 20px;
