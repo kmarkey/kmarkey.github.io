@@ -19,6 +19,27 @@ section {
   background-color: var(--alabaster);
   color: var(--black-olive);
 }
+code {
+  color: var(--alabaster);
+  background-color: var(--asparagus);
+}
+
+.hero.is-primary .title {
+    color: var(--alabaster);
+}
+
+.hero.is-primary .subtitle {
+    color: var(--alabaster);
+}
+
+h1.title.is-2 {
+  background-color: transparent;
+  color: var(--pine-tree);
+}
+
+p.subtitle.is-3 {
+  background-color: transparent;
+}
 
 /* Body sections */
 /*body {
@@ -33,7 +54,13 @@ h1, h2, h3 {
 }
 
 /* Code chunks? */
-.language-plaintext-highlighter-rouge {
+
+.highlight {
+    background-color: var(--ecru);
+    color: var(--pine-tree);
+}
+
+.language-plaintext.highlighter-rouge pre.highlight {
   background-color: var(--pine-tree);
   color: var(--alabaster);
 }
@@ -81,27 +108,6 @@ h1, h2, h3 {
 } */
 
 /* Inline Code Blocks */
-code {
-  color: var(--alabaster);
-  background-color: var(--asparagus);
-}
-
-.hero.is-primary .title {
-    color: var(--alabaster);
-}
-
-.hero.is-primary .subtitle {
-    color: var(--alabaster);
-}
-
-h1.title.is-2 {
-  background-color: transparent;
-  color: var(--pine-tree);
-}
-
-p.subtitle.is-3 {
-  background-color: transparent;
-}
 
 /* Block Quotes */
 /* blockquote {
