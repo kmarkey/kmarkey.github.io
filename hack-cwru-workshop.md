@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ---
 layout: page
 title: R, the tidyverse, and Machine Learning
@@ -9,6 +10,12 @@ menubar_toc: true
 toc_title: Contents
 hero_height: is-fullwidth
 ---
+=======
+R, the tidyverse, and Machine Learning
+================
+Author: Keaton Markey
+2022/12/28
+>>>>>>> Stashed changes
 
 <link href="assets/css/style.css" rel="stylesheet">
 
@@ -260,11 +267,11 @@ matrix1
 ```
 
     ##          [,1]     [,2]
-    ## [1,] 4.632838 6.306372
-    ## [2,] 3.824338 8.315635
-    ## [3,] 3.638824 6.210929
-    ## [4,] 5.015669 7.977296
-    ## [5,] 3.842044 8.705368
+    ## [1,] 4.327522 6.682276
+    ## [2,] 3.672691 6.595569
+    ## [3,] 2.965676 5.909040
+    ## [4,] 4.446773 6.574380
+    ## [5,] 4.607758 7.539130
 
 To index this class of object, the column names and row names give us a
 pretty good idea. To get a specific element, index the row then column.
@@ -273,7 +280,7 @@ pretty good idea. To get a specific element, index the row then column.
 matrix1[3,1]
 ```
 
-    ## [1] 3.638824
+    ## [1] 2.965676
 
 Matrices can also be indexed as one-dimensional by supplying one index.
 The columns wrap to the next one.
@@ -282,13 +289,13 @@ The columns wrap to the next one.
 matrix1[6]
 ```
 
-    ## [1] 6.306372
+    ## [1] 6.682276
 
 ``` r
 matrix1[1,2]
 ```
 
-    ## [1] 6.306372
+    ## [1] 6.682276
 
 To get a full row or column, just leave the other dimension blank.
 
@@ -296,7 +303,7 @@ To get a full row or column, just leave the other dimension blank.
 matrix1[1,]
 ```
 
-    ## [1] 4.632838 6.306372
+    ## [1] 4.327522 6.682276
 
 ## Data Frames
 
@@ -316,24 +323,19 @@ class(dataframe1)
 dataframe1
 ```
 
-<div class="kable-table">
-
-|      col1 | col2 |
-|----------:|-----:|
-|  4.632838 |    1 |
-|  3.824338 |    2 |
-|  3.638824 |    3 |
-|  5.015669 |    4 |
-|  3.842044 |    5 |
-|  6.306372 |    6 |
-|  8.315635 |    7 |
-|  6.210929 |    8 |
-|  7.977296 |    9 |
-|  8.705368 |   10 |
-| 78.000000 |   11 |
-| 44.000000 |   12 |
-
-</div>
+    ##         col1 col2
+    ## 1   4.327522    1
+    ## 2   3.672691    2
+    ## 3   2.965676    3
+    ## 4   4.446773    4
+    ## 5   4.607758    5
+    ## 6   6.682276    6
+    ## 7   6.595569    7
+    ## 8   5.909040    8
+    ## 9   6.574380    9
+    ## 10  7.539130   10
+    ## 11 78.000000   11
+    ## 12 44.000000   12
 
 Indexing these named columns is super easy with the “\$” operator. This
 returns a vector.
@@ -342,8 +344,8 @@ returns a vector.
 dataframe1$col1
 ```
 
-    ##  [1]  4.632838  3.824338  3.638824  5.015669  3.842044  6.306372  8.315635
-    ##  [8]  6.210929  7.977296  8.705368 78.000000 44.000000
+    ##  [1]  4.327522  3.672691  2.965676  4.446773  4.607758  6.682276  6.595569
+    ##  [8]  5.909040  6.574380  7.539130 78.000000 44.000000
 
 You can also index like you do with matrices, but since it’s a
 dataframe, the first method is preferred.
@@ -352,8 +354,8 @@ dataframe, the first method is preferred.
 dataframe1[,1]
 ```
 
-    ##  [1]  4.632838  3.824338  3.638824  5.015669  3.842044  6.306372  8.315635
-    ##  [8]  6.210929  7.977296  8.705368 78.000000 44.000000
+    ##  [1]  4.327522  3.672691  2.965676  4.446773  4.607758  6.682276  6.595569
+    ##  [8]  5.909040  6.574380  7.539130 78.000000 44.000000
 
 ## Conditional Indexing
 
@@ -370,7 +372,7 @@ greater_than_1 <- dataframe1$col1 > 4
 greater_than_1
 ```
 
-    ##  [1]  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+    ##  [1]  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 
 Here, we receive a vector of boolean (True or False) values. We can use
 this vector to index the original vector. So we only receive elements
@@ -380,15 +382,15 @@ from col1 where greater_than_1 is equal to True.
 dataframe1$col1
 ```
 
-    ##  [1]  4.632838  3.824338  3.638824  5.015669  3.842044  6.306372  8.315635
-    ##  [8]  6.210929  7.977296  8.705368 78.000000 44.000000
+    ##  [1]  4.327522  3.672691  2.965676  4.446773  4.607758  6.682276  6.595569
+    ##  [8]  5.909040  6.574380  7.539130 78.000000 44.000000
 
 ``` r
 dataframe1$col1[greater_than_1]
 ```
 
-    ## [1]  4.632838  5.015669  6.306372  8.315635  6.210929  7.977296  8.705368
-    ## [8] 78.000000 44.000000
+    ##  [1]  4.327522  4.446773  4.607758  6.682276  6.595569  5.909040  6.574380
+    ##  [8]  7.539130 78.000000 44.000000
 
 This is an extremely powerful tool in base R. You can also create other
 conditionals with:
@@ -429,18 +431,13 @@ Lets get some information about this data we just pulled using the
 head(mtcars)
 ```
 
-<div class="kable-table">
-
-|                   |  mpg | cyl | disp |  hp | drat |    wt |  qsec |  vs |  am | gear | carb |
-|:------------------|-----:|----:|-----:|----:|-----:|------:|------:|----:|----:|-----:|-----:|
-| Mazda RX4         | 21.0 |   6 |  160 | 110 | 3.90 | 2.620 | 16.46 |   0 |   1 |    4 |    4 |
-| Mazda RX4 Wag     | 21.0 |   6 |  160 | 110 | 3.90 | 2.875 | 17.02 |   0 |   1 |    4 |    4 |
-| Datsun 710        | 22.8 |   4 |  108 |  93 | 3.85 | 2.320 | 18.61 |   1 |   1 |    4 |    1 |
-| Hornet 4 Drive    | 21.4 |   6 |  258 | 110 | 3.08 | 3.215 | 19.44 |   1 |   0 |    3 |    1 |
-| Hornet Sportabout | 18.7 |   8 |  360 | 175 | 3.15 | 3.440 | 17.02 |   0 |   0 |    3 |    2 |
-| Valiant           | 18.1 |   6 |  225 | 105 | 2.76 | 3.460 | 20.22 |   1 |   0 |    3 |    1 |
-
-</div>
+    ##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+    ## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+    ## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+    ## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+    ## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+    ## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+    ## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 
 Here we see what we are working with. Take note of some of the column
 names, what kinds of values each column seems to take, and the row names
@@ -587,15 +584,12 @@ mtcars %>%
     summarise(mean_mpg = mean(mpg))
 ```
 
-<div class="kable-table">
-
-| cyl | mean_mpg |
-|----:|---------:|
-|   4 | 26.66364 |
-|   6 | 19.74286 |
-|   8 | 15.10000 |
-
-</div>
+    ## # A tibble: 3 x 2
+    ##     cyl mean_mpg
+    ##   <dbl>    <dbl>
+    ## 1     4     26.7
+    ## 2     6     19.7
+    ## 3     8     15.1
 
 Without the pipe operator, that code would look like this:
 
@@ -603,15 +597,12 @@ Without the pipe operator, that code would look like this:
 summarise(group_by(mtcars, cyl), mean_mpg = mean(mpg))
 ```
 
-<div class="kable-table">
-
-| cyl | mean_mpg |
-|----:|---------:|
-|   4 | 26.66364 |
-|   6 | 19.74286 |
-|   8 | 15.10000 |
-
-</div>
+    ## # A tibble: 3 x 2
+    ##     cyl mean_mpg
+    ##   <dbl>    <dbl>
+    ## 1     4     26.7
+    ## 2     6     19.7
+    ## 3     8     15.1
 
 Not terrible, but with longs chains it can get messy fast, and we
 couldn’t easily add comments between code.
@@ -629,13 +620,8 @@ mtcars %>%
     summarise(avg_ratio = mean(disp/wt))
 ```
 
-<div class="kable-table">
-
-| avg_ratio |
-|----------:|
-|  67.77537 |
-
-</div>
+    ##   avg_ratio
+    ## 1  67.77537
 
 The tidyverse is home to other methods as well:
 
@@ -728,7 +714,7 @@ ggplot(mtcars) + geom_histogram(aes(x = cyl)) +
 There are two main classes of ML:
 
 ![Regression and
-Classification](../figs/regression-vs-classification-in-machine-learning.png)
+Classification](assets/hack-cwru-workshop_files/img-gfm/regression-vs-classification-in-machine-learning.png)
 
 - Regression
   - Line of best fit
@@ -1044,7 +1030,8 @@ more accurately represent the relationship between `Calories` and
 
 ## Case 2: Logistic Regression
 
-![Simple Logistic Regression](../figs/Simple-Logistic-Regression.jpg)
+![Simple Logistic
+Regression](assets/hack-cwru-workshop_files/img-gfm/Simple-Logistic-Regression.jpg)
 
 Even though regression is in the name, it is used for binary
 classification (TRUE/FALSE, white/black etc.). This model estimates the
@@ -1197,7 +1184,7 @@ sum(diag(cmat))/sum(cmat)
 
     ## [1] 0.7
 
-The model without `FailryActiveMinutes` achieved a slightly better
+The model without `FairlyyActiveMinutes` achieved a slightly better
 accuracy than the model with it, but does that matter? If you’re
 interested in the benefits of model complexity, [here’s an article from
 Forbes](https://www.forbes.com/sites/forbestechcouncil/2021/08/10/five-reasons-why-simple-models-are-a-data-scientists-best-friend/).
