@@ -158,6 +158,14 @@ a:hover {
     padding: 3rem 1.5rem 6rem;
 }
 
+/* logo */
+
+.logos {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 /* Paragraph */
 /* p {
   background-color: var(--alabaster);
