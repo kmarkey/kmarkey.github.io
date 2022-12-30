@@ -138,7 +138,7 @@ a:hover {
   color: var(--alabaster);
   background: var(--brunswick-green);
   text-decoration: none;
-  border-radius: 3px
+  border-radius: 3px;
 }
 
 /* Dont underline nav */
@@ -160,11 +160,16 @@ a:hover {
 
 /* logo */
 
-.logos {
+.logo {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  margin-bottom: 0;
+}
+
+.logo:hover {
+  background: transparent;
+  text-decoration: none;
 }
 /* Paragraph */
 /* p {
