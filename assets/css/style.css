@@ -158,10 +158,15 @@ a:hover {
     padding: 3rem 1.5rem 6rem;
 }
 
+.ftext {
+    color: inherit;
+}
+
 /* logo */
 
-.logo {
-  display: block;
+.logos {
+  display: flex;
+  justify-content: center;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0;
@@ -170,6 +175,11 @@ a:hover {
 .logo:hover {
   background: transparent;
   text-decoration: none;
+}
+
+.spacer {
+  background-color: var(--ecru);
+  border-color: var(--satin-sheen-gold);
 }
 /* Paragraph */
 /* p {
