@@ -5,3 +5,12 @@ remote_theme: chrisrhymes/bulma-clean-theme
 author: Keaton Markey
 timezone: America/New_York
 ---
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+    hero-height: "is-fullwidth"
+    author: "Keaton Markey
