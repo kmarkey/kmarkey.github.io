@@ -146,11 +146,17 @@ a:hover {
   text-decoration: none;
 }
 
+/* footer */
 .footer {
     background-color: var(--pine-tree);
     padding: 3rem 1.5rem 6rem;
 }
 
+.footer .a {
+    color: var(--alabster);
+    background-color: inherit;
+    padding: 3rem 1.5rem 6rem;
+}
 
 /* Paragraph */
 /* p {
