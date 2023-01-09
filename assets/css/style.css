@@ -313,4 +313,13 @@ a:hover {
 } */
 
 /* scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: red;
+}
 /* width */
