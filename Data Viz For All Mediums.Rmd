@@ -1,0 +1,36 @@
+---
+title: "Data Visualization For All Mediums"
+author: "Keaton Markey"
+date: "2023-01-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Another Blog POst About Data Visualization
+### Presenting Data in Apps vs Markdown
+
+You've just finished crunching numbers on your most recent data science project, and its time to present your findings to the world. But, there's a couple of issues.
+
+You don't want people to see too many words. Your code might be too long (or messy), or you'd rather have images and figures tell the story.
+
+Maybe your analysis isn't exactly linear (which is often the case), and you want users to be able to jump around easily
+
+You don't want to mess with JavaScript or a more popular app-development library
+
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
