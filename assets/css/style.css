@@ -1,23 +1,22 @@
 /* Define the color palette */
 :root {
-  --alabaster: #f5f1e5ff;
-  --dutch-white: #e7ddbcff;
-  --ecru: #cdbd85ff;
-  --satin-sheen-gold: #b39c4dff;
-  --asparagus: #9Cab73ff;
-  --moss-green: #768948ff;
-  --fern-green: #607744ff;
-  --hunter-green: #34623fff;
-  --brunswick-green: #294931ff;
-  --pine-tree: #1e2f23ff;
-  --black-olive: #40403eff;
-  --orange-red: #f25f5cff;
+  /* CSS HEX */
+  --lemon-chiffon: ##FFF5C4ff
+  --vanilla: #faeba1ff;
+  --sage: #b8c38aff;
+  --asparagus: #769a73ff;
+  --dark-green: #1e2f23ff;
+  --dim-gray: #6f6d66ff;
+  --eggplant: #673f58ff;
+  --eggplant-2: #755067ff;
+  
+  --pistachio: #8BD18Eff
 }
 
 /* Subsections */
 section {
-  background-color: var(--alabaster);
-  color: var(--black-olive);
+  background-color: var(--vanilla);
+  color: var(--eggplant);
 }
 
 .content pre {
@@ -31,15 +30,15 @@ section {
 /* Menubar */
 .menu-list a {
     border-radius: 7px;
-    color: var(--black-olive);
+    color: var(--asparagus);
     text-decoration: none;
     display: block;
     padding: 0.5em 0.75em;
 }
 
 .menu-list a:hover {
-  color: var(--alabaster);
-  background: var(--brunswick-green);
+  color: var(--sage);
+  background: var(--dim-grey);
 }
 
 /* inline code */
@@ -53,15 +52,15 @@ code {
   padding: 10px 20px;
   margin: 0 0 20px;
   font-size: 17.5px;
-  background-color: var(--dutch-white);
+  background-color: var(--vanilla);
   border-radius: 0px 7px 7px 0px;
-  border: 1px solid var(--satin-sheen-gold);
-  border-left: 5px solid var(--brunswick-green);
+  border: 1px solid var(--lemon-shiffon);
+  border-left: 5px solid var(--asparagus);
 }
 
 /* title */
 .hero.is-primary .title {
-    color: var(--alabaster);
+    color: var(--vanilla);
 }
 
 h1.title.is-2 {
@@ -70,7 +69,7 @@ h1.title.is-2 {
 
 /* subtitle */
 .hero.is-primary .subtitle {
-    color: var(--alabaster);
+    color: var(--vanilla);
 }
 
 p.subtitle.is-3 {
@@ -91,53 +90,53 @@ h1, h2, h3 {
 
 /* Code chunks */
 .language-r.highlighter-rouge pre.highlight {
-  color: var(--alabaster);
-  background-color: var(--pine-tree);
-  border: 1px solid var(--moss-green);
+  color: var(--eggplant);
+  background-color: var(--eggplant-2);
+  border: 1px solid var(--vanilla);
   border-radius: 7px;
 }
 
 /* Output */
 .language-plaintext.highlighter-rouge pre.highlight {
-  color: var(--black-olive);
-  background-color: var(--dutch-white);
-  border: 1px solid var(--satin-sheen-gold);
+  color: var(--dim-grey);
+  background-color: var(--lemon-chiffon);
+  border: 1px solid var(--dark-green);
   border-radius: 7px;
 }
 
 /* Strings */
 .highlight .s1, .highlight .s2 {
-    color: var(--moss-green);
+    color: var(--vanilla);
 }
 
 /* numbers */
 .highlight .m, .highlight .mb, .highlight .mx {
-    color: var(--moss-green);
+    color: var(--sage);
 }
 
 /* keywords */
 .highlight .nf {
-    color: var(--orange-red);
+    color: var(--pistachio);
     font-weight: bold;
 }
 
 /* weird characters?  */
 
 .highlight .o {
-    color: var(--alabaster);
+    color: var(--vanilla);
     font-weight: normal;
 }
 
 /* Links */
 a {
-    color: var(--pine-tree);
+    color: var(--aspargus);
     cursor: pointer;
     text-decoration: underline;
 }
 
 a:hover {
-  color: var(--alabaster);
-  background: var(--brunswick-green);
+  color: var(--vanilla);
+  background: var(--dark-green);
   text-decoration: none;
   border-radius: 3px;
 }
@@ -149,12 +148,12 @@ a:hover {
 
 /* footer */
 .footer {
-    background-color: var(--pine-tree);
+    background-color: var(--dark-green);
     padding: 1.5rem 1.5rem 1.5rem;
 }
 
 .footer .a {
-    color: var(--alabster);
+    color: var(--asparagus);
     background-color: inherit;
 }
 
@@ -176,141 +175,6 @@ a:hover {
   background: transparent;
   text-decoration: none;
 }
-/* Paragraph */
-/* p {
-  background-color: var(--alabaster);
-} */
-
-/* Links */
-/* a {
-  outline: none;
-  text-decoration: none;
-  padding: 2px 1px 0;
-} */
-
-/* a:link {
-  color: var(--moss-green);
-} */
-
-/* a:focus {
-  border-bottom: 1px solid;
-  background: var(--pine-tree);
-} */
-
-/* a:hover {
-  color: var(--alabaster);
-  border-bottom: 1px solid var(--pine-tree);
-  background: var(--brunswick-green);
-} */
-
-/* a:active {
-  background: var(--brunswick-green);
-  color: var(--alabaster);
-} */
-
-/* Inline Code Blocks */
-
-/* Block Quotes */
-/* blockquote {
-  padding: 10px 20px;
-  margin: 0 0 20px;
-  font-size: 17.5px;
-  background-color: var(--alabaster);
-  border-left: 5px solid var(--brunswick-green);
-} */
-
-/* Custom Knitr Class, R Chunks */
-/* .code-chunk {
-  color: var(--alabaster);
-  background-color: var(--pine-tree);
-  border: 1px solid var(--moss-green);
-} */
-
-/* Chunk Output */
-/* pre:not([class]) {
-    color: var(--black-olive);
-    background-color: var(--dutch-white);
-    border: 1px solid var(--satin-sheen-gold);
-} */
-
-/* Table Header */
-/* .table>thead>tr>th {
-    vertical-align: bottom;
-    border-bottom: 2px solid var(--pine-tree);
-    background-color: inherit;
-} */
-
-/* Table Body */
-/* .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-    padding: 8px;
-    line-height: 1.42857143;
-    vertical-align: top;
-    border-top: 1px solid var(--pine-tree);
-    background-color: inherit;
-
-} /*
-
-/* Sidebar Navigation */
-/* .nav-tabs {
-    border-bottom: 1px solid var(--hunter-green);
-} */
-
-/* .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-    color: var(--alabaster);
-    cursor: default;
-    background-color: var(--fern-green);
-    border: 1px solid var(--hunter-green);
-    border-bottom-color: var(--hunter-green);
-} */
-
-/* .nav>li>a:focus, .nav>li>a:hover {
-    color: var(--black-olive);
-    cursor: default;
-    background-color: var(--dutch-white);
-    border: 1px solid var(--moss-green);
-    border-bottom-color: var(--moss-green);
-} */
-
-/* Tabsets */
-/* .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
-    z-index: 2;
-    color: var(--alabaster);
-    background-color: var(--fern-green);
-    border-color: var(--hunter-green);
-} */
-
-/* Highlight Numbers */
-/* .hljs-number {
-    color: var(--asparagus);
-} */
-
-/* Highlight Keywords */
-/* .hljs-keyword {
-    color: var(--orange-red);
-    font-weight: bold;
-} */
-
-/* Highlight Strings */
-/* .hljs-string {
-    color: var(--asparagus);
-} */
-
-/* Decorate Links */
-/* a:link {
-  text-decoration: none;
-} */
-
-/* a:visited {
-  text-decoration: none;
-} */
-
-/* a:hover {
-  text-decoration: underline;
-} */
-
-/* a:active {
-  text-decoration: underline;
-} */
 
 /* scrollbar */
 ::-webkit-scrollbar {
