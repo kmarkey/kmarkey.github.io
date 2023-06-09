@@ -1,15 +1,15 @@
 /* Define the color palette */
 :root {
   /* CSS HEX */
-  --lemon-chiffon: ##FFF5C4ff
+  --lemon-chiffon: ##FFF5C4ff;
   --vanilla: #faeba1ff;
   --sage: #b8c38aff;
   --asparagus: #769a73ff;
   --dark-green: #1e2f23ff;
   --dim-gray: #6f6d66ff;
   --eggplant: #673f58ff;
-  --eggplant-2: #755067ff;
-  
+  --eggplant-2: #140527ff;
+  --cosmic-latte: #fcf8e6ff;
   --pistachio: #8BD18Eff
 }
 
@@ -77,11 +77,11 @@ p.subtitle.is-3 {
 }
 
 /* Body sections */
-/*body {
-  background-color: var(--alabaster);
+body {
+  background-color: var(--vanilla);
   color: var(--pine-tree);
   padding: 20px;
-} */
+} 
 
 /* Other styles */
 h1, h2, h3 {
@@ -90,9 +90,9 @@ h1, h2, h3 {
 
 /* Code chunks */
 .language-r.highlighter-rouge pre.highlight {
-  color: var(--eggplant);
-  background-color: var(--eggplant-2);
-  border: 1px solid var(--vanilla);
+  color: var(--eggplant-2);
+  background-color: var(--eggplant);
+  border: 1px solid var(--eggplant-2);
   border-radius: 7px;
 }
 
@@ -106,7 +106,7 @@ h1, h2, h3 {
 
 /* Strings */
 .highlight .s1, .highlight .s2 {
-    color: var(--vanilla);
+    color: var(--cosmic-latte);
 }
 
 /* numbers */
@@ -116,14 +116,14 @@ h1, h2, h3 {
 
 /* keywords */
 .highlight .nf {
-    color: var(--pistachio);
+    color: var(--sage);
     font-weight: bold;
 }
 
 /* weird characters?  */
 
 .highlight .o {
-    color: var(--vanilla);
+    color: var(--sage);
     font-weight: normal;
 }
 
@@ -135,7 +135,7 @@ a {
 }
 
 a:hover {
-  color: var(--vanilla);
+  color: var(--cosmic-latte);
   background: var(--dark-green);
   text-decoration: none;
   border-radius: 3px;
