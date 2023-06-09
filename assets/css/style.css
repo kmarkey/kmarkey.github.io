@@ -184,6 +184,6 @@ a:hover {
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  background: red;
+  background: --eggplant;
 }
 /* width */
