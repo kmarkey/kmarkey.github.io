@@ -15,7 +15,7 @@
 
 /* Subsections */
 section {
-  background-color: var(--vanilla);
+  background-color: var(--cosmic-latte);
   color: var(--eggplant);
 }
 
@@ -52,15 +52,15 @@ code {
   padding: 10px 20px;
   margin: 0 0 20px;
   font-size: 17.5px;
-  background-color: var(--vanilla);
+  background-color: var(--cosmic-latte);
   border-radius: 0px 7px 7px 0px;
-  border: 1px solid var(--lemon-shiffon);
-  border-left: 5px solid var(--asparagus);
+  border: 1px solid var(--lemon-chiffon);
+  border-left: 5px solid var(--sage);
 }
 
 /* title */
 .hero.is-primary .title {
-    color: var(--vanilla);
+    color: var(--cosmic-latte);
 }
 
 h1.title.is-2 {
@@ -69,7 +69,7 @@ h1.title.is-2 {
 
 /* subtitle */
 .hero.is-primary .subtitle {
-    color: var(--vanilla);
+    color: var(--cosmic-latte);
 }
 
 p.subtitle.is-3 {
@@ -78,7 +78,7 @@ p.subtitle.is-3 {
 
 /* Body sections */
 body {
-  background-color: var(--vanilla);
+  background-color: var(--cosmic-latte);
   color: var(--pine-tree);
   padding: 20px;
 } 
@@ -92,7 +92,7 @@ h1, h2, h3 {
 .language-r.highlighter-rouge pre.highlight {
   color: var(--eggplant-2);
   background-color: var(--eggplant);
-  border: 1px solid var(--eggplant-2);
+  border: 2px solid var(--eggplant-2);
   border-radius: 7px;
 }
 
@@ -100,12 +100,12 @@ h1, h2, h3 {
 .language-plaintext.highlighter-rouge pre.highlight {
   color: var(--dim-grey);
   background-color: var(--lemon-chiffon);
-  border: 1px solid var(--dark-green);
+  border: 2px solid var(--dark-green);
   border-radius: 7px;
 }
 
 /* Strings */
-.highlight .s1, .highlight .s2 .kc {
+.highlight .s1, .highlight .s2, .highlight .kc {
     color: var(--cosmic-latte);
 }
 
@@ -120,12 +120,7 @@ h1, h2, h3 {
     font-weight: bold;
 }
 
-/* weird characters?  */
-
-.highlight .o {
-    color: var(--sage);
-    font-weight: normal;
-}
+/* weird characters? Nothing */
 
 /* Links */
 a {
@@ -184,6 +179,6 @@ a:hover {
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  background: --eggplant;
+  background: var(--eggplant);
 }
 /* width */
