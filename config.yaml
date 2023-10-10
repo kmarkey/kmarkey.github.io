@@ -1,6 +1,6 @@
 baseurl: /
 languageCode: en-US
-title: A Hugo website
+title: Keaton Markey | Portfolio Website
 theme: hugo-lithium
 googleAnalytics: ''
 disqusShortname: ''
@@ -14,10 +14,10 @@ menu:
   main:
     - name: About
       url: /about/
-    - name: GitHub
-      url: https://github.com/rstudio/blogdown
-    - name: Twitter
-      url: https://twitter.com/rstudio
+    - name: Github
+      url: https://github.com/kmarkey
+    - name: LinkedIn
+      url: https://www.linkedin.com/in/keaton-markey-7822b3205/
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
