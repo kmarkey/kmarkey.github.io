@@ -10,6 +10,7 @@ ignoreFiles:
   - _cache$
 permalinks:
   post: /:year/:month/:day/:slug/
+  publishDir: docs/
 menu:
   main:
     - name: About
@@ -18,6 +19,8 @@ menu:
       url: https://github.com/kmarkey
     - name: LinkedIn
       url: https://www.linkedin.com/in/keaton-markey-7822b3205/
+    - name: Kaggle
+      url: https://www.kaggle.com/kmarkey
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
