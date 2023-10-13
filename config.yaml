@@ -8,9 +8,9 @@ ignoreFiles:
   - \.Rmd$
   - \.Rmarkdown$
   - _cache$
+publishDir: docs/
 permalinks:
   post: /:year/:month/:day/:slug/
-  publishDir: docs/
 menu:
   main:
     - name: About
