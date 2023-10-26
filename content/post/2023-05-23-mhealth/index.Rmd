@@ -15,7 +15,6 @@ editor_options:
 
 # Introduction
 
-
 In the past couple of years, during a global period of isolation,
 suffering, and uncertainty, mental health has increasingly become a
 concern for everyone. Poor mental health represents a host of massive
@@ -48,7 +47,6 @@ the specific mental health needs of it's population.
 
 ```{r setup, include=FALSE}
 library(tidyverse)
-library(dplyr)
 library(cowplot)
 library(sf)
 library(usmap)
@@ -157,7 +155,7 @@ Let's look at he number of days per month that respondents had bad physical and 
 ```{r chunk1, echo=FALSE, warning=FALSE}
 p <- drillb(phys14d) %>%
   group_by(phys14d) %>%
-  summarise(phys14d, tot = sum(count)) %>%
+  reframe(phys14d, tot = sum(count)) %>%
   unique() %>%
   ggplot() +
   geom_bar(aes(x = phys14d, y = tot/1000000), stat = "identity", fill = "#e76f51", color = "#2B2D42") +
@@ -170,7 +168,7 @@ p <- drillb(phys14d) %>%
 
 m <- drillb(ment14d) %>%
   group_by(ment14d) %>%
-  summarise(ment14d, tot = sum(count)) %>%
+  reframe(ment14d, tot = sum(count)) %>%
   unique() %>%
   ggplot() +
   geom_bar(aes(x = ment14d, y = tot/1000000), stat = "identity", fill = "#588157", color = "#2B2D42") +
@@ -228,7 +226,7 @@ data <- drillb(X_RFBING5) %>%
   
   group_by(state) %>%
   
-  summarise(per = `count`/sum(`count`), X_RFBING5, n = sum(`count`)) %>%
+  reframe(per = `count`/sum(`count`), X_RFBING5, n = sum(`count`)) %>%
   
   dplyr::filter(X_RFBING5 == "2") %>%
   
@@ -261,7 +259,7 @@ ggplotly(p, tooltip = "text") %>%
   plotly_anno(text = "Data source: BRFSS 2020")
 ```
 
-This map shows the average number of drinks-per-capita
+This map shows the average number of drinks-per-capita.
 
 ```{r, echo=FALSE, warning=FALSE}
 
@@ -272,7 +270,7 @@ data <- drillb(AVEDRNK3) %>%
   
   group_by(state) %>%
   
-  summarise(total = `count` * AVEDRNK3, avg = sum(total) / statecount) %>%
+  reframe(total = `count` * AVEDRNK3, avg = sum(total) / statecount) %>%
   
   dplyr::select(-total) %>%
   
@@ -307,6 +305,7 @@ ggplotly(p, tooltip = "text") %>%
 
 ```
 
+Many of the norther states lead this category.
 
 ### Smoking
 
@@ -347,37 +346,96 @@ ggplotly(p, tooltip = "text") %>%
   plotly_anno(text = "Data source: BRFSS 2020")
 ```
 
+
 Unlike the question regarding general mental health, the information available about drug use only
 fills in part of the picture of substance abuse that would be treated at Mental Health Facilities (MHFs).
 
 However, looking at these legal *source* non-medical substances benefits us in two ways:
 
--   First, we don't have to worry about any interference between the observed rates of drug use and the prescription of these drugs by MHFs. MHFs are not known to prescribe alcohol, tobacco, but do prescribe benzodiazepenes (Xanax, Vicodin) and amphetamines (Adderal) that result in higher rates of substance abuse.
+-   First, we don't have to worry about any interference between the observed rates of drug use and the prescription of these drugs by MHFs. MHFs are not known to prescribe alcohol, tobacco, but do prescribe benzodiazepenes (Xanax, Vicodin) and amphetamines (Adderall) that result in higher rates of substance abuse.
 
 -   Second, when the government collects data about any kind of illegal activity, it introduces response bias that may not yield accurate measures how many people participate in the illegal activity. The survey skirts around this by asking some questions about people the respondents live with **(See Figure Appendix)**
 
 ## Healthcare
 
-The cost of treatment is a huge barrier to many people seeking care. For all health-related visits, participants were asked
+The cost of treatment is a huge barrier to many people seeking care. For all health-related visits, participants were asked:
+
+> "Was there a time in the past 12 months when you needed to see a doctor but could not because of cost?"
+
 ```{r}
+
+data <- drillb(medcost) %>%
+  filter(medcost == "yes") %>%
+  group_by(state) %>%
+  dplyr::mutate(per = sum(count) / statecount)
+
+myplot <- data %>%
+  right_join(us_states, by = c("state" = "full")) %>%
+  ggplot() + geom_polygon(aes(x = x, 
+                              y = y, 
+                              group = group, 
+                              fill = per, 
+                              text = paste0(state, "\n", round(per, 3) * 100, "%")), 
+                          color = "black", 
+                          linewidth = 0.2) +
+  
+  coord_sf() +
+  
+  scale_fill_fermenter(palette = 7,
+                       guide = "colorbar",
+                       direction = 1,
+                       breaks = c(0.08, 0.10, 0.12, 0.14),
+                       labels = c("8%", "10%", "12%", "14%")
+                       ) +
+  labs(fill = "") +
+  
+  map_theme()
+
+ggplotly(myplot, tooltip = "text") %>%
+  plotly_anno(text = "Data source: BRFSS 2020")
 
 ```
 
-Montana, Utah, and Kentucky Stand out here.
+Treatment is especially difficult to afford if a patient doesn't have any kind of healthcare.
 
-Based on the primary indicator of mental health gathered from the
-behavioral survey, the most chronic mental health difficulties seem to
-be mostly observed in tight geographic regions of the Midwest and in the
-South, in states like **Kentucky, West Virginia, Arkansas, and
-Louisiana**. **Nevada** also scored highly on this measure.
+> "Do you have any kind of health care coverage, including health insurance, prepaid plans such as HMOs, or
+government plans such as Medicare, or Indian Health Service?"
 
-Signs of substance abuse seemed to be observed most often in the
-Northern states, Wisconsin, Iowa, including Montana, Nebraska, and North
-Dakota.
+```{r}
 
-While the results of the indirect questions highlighted Montana, Utah,
-and Kentucky as states of interest for substance abuse and mental
-health, the data is too incomplete to use further.
+data <- drillb(hlthplan)  %>%
+  filter(hlthplan == "no") %>%
+  group_by(state) %>%
+  dplyr::mutate(per = sum(count) / statecount)
+
+myplot <- data %>%
+  right_join(us_states, by = c("state" = "full")) %>%
+  ggplot() + geom_polygon(aes(x = x, 
+                              y = y, 
+                              group = group, 
+                              fill = per, 
+                              text = paste0(state, "\n", round(per, 3) * 100, "%")), 
+                          color = "black", 
+                          linewidth = 0.2) +
+  
+  coord_sf() +
+  
+  scale_fill_fermenter(palette = 7,
+                       guide = "colorbar",
+                       direction = 1,
+                       breaks = c(0.08, 0.12, 0.16, 0.20),
+                       labels = c("8%", "12%", "16%", "20%")
+                       ) +
+  labs(fill = "") +
+  
+  map_theme()
+
+ggplotly(myplot, tooltip = "text") %>%
+  plotly_anno(text = "Data source: BRFSS 2020")
+```
+
+
+Texas and some other southern states stand out here.
 
 # NMHSS {.tabset .tabset-pills}
 
@@ -395,7 +453,7 @@ We will use this survey to get some information about:
 -   the kinds of facilities that exist in each state
 -   the types of treatment options they offer and thus, what kind of population they serve
 -   the affordability of those treatments
--   and other aspects that might hinder access and affordability of care.
+-   and other aspects that might hinder access and afordability of care.
 
 Lets begin by looking at where these facilities are located. While we don't have access to the precise location, we do know the state in which the facility operates.
 
@@ -477,7 +535,7 @@ ggplotly(p, tooltip = "text") %>%
 
 Due to other factors that may compound with each state's population, its a good idea to keep the population in consideration.
 
-The sheer number of facilities is important, but there are hidden
+In addition to the number facilities per capita, there are factors that might affect accessibilty of mental health care.
 
 For example, a state may have a sufficient number of facilities, but:
 
@@ -828,7 +886,7 @@ costvars <- c("REVCHK1", "REVCHK2", "REVCHK5", "REVCHK8", "REVCHK10", "FUNDSMHA"
 
 data <- nmhss %>%
   group_by(state) %>%
-  dplyr::summarise(count = rowSums(ifelse(across(all_of(costvars)) == "yes", 1, 0)), 
+  dplyr::reframe(count = rowSums(ifelse(across(all_of(costvars)) == "yes", 1, 0)), 
                    bins = as.character(cut_width(count, width = 2)),
                    bins = str_replace(
                      str_replace(
@@ -841,7 +899,7 @@ data <- nmhss %>%
   
   group_by(state, bins) %>%
   
-  dplyr::summarise(per = n()/statecount, statecount, state) %>%
+  dplyr::reframe(per = n()/statecount, statecount, state) %>%
   
   distinct() %>%
   
@@ -907,38 +965,23 @@ data %>%
 
 <!-- number of facilities that accept more payment types, but only slightly. -->
 
-## Treatment
+<!-- ## Treatment -->
 
+<!-- ```{r} -->
 
-## Demographics
+<!-- ``` -->
 
-# Stages
+<!-- ## Demographics -->
 
-# Ranking Methodology
+<!-- # Stages -->
 
-I elected to use non-parametric techniques to analyze this dataset due to my lack of authoritative subject knowledge and small size of the dataset. By calculating a score based on rankings, I'm able to naively include many unweighted measures, and ensure that the scoring is reproducible in future releases of both datasets.To measure how well each state meets the needs of its population with more severe mental health challenges, states were ranked on the following formula
+<!-- # Scoring -->
 
-- Where:
-  - $M$ is the percentage of individuals with poor mental health
-  - $A_{b}$ is the percentage of individuals engaging in alcohol abuse
-  - $S_{b}$ is the percentage of individuals engaging in smoking
-  - $H$ is the percentage of individuals that could not afford healthcare expenses
-  
-  
-  - $N$ is the number of facilities per capita
-  - $N_{u}$ is the number of public facilities per capita
-  - $N_{p}$ is the number of private facilities per capita
-  - $u_{c}$
-  - $D_{n}$
-  - $L_{n}$
+<!-- # Results -->
 
+<!-- # Disucussion & Future Directions -->
 
-
-# Results
-
-# Disucussion & Future Directions
-
-Exact facility location, more specific
+<!-- Exact facility location, more specific -->
 
 
 # Supplemental Material
@@ -998,7 +1041,7 @@ data <- drillb(ACEDEPRS) %>%
   
   group_by(state) %>%
   
-  summarise(per = `count`/sum(`count`), ACEDEPRS, n = sum(`count`)) %>%
+  reframe(per = `count`/sum(`count`), ACEDEPRS, n = sum(`count`)) %>%
   
   dplyr::filter(ACEDEPRS == "1") %>%
   
@@ -1042,7 +1085,7 @@ data <- drillb(ACEDRUGS) %>%
   
   group_by(state) %>%
   
-  summarise(per = `count` / sum(`count`), ACEDRUGS, n = sum(`count`)) %>%
+  reframe(per = `count` / sum(`count`), ACEDRUGS, n = sum(`count`)) %>%
   
   dplyr::filter(ACEDRUGS == "1") %>%
   
@@ -1081,6 +1124,20 @@ ggplotly(p, tooltip = "text") %>%
 
 ```
 
+Based on the primary indicator of mental health gathered from the
+behavioral survey, the most chronic mental health difficulties seem to
+be mostly observed in tight geographic regions of the Midwest and in the
+South, in states like **Kentucky, West Virginia, Arkansas, and
+Louisiana**. **Nevada** also scored highly on this measure.
+
+Signs of substance abuse seemed to be observed most often in the
+Northern states, Wisconsin, Iowa, including Montana, Nebraska, and North
+Dakota.
+
+While the results of the indirect questions highlighted Montana, Utah,
+and Kentucky as states of interest for substance abuse and mental
+health, the data is too incomplete to use further.
+
 # References
 
 ## Data
@@ -1100,7 +1157,6 @@ Mental Health Services Survey (N-MHSS): 2020. Data on Mental Health
 Treatment Facilities. Rockville, MD: Substance Abuse and Mental Health
 Services Administration, 2021.
 
-
 -   [BRFSS User
     Guide](https://www.cdc.gov/brfss/data_documentation/pdf/UserguideJune2013.pdf)
 -   [BRFSS
@@ -1112,3 +1168,9 @@ Services Administration, 2021.
 
 ## Packages
 
+R Core Team (2022). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
+  
+Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A, Henry L, Hester J, Kuhn M, Pedersen TL,
+Miller E, Bache SM, Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K, Vaughan D, Wilke C, Woo K, Yutani H
+(2019). “Welcome to the tidyverse.” _Journal of Open Source Software_, *4*(43), 1686. doi: 10.21105/joss.01686 (URL:
+https://doi.org/10.21105/joss.01686).
