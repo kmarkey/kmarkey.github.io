@@ -3,14 +3,20 @@ title: The State of Mental Illness
 subtitle:  A survey of mental health and treatment in the U.S.
 categories: ["R", "mental health", "mental illness", "United States"]
 tags: ["BRFSS", "mental health", "health", "data", "R", "tidyverse", "dplyr", "ggplot", "Rstudio", "behavioral health", "mental health facilities", "mental illness", "state", "United states", "NMHSS"]
+
 author: Keaton Markey
 date: 2023-05-23
 menubar_toc: true
 toc_title: Contents
 hero_height: is-fullwidth
-editor_options: 
+editor_options:
   markdown: 
     wrap: 60
+
+format:
+  html:
+    warning: false
+    echo: false
 ---
 
 # Introduction
@@ -51,6 +57,12 @@ library(cowplot)
 library(sf)
 library(usmap)
 library(plotly)
+
+# options
+# no summarise info
+options(dplyr.summarise.inform = FALSE)
+# no warnings
+options(warn=-1)
 
 # source  data
 
@@ -152,7 +164,7 @@ Each participant was asked some simple questions:
 Let's look at he number of days per month that respondents had bad physical and mental health days. The responses are binned into groups, to keep
 
 
-```{r chunk1, echo=FALSE, warning=FALSE}
+```{r chunk1}
 p <- drillb(phys14d) %>%
   group_by(phys14d) %>%
   reframe(phys14d, tot = sum(count)) %>%
@@ -218,7 +230,7 @@ Participants were asked these questions relating to alcohol use:
 Those with at least one occurrence are considered to have participated
 in binge drinking in the past month.
 
-```{r chunk2, echo=FALSE, warning=FALSE}
+```{r chunk2}
       
 us_states <- us_map(regions = "state")
 
@@ -261,7 +273,7 @@ ggplotly(p, tooltip = "text") %>%
 
 This map shows the average number of drinks-per-capita.
 
-```{r, echo=FALSE, warning=FALSE}
+```{r}
 
 # avg number of drinks per person
 data <- drillb(AVEDRNK3) %>%
@@ -313,19 +325,19 @@ Many of the norther states lead this category.
 
 The following plot shows the percentage of people that smoke.
 
-```{r, echo=FALSE, warning=FALSE}
+```{r}
 data <- drillb(SMOKDAY2) %>%
   dplyr::filter(SMOKDAY2 == 1 | SMOKDAY2 == 2) %>%
   group_by(state) %>%
-  dplyr::mutate(per = sum(count) / statecount)
+  dplyr::summarise(per = sum(count) / max(statecount), statecount = max(statecount))
 
 p <- data %>%
   right_join(us_states, by = c("state" = "full")) %>%
-  ggplot() + geom_polygon(aes(x = x, 
-                              y = y, 
-                              group = group, 
-                              fill = per, 
-                              text = paste0(state, "\n", round(per, 3) * 100, "%")), 
+  ggplot() + geom_polygon(aes(x = x,
+                              y = y,
+                              group = group,
+                              fill = per,
+                              text = paste0(state, "\n", round(per * 100, 3), "%")), 
                           color = "black", 
                           linewidth = 0.2) +
   
@@ -369,7 +381,7 @@ data <- drillb(medcost) %>%
   group_by(state) %>%
   dplyr::mutate(per = sum(count) / statecount)
 
-myplot <- data %>%
+p <- data %>%
   right_join(us_states, by = c("state" = "full")) %>%
   ggplot() + geom_polygon(aes(x = x, 
                               y = y, 
@@ -391,7 +403,7 @@ myplot <- data %>%
   
   map_theme()
 
-ggplotly(myplot, tooltip = "text") %>%
+ggplotly(p, tooltip = "text") %>%
   plotly_anno(text = "Data source: BRFSS 2020")
 
 ```
@@ -457,7 +469,7 @@ We will use this survey to get some information about:
 
 Lets begin by looking at where these facilities are located. While we don't have access to the precise location, we do know the state in which the facility operates.
 
-```{r chunk5, echo=FALSE, warning=FALSE}
+```{r chunk5}
 
 p <- drilln() %>%
   
@@ -497,7 +509,7 @@ a substantial margin.
 
 If we calculate the number of facilities on a per-capita basis according to the 2020 Census, the map looks different.
 
-```{r chunk6, echo=FALSE, warning=FALSE}
+```{r chunk6}
 p <- drilln() %>%
   left_join(pop, by = c("state")) %>%
   dplyr::mutate(per = count / pop * 100000) %>%
@@ -563,7 +575,7 @@ facility specializes in a certain type of care, which has been
 classified into 12 types by the survey, and simplified into 7 similar
 types in the figure below.
 
-```{r chunk7, echo=FALSE, warning=FALSE}
+```{r chunk7}
 p <- drilln(facilitytype) %>%
   
   dplyr::mutate(
@@ -656,7 +668,7 @@ illness. These facilities are licences by their respective state mental
 health authority. They can also coordinate with physical health care
 providers to give holistic care for all the patient's needs.
 
-## Ownership
+## Facility Ownership
 
 Across states, the majority of Mental Health Facilities are owned by
 private non-profits. These facilities are not as incentivized to
@@ -664,7 +676,7 @@ increase profits as for-profit institutions, but seeking care at these
 facilities may be more challenging and less accommodating than public
 facilities.
 
-```{r chunk8, echo=FALSE, warning=FALSE}
+```{r chunk8}
 
 drilln(ownership) %>%
   
@@ -726,13 +738,13 @@ drilln(ownership) %>%
 
 ```
 
-## Operator
+## Facility Operator
 
 Among public facilities, the organization in charge of facility
 operation impacts who can receive care, who provides the care, and how
 good the care is.
 
-```{r chunk9, echo=FALSE, warning=FALSE}
+```{r chunk9}
 
 data <- drilln(operator) %>%
   
@@ -811,8 +823,7 @@ to the general population.
 
 From the 2020 Behavioral Risk Factor Surveillance Survey, about 10% of
 people had to refuse medical care due to cost in the past 12 months,
-which translates to about 33 million people. Financial cost is a huge
-barrier to treatment. Nationally, about 50% of facilities offer payment
+which translates to about 33 million people. Nationally, about 50% of facilities offer payment
 assistance to those who cannot afford to pay the full amount or those
 who cannot pay at all. Some facilities accept multiple forms of payment
 for treatment as well, including Medicare, Medicaid, welfare, the state
@@ -822,7 +833,7 @@ If the individual doesn't have to pay the full amount, or is allowed to
 provide different methods of payment, the less likely an individual is
 to refuse care due to cost.
 
-```{r chunk10, echo=FALSE, warning=FALSE}
+```{r chunk10}
 
 data <- drilln(PAYASST) %>%
   dplyr::filter(PAYASST == "yes") %>%
@@ -990,7 +1001,7 @@ data %>%
 
 Only some BRFSS respondents were asked about their marijuana use, and many reported that they didn't smoke. This resulted in missing data for some states, and so this was not included.
 
-```{r, echo=FALSE, warning=FALSE}
+```{r}
 data <- drillb(MARIJAN1) %>%
   dplyr::filter(MARIJAN1 <= 30) %>%
   group_by(state) %>%
@@ -1030,13 +1041,12 @@ Participants were also asked:
 
 >     "Did you live with anyone who was depressed, mentally ill, or suicidal?"
 
-Although **these questions don't implicate the respondent directly** and
-less than half of all states reported data, I think the results are
+Although these questions don't implicate the respondent directly, may be
+affected by the rate of cohabitation, and less than half of all states reported data, I think the results are
 still interesting, and may more accurately represent the level of mental
-illness in the region due to response bias. However, they also may be
-affected by the rate of cohabitation.
+illness in the region due to response bias.
 
-```{r chunk3, echo=FALSE, warning=FALSE}
+```{r chunk3}
 data <- drillb(ACEDEPRS) %>%
   
   group_by(state) %>%
@@ -1069,7 +1079,9 @@ p <- data %>%
   labs(title = "Living With Someone Mentally Ill",
        subtitle = "Weighted Percentage",
        caption = "BRFSS 2020\ncdc.gov",
-       fill = "")
+       fill = "") +
+  
+  map_theme()
 
 ggplotly(p, tooltip = "text") %>%
   plotly_anno(text = "Data source: BRFSS 2020")
@@ -1077,9 +1089,9 @@ ggplotly(p, tooltip = "text") %>%
 
 Participants were also asked:
 
-> -   "Did you live with anyone who used illegal street drugs or who abused prescription medications?"
+>     "Did you live with anyone who used illegal street drugs or who abused prescription medications?"
 
-```{r chunk4, echo = FALSE, warning = FALSE}
+```{r chunk4}
 
 data <- drillb(ACEDRUGS) %>%
   
@@ -1127,11 +1139,11 @@ ggplotly(p, tooltip = "text") %>%
 Based on the primary indicator of mental health gathered from the
 behavioral survey, the most chronic mental health difficulties seem to
 be mostly observed in tight geographic regions of the Midwest and in the
-South, in states like **Kentucky, West Virginia, Arkansas, and
-Louisiana**. **Nevada** also scored highly on this measure.
+South, in states like **Kentucky**, **West Virginia**, **Arkansas**, and
+**Louisiana**. **Nevada** also scored highly on this measure.
 
 Signs of substance abuse seemed to be observed most often in the
-Northern states, Wisconsin, Iowa, including Montana, Nebraska, and North
+northern states, Wisconsin, Iowa, including Montana, Nebraska, and North
 Dakota.
 
 While the results of the indirect questions highlighted Montana, Utah,
@@ -1164,7 +1176,8 @@ Services Administration, 2021.
 -   [N-MHSS
     Codebook](https://www.datafiles.samhsa.gov/sites/default/files/field-uploads-protected/studies/N-MHSS-2020/N-MHSS-2020-datasets/N-MHSS-2020-DS0001/N-MHSS-2020-DS0001-info/N-MHSS-2020-DS0001-info-codebook.pdf)
 
-[[https://www.va.gov/health-care/eligibility/#:\\\\](https://www.va.gov/health-care/eligibility/#:){.uri}](%5Bhttps://www.va.gov/health-care/eligibility/#:%5D(https://www.va.gov/health-care/eligibility/#:)%7B.uri%7D){.uri}
+[[https://www.va.gov/health-care/eligibility/](VA Health Programs)
+
 
 ## Packages
 
