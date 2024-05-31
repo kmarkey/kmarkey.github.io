@@ -1176,7 +1176,7 @@ Services Administration, 2021.
 -   [N-MHSS
     Codebook](https://www.datafiles.samhsa.gov/sites/default/files/field-uploads-protected/studies/N-MHSS-2020/N-MHSS-2020-datasets/N-MHSS-2020-DS0001/N-MHSS-2020-DS0001-info/N-MHSS-2020-DS0001-info-codebook.pdf)
 
-[[https://www.va.gov/health-care/eligibility/](VA Health Programs)
+[https://www.va.gov/health-care/eligibility/](VA Health Programs)
 
 
 ## Packages
