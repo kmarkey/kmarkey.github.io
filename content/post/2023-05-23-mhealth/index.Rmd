@@ -13,8 +13,11 @@ editor_options:
   markdown: 
     wrap: 60
 
-format:
-  html:
+output:
+  github_document:
+    toc: false
+    number_sections: false
+    preserve_yaml: true
     warning: false
     echo: false
 ---
