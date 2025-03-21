@@ -36,11 +36,7 @@ issues in the United States:
 
 -   It is extremely difficult to be treated for mental health
     challenges. The average delay between onset of mental illness
-    symptoms and treatment is 11 years. While a diagnosis doesn't cure
-    any illnesses, it can be important psychologically, financially, and
-    of course medically for patients who require treatment. It can mean
-    the difference between a patient paying thousands per month for
-    treatment and paying nothing.
+    symptoms and treatment is 11 years.
 
 -   In the US, more adults reported struggling with mental health or
     substance abuse than physical health -- around 40% in 2020. There is
@@ -59,91 +55,23 @@ library(tidyverse)
 library(cowplot)
 library(sf)
 library(usmap)
+library(here)
 library(plotly)
+library(scales)
+library(RColorBrewer)
 
 # options
 # no summarise info
+options(tidyverse.quiet = TRUE)
 options(dplyr.summarise.inform = FALSE)
 # no warnings
 options(warn=-1)
 
-# source  data
+# source scripts
+source("functions.R")
+source("digest.R")
 
-source("aux.R")
-
-# slicers
-
-drillb <- function(...) {
-    
-    quos <- enquos(...)
-        
-    brfss %>%
-      
-        dplyr::select(!!!quos, state, X_LLCPWT) %>%
-        
-        dplyr::group_by(!!!quos, state) %>%
-        
-        dplyr::count(wt = X_LLCPWT, .drop = FALSE, name = "count") %>%
-        
-        group_by(state) %>%
-        
-        mutate(statecount = sum(count),
-               state = str_to_title(state))
-}
-
-drilln <- function(...) {
-  
-    quos <- enquos(...)
-    
-    nmhss %>%
-      
-        dplyr::select(!!!quos, state) %>%
-        
-        dplyr::group_by(!!!quos, state) %>%
-        
-        dplyr::count(.drop = FALSE, name = "count") %>%
-    
-        group_by(state) %>%
-      
-        mutate(statecount = sum(count),
-               state = str_to_title(state))
-}
-
-########################### plotting ###########################################
-# add annotation to plotly plots
-plotly_anno <- function(p, text = "") {
-  
-  p  %>%
-    
-    layout(
-      annotations =
-        list(
-          x = 1,
-          y = 0,
-          text = text,
-          showarrow = F,
-          xref = 'paper',
-          yref = 'paper',
-          xanchor = 'right',
-          yanchor = 'bottom',
-          xshift = 0,
-          yshift = 0,
-          font = list(size = 10)
-        )
-    )
-}
-
-# thematizes maps
-map_theme <- function() {
-  theme(legend.title = element_blank(),
-        axis.ticks = element_blank(),
-        axis.text = element_blank(),
-        axis.title = element_blank(),
-        panel.background = element_blank(),
-        panel.grid = element_line(color = "transparent"),
-        plot.background = element_rect(color = "transparent"))
-}
-
+brfss <- read_csv("data/brfss.csv")
 ```
 
 # BRFSS
@@ -154,18 +82,17 @@ map_theme <- function() {
 conducted yearly by the CDC which contacts hundreds of thousands of
 residents across the U.S. for basic information on health-related
 behavior. The survey is weighted by demographic as to account for any
-sampling bias. Upwards of 200 data points can be collected from each
-participant, but I only use a few related to mental health and substance
+sampling bias. Upwards of 200 data points are collected from each
+participant and a few are related to mental health and its co-morbidities, including substance
 abuse.
 
-Each participant was asked some simple questions:
+Each participant was asked to report the number of days they had a "bad day" with respect to their physical and mental health:
 
 > "Now thinking about your physical health, which includes physical illness and injury, for how many days during the past 30 days was your physical health not good?"
 
 > "Now thinking about your mental health, which includes stress, depression, and problems with emotions, for how many days during the past 30 days was your mental health not good?"
 
-Let's look at he number of days per month that respondents had bad physical and mental health days. The responses are binned into groups, to keep
-
+Let's look at he number of days per month that respondents had bad physical or mental health days.
 
 ```{r chunk1}
 p <- drillb(phys14d) %>%
@@ -200,41 +127,29 @@ plot_grid(p, m, align = "vh", nrow = 1)
 
 ```
 
-*More people reported that they have more bad mental health days than
-bad physical health days.*
+In total, more respondents had bad mental health days than bad physical health days.
 
-For the purposes of this project, the population with "bad mental
+The responses to this question are highly subjective to the respondent's own idea of what constitutes a "bad health day".   the population with "bad mental
 health" is defined as all respondents who had at least 14 (14+) bad
-mental health day per month.<details><summary>Why?</summary>
-
-Those with more chronic debilitating mental health challenges are more
-likely to benefit from accessible facility-based mental health care. While those with
-minor mental health challenges may still benefit from psychotherapy,
-e.g. cognitive behavioral therapy, these kinds of mental health
-challenges are not typically the target of Mental Health Facilities (MHFs) and
-are often treated without admittance to a facility.
-
-</details>
+mental health day per month.
 
 ## Drug Use
 
-Drug use, and particularly drug abuse, is highly associated with mental
+Drug use, and particularly drug use disorders, are highly associated with mental
 illness.
-[source](https://nida.nih.gov/publications/research-reports/common-comorbidities-substance-use-disorders/part-1-connection-between-substance-use-disorders-mental-illness). The BRFSS gives us a good overview of drug habits related to alcohol and tobacco.
+[source](https://nida.nih.gov/publications/research-reports/common-comorbidities-substance-use-disorders/part-1-connection-between-substance-use-disorders-mental-illness). The survey asks a couple questions regarding drug use.
 
-### Alcohol
+### Binge Drinking
 
-Participants were asked these questions relating to alcohol use:
+Participants were asked questions about alcohol consumption.
 
 >   "Considering all types of alcoholic beverages, how many times during the past 30 days did you have 5 or more drinks for men or 4 or more drinks for women on an occasion?"
-
->   "During the past 30 days, on the days when you drank, about how many drinks did you drink on the average?"
 
 Those with at least one occurrence are considered to have participated
 in binge drinking in the past month.
 
 ```{r chunk2}
-      
+
 us_states <- us_map(regions = "state")
 
 data <- drillb(X_RFBING5) %>%
@@ -247,34 +162,15 @@ data <- drillb(X_RFBING5) %>%
   
   right_join(us_states, by = c("state" = "full"))
 
-p <- data %>%
-  
-  ggplot() + geom_polygon(aes(x = x, 
-                              y = y, 
-                              group = group, 
-                              fill = per, 
-                              text = paste0(state, "\n", round(per * 100, 2), "%")), 
-                          color = "black", 
-                          linewidth = 0.2) +
-  
-  coord_sf() +
-  
-  scale_fill_fermenter(palette = 7, 
-                       guide = "colorbar", 
-                       direction = 1,
-                       breaks = c(0.12, 0.14, 0.16, 0.18, 0.20),
-                       labels = c("12%", "14%", "16%", "18%", "20%")
-                       ) +
-  
-  labs(caption = "BRFSS 2020\ncdc.gov",
-       fill = "") +
-  map_theme()
+plotly_chloropleth(data = data, z = "per", colors = "Oranges", tick_breaks = c(0.12, 0.14, 0.16, 0.18, 0.20), symbol = "%") %>%
+    plotly_anno(text = "Data source: BRFSS 2020")
 
-ggplotly(p, tooltip = "text") %>%
-  plotly_anno(text = "Data source: BRFSS 2020")
 ```
 
-This map shows the average number of drinks-per-capita.
+
+Of those that drink, this map shows the average number of drinks per month, compiled from the average number of drinks per occasion:
+
+>   "During the past 30 days, on the days when you drank, about how many drinks did you drink on the average?"
 
 ```{r}
 
@@ -293,34 +189,12 @@ data <- drillb(AVEDRNK3) %>%
   
   right_join(us_states, by = c("state" = "full"))
 
-p <- data %>%
-  
-  ggplot() + geom_polygon(aes(x = x, 
-                              y = y, 
-                              group = group, 
-                              fill = avg, 
-                              text = paste0(state, "\n", round(avg, 2))), 
-                          color = "black", 
-                          linewidth = 0.2) +
-  
-  coord_sf() +
-  
-  scale_fill_fermenter(palette = 7, 
-                       guide = "colorbar", 
-                       direction = 1,
-                       breaks = c(0.80, 1.00, 1.20, 1.40)
-                       ) +
-  
-  labs(fill = "") +
-  
-  map_theme()
-
-ggplotly(p, tooltip = "text") %>%
-  plotly_anno(text = "Data source: BRFSS 2020")
+plotly_chloropleth(data = data, z = "total", title = "Hello", colors = "Oranges", tick_breaks = c(0.80, 1.00, 1.20, 1.40)) %>%
+    plotly_anno(text = "Data source: BRFSS 2020")
 
 ```
 
-Many of the norther states lead this category.
+Many of the central northern states lead this category.
 
 ### Smoking
 
@@ -332,40 +206,18 @@ The following plot shows the percentage of people that smoke.
 data <- drillb(SMOKDAY2) %>%
   dplyr::filter(SMOKDAY2 == 1 | SMOKDAY2 == 2) %>%
   group_by(state) %>%
-  dplyr::summarise(per = sum(count) / max(statecount), statecount = max(statecount))
+  dplyr::summarise(per = sum(count) / max(statecount), statecount = max(statecount)) %>%
+  right_join(us_states, by = c("state" = "full"))
 
-p <- data %>%
-  right_join(us_states, by = c("state" = "full")) %>%
-  ggplot() + geom_polygon(aes(x = x,
-                              y = y,
-                              group = group,
-                              fill = per,
-                              text = paste0(state, "\n", round(per * 100, 3), "%")), 
-                          color = "black", 
-                          linewidth = 0.2) +
-  
-  coord_sf() +
-  
-  scale_fill_fermenter(palette = 7,
-                       guide = "colorbar",
-                       direction = 1,
-                       breaks = c(0.10, 0.14, 0.18),
-                       labels = c("10%", "14%", "18%")
-                       ) +
-  
-  labs(fill = "") +
-  
-  map_theme()
+plotly_chloropleth(data = data, z = "per", title = "", colors = "Oranges", tick_breaks = c(0.10, 0.14, 0.18), symbol = "%") %>%
+    plotly_anno(text = "Data source: BRFSS 2020")
 
-ggplotly(p, tooltip = "text") %>%
-  plotly_anno(text = "Data source: BRFSS 2020")
 ```
 
 
-Unlike the question regarding general mental health, the information available about drug use only
-fills in part of the picture of substance abuse that would be treated at Mental Health Facilities (MHFs).
+The information available about drug use only fills in part of the picture of substance abuse that would be treated at Mental Health Facilities (MHFs).
 
-However, looking at these legal *source* non-medical substances benefits us in two ways:
+However, looking at these substances benefits us in two ways:
 
 -   First, we don't have to worry about any interference between the observed rates of drug use and the prescription of these drugs by MHFs. MHFs are not known to prescribe alcohol, tobacco, but do prescribe benzodiazepenes (Xanax, Vicodin) and amphetamines (Adderall) that result in higher rates of substance abuse.
 
@@ -382,32 +234,11 @@ The cost of treatment is a huge barrier to many people seeking care. For all hea
 data <- drillb(medcost) %>%
   filter(medcost == "yes") %>%
   group_by(state) %>%
-  dplyr::mutate(per = sum(count) / statecount)
+  dplyr::mutate(per = sum(count) / statecount) %>%
+  right_join(us_states, by = c("state" = "full"))
 
-p <- data %>%
-  right_join(us_states, by = c("state" = "full")) %>%
-  ggplot() + geom_polygon(aes(x = x, 
-                              y = y, 
-                              group = group, 
-                              fill = per, 
-                              text = paste0(state, "\n", round(per, 3) * 100, "%")), 
-                          color = "black", 
-                          linewidth = 0.2) +
-  
-  coord_sf() +
-  
-  scale_fill_fermenter(palette = 7,
-                       guide = "colorbar",
-                       direction = 1,
-                       breaks = c(0.08, 0.10, 0.12, 0.14),
-                       labels = c("8%", "10%", "12%", "14%")
-                       ) +
-  labs(fill = "") +
-  
-  map_theme()
-
-ggplotly(p, tooltip = "text") %>%
-  plotly_anno(text = "Data source: BRFSS 2020")
+plotly_chloropleth(data = data, z = "per", title = "", colors = "Oranges", tick_breaks = c(0.08, 0.10, 0.12, 0.14), symbol = "%") %>%
+    plotly_anno(text = "Data source: BRFSS 2020")
 
 ```
 
@@ -421,32 +252,11 @@ government plans such as Medicare, or Indian Health Service?"
 data <- drillb(hlthplan)  %>%
   filter(hlthplan == "no") %>%
   group_by(state) %>%
-  dplyr::mutate(per = sum(count) / statecount)
+  dplyr::mutate(per = sum(count) / statecount) %>%
+  right_join(us_states, by = c("state" = "full")) 
 
-myplot <- data %>%
-  right_join(us_states, by = c("state" = "full")) %>%
-  ggplot() + geom_polygon(aes(x = x, 
-                              y = y, 
-                              group = group, 
-                              fill = per, 
-                              text = paste0(state, "\n", round(per, 3) * 100, "%")), 
-                          color = "black", 
-                          linewidth = 0.2) +
-  
-  coord_sf() +
-  
-  scale_fill_fermenter(palette = 7,
-                       guide = "colorbar",
-                       direction = 1,
-                       breaks = c(0.08, 0.12, 0.16, 0.20),
-                       labels = c("8%", "12%", "16%", "20%")
-                       ) +
-  labs(fill = "") +
-  
-  map_theme()
-
-ggplotly(myplot, tooltip = "text") %>%
-  plotly_anno(text = "Data source: BRFSS 2020")
+plotly_chloropleth(data = data, z = "per", title = "Without any health care coverage", colors = "Oranges", tick_breaks = c(0.08, 0.12, 0.16, 0.20), symbol = "%") %>%
+    plotly_anno(text = "Data source: BRFSS 2020")
 ```
 
 
