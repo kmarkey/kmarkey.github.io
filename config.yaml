@@ -4,6 +4,7 @@ title: Keaton Markey | Portfolio Website
 theme: hugo-lithium
 googleAnalytics: ''
 disqusShortname: ''
+publishDir: /docs
 ignoreFiles:
   - \.Rmd$
   - \.Rmarkdown$

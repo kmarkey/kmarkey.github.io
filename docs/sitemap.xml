@@ -11,9 +11,6 @@
     <loc>/post/</loc>
     <lastmod>2023-10-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/about/</loc>
-    <lastmod>2023-10-01T21:48:51-07:00</lastmod>
-  </url><url>
     <loc>/tags/behavioral-health/</loc>
     <lastmod>2023-05-23T00:00:00+00:00</lastmod>
   </url><url>
@@ -68,7 +65,7 @@
     <loc>/tags/</loc>
     <lastmod>2023-05-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/2023/05/23/the-state-of-mental-illness/</loc>
+    <loc>/2023/05/23/state-of-mental-ill2/</loc>
     <lastmod>2023-05-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/tidyverse/</loc>
@@ -115,5 +112,7 @@
   </url><url>
     <loc>/tags/walk-through/</loc>
     <lastmod>2022-12-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/about/</loc>
   </url>
 </urlset>
