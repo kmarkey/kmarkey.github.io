@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.117.0">
+
+
+<title>R, the tidyverse, and Machine Learning - CWRU Hackathon Workshop  - Keaton Markey | Portfolio Website</title>
+<meta property="og:title" content="R, the tidyverse, and Machine Learning - Keaton Markey | Portfolio Website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/kmarkey">Github</a></li>
+    
+    <li><a href="https://www.linkedin.com/in/keaton-markey-7822b3205/">LinkedIn</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">29 min read</span>
+    
+
+    <h1 class="article-title">R, the tidyverse, and Machine Learning</h1>
+
+    
+    <span class="article-date">2022-12-01</span>
+    
+
+    <div class="article-content">
+      
+      <p>This tutorial was prepared for a light overview of R, some of its capabilities, and what machine learning looks like using the {glm} and {caret} packages. It is assumed that you have some knowledge of programming concepts, maybe some statistics, but not necessarily any experience with R or ML.</p>
+<h1 id="introduction">Introduction</h1>
+<p>R is an integrated suite of software facilities built by statisticians used for</p>
+<ul>
+<li>
+<p>data manipulation</p>
+</li>
+<li>
+<p>calculation</p>
+</li>
+<li>
+<p>graphics</p>
+</li>
+<li>
+<p>data handling and storage</p>
+</li>
+<li>
+<p>operations on arrays, matrices</p>
+</li>
+</ul>
+<p>At its beginning, R was designed for stats, but now its a fully-fledged programming language. Some other features of R:</p>
+<ul>
+<li>
+<p>a large integrated collection of intermediate tools for data analysis</p>
+</li>
+<li>
+<p>a well-developed, simple and effective programming language (called <code>S</code>) which includes:</p>
+</li>
+<li>
+<p>conditionals</p>
+</li>
+<li>
+<p>loops</p>
+</li>
+<li>
+<p>user defined recursive functions</p>
+</li>
+<li>
+<p>input and output facilities</p>
+</li>
+</ul>
+<p>R comes with a lot of bells and whistles built in, but one of the things I like most about it is the wealth of add-ons that are out there. Some extensions of R that people commonly use:</p>
+<ul>
+<li>
+<p>RStudio (a development environment)</p>
+</li>
+<li>
+<p>RMarkdown (markdown for R)</p>
+</li>
+<li>
+<p>Popular packages (dplyr, ggplot)</p>
+</li>
+<li>
+<p>and more packages (github, BioConductor)</p>
+</li>
+<li>
+<p>whole package ecosystems (tidyverse)</p>
+</li>
+<li>
+<p>applications (shiny)</p>
+</li>
+<li>
+<p>presentations</p>
+</li>
+<li>
+<p>and more!</p>
+</li>
+</ul>
+<p>For data science, R and python are the most widely used languages. There are many similarities between the two. Developers can even combine the strengths of both languages to do better data science.</p>
+<h1 id="r-basics">R Basics</h1>
+<p>In most people&rsquo;s opinion, there are really two kinds of R:</p>
+<ul>
+<li>
+<p>The more basic that comes installed with R (base R)</p>
+</li>
+<li>
+<p>and the tidyverse.</p>
+</li>
+</ul>
+<p>In most cases, base R works just fine, but the tidyverse supplies a bunch of other functions (sometimes called <code>verbs</code>) that are designed to make it easier to write and edit code.</p>
+<p>To grasp some of the basic principles in R, we&rsquo;ll fist use base R, and then demonstrate some of the capabilities of the tidyverse.</p>
+<p>If you don&rsquo;t have R and Rstudio downloaded yet, you can follow <a href="https://rstudio-education.github.io/hopr/starting.html">this tutorial</a>.</p>
+<h2 id="creating-objects">Creating Objects</h2>
+<p>(Using Base R)</p>
+<p>First we&rsquo;ll create a 1-dimensional object. Most things stored in R can be thought of as different types of objects. Objects can have many characteristics or properties. Objects can be very large, such as a big image, very small, such as a single number, have many dimensions such as in genetic data, or few dimensions like an excel spreadsheet. Each object has its own unique set of characteristics, some are pre-defined and some can be created by the user. Here is a simple type of object, a vector (similar to an array if you&rsquo;re familiar with those). This code tells R to store the vector with 3 numbers in an object called &ldquo;vector1&rdquo;.</p>
+<pre><code class="language-r">vector1 &lt;- c(1, 2, 3)
+</code></pre>
+<p>Now this vector is stored in R. We can &ldquo;call&rdquo; the object by just typing out the name.</p>
+<pre><code class="language-r">vector1
+</code></pre>
+<pre><code>## [1] 1 2 3
+</code></pre>
+<p>This is different than printing out the object. Although it might look the same, printing is only used for the purpose of seeing stuff. &ldquo;Calling&rdquo; an object means that you want to interact with it.</p>
+<p>One of the characteristics of any object in R is it&rsquo;s class. We can get the class by applying the function <code>class()</code>. Functions are really important in programming. The define a set of operations that are performed on whatever is inside the function. Here, R is telling us that it recognizes the elements of &ldquo;vector1&rdquo; as numeric.</p>
+<pre><code class="language-r">print(vector1)
+</code></pre>
+<pre><code>## [1] 1 2 3
+</code></pre>
+<pre><code class="language-r">class(vector1)
+</code></pre>
+<pre><code>## [1] &quot;numeric&quot;
+</code></pre>
+<h2 id="indexing">Indexing</h2>
+<p>Now that we have this object &ldquo;vector1&rdquo;, we can view different parts of it. A vector is what is known as a on-dimensional object. If you think about a vector like an spreadsheet, a vector would only be stored across one axis, either in a row or a column, hence the term one-dimensional. To view a certain part of (most) one-dimensional objects, we do what&rsquo;s called indexing. Indexing identifies each element as having a order in the vector that doesn&rsquo;t change unless we want it to</p>
+<p>To get the first element of this vector, we can call the object, and then index the first element like so:</p>
+<pre><code class="language-r">vector1[1]
+</code></pre>
+<pre><code>## [1] 1
+</code></pre>
+<p>What if we want the last two elements?</p>
+<pre><code class="language-r">vector1[2,3]
+</code></pre>
+<pre><code>## Error in vector1[2, 3]: incorrect number of dimensions
+</code></pre>
+<p>The comma inside the brackets tells R to start looking in another dimension. Since this is a one-dimensional object, this fails. To get the last two elements, we have to pass their indexes as another vector!</p>
+<pre><code class="language-r">vector1[c(2,3)]
+</code></pre>
+<pre><code>## [1] 2 3
+</code></pre>
+<h2 id="lists">Lists</h2>
+<p>Another type of object is called a list. These are preferred when you want to name each element. While vectors must have elements of all the same class, lists can hold anything, even other objects! You should always use names if possible, but you don&rsquo;t even have to name every element.</p>
+<pre><code class="language-r">list1 &lt;- c(crowd = &quot;a&quot;, b = 12, vector1)
+</code></pre>
+<p>When we created the list, R automatically separated &ldquo;vector1&rdquo; into each element.</p>
+<pre><code class="language-r">list1
+</code></pre>
+<pre><code>## crowd     b                   
+##   &quot;a&quot;  &quot;12&quot;   &quot;1&quot;   &quot;2&quot;   &quot;3&quot;
+</code></pre>
+<p>Lets grab the second element and add a number.</p>
+<pre><code class="language-r">list1[2] + 12
+</code></pre>
+<pre><code>## Error in list1[2] + 12: non-numeric argument to binary operator
+</code></pre>
+<p>Before we do an operation, we need to make sure R recognizes everything as a number. To do that, we need to apply a function to our object to make it of numeric class.</p>
+<pre><code class="language-r">as.numeric(list1[2]) + 12
+</code></pre>
+<pre><code>## [1] 24
+</code></pre>
+<p>That&rsquo;s better. There are lots of conversion functions:</p>
+<ul>
+<li>
+<p><code>as.character()</code></p>
+</li>
+<li>
+<p><code>as.numeric()</code></p>
+</li>
+<li>
+<p><code>as.factor()</code></p>
+</li>
+<li>
+<p>and a few others</p>
+</li>
+</ul>
+<h2 id="factors">Factors</h2>
+<p>Factors are a type of object that takes elements and stores them in levels: unique values from all the elements. That means that if a value shows up multiple times in a vector, it is stored as an index to another vector that stores all the unique values.</p>
+<pre><code class="language-r">factor1 &lt;- factor(c(1, 4, 3, 6, 6, 0, 3, 9, 1))
+
+# When we call a factor, we can see all its data and its levels
+
+factor1
+</code></pre>
+<pre><code>## [1] 1 4 3 6 6 0 3 9 1
+## Levels: 0 1 3 4 6 9
+</code></pre>
+<pre><code class="language-r">class(factor1)
+</code></pre>
+<pre><code>## [1] &quot;factor&quot;
+</code></pre>
+<h2 id="matrices">Matrices</h2>
+<p>Now let&rsquo;s look at two-dimensional objects. The types that are most essential are matrices and data frames. A matrix is a simple table of stuff. Here we use the function <code>rnorm()</code> to generate data for our matrix.</p>
+<pre><code class="language-r"># ncol specifies how to separate the vectors
+
+matrix1 &lt;- matrix(data = c(rnorm(5, 4), rnorm(5, 7)), ncol = 2) 
+
+matrix1
+</code></pre>
+<pre><code>##          [,1]     [,2]
+## [1,] 2.695641 7.274793
+## [2,] 2.893987 6.858376
+## [3,] 3.414308 6.869655
+## [4,] 4.911392 7.511038
+## [5,] 2.860796 5.048496
+</code></pre>
+<p>To index this class of object, the column names and row names give us a pretty good idea. To get a specific element, index the row then column.</p>
+<pre><code class="language-r">matrix1[3,1]
+</code></pre>
+<pre><code>## [1] 3.414308
+</code></pre>
+<p>Matrices can also be indexed as one-dimensional by supplying one index. The columns wrap to the next one.</p>
+<pre><code class="language-r">matrix1[6]
+</code></pre>
+<pre><code>## [1] 7.274793
+</code></pre>
+<pre><code class="language-r">matrix1[1,2]
+</code></pre>
+<pre><code>## [1] 7.274793
+</code></pre>
+<p>To get a full row or column, just leave the other dimension blank.</p>
+<pre><code class="language-r">matrix1[1,]
+</code></pre>
+<pre><code>## [1] 2.695641 7.274793
+</code></pre>
+<h2 id="data-frames">Data Frames</h2>
+<p>These are the bread and butter of data analytics. They are very similar to a matrix or data table, except they have extra rules. Here we create a data frame (df for short) with two named columns (like a list!)</p>
+<pre><code class="language-r">dataframe1 &lt;- data.frame(col1 = c(matrix1, 78, 44), col2 = 1:12)
+
+class(dataframe1)
+</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;
+</code></pre>
+<pre><code class="language-r">dataframe1
+</code></pre>
+<pre><code>##         col1 col2
+## 1   2.695641    1
+## 2   2.893987    2
+## 3   3.414308    3
+## 4   4.911392    4
+## 5   2.860796    5
+## 6   7.274793    6
+## 7   6.858376    7
+## 8   6.869655    8
+## 9   7.511038    9
+## 10  5.048496   10
+## 11 78.000000   11
+## 12 44.000000   12
+</code></pre>
+<p>Indexing these named columns is super easy with the &ldquo;$&rdquo; operator. This returns a vector.</p>
+<pre><code class="language-r">dataframe1$col1
+</code></pre>
+<pre><code>##  [1]  2.695641  2.893987  3.414308  4.911392  2.860796  7.274793  6.858376
+##  [8]  6.869655  7.511038  5.048496 78.000000 44.000000
+</code></pre>
+<p>You can also index like you do with matrices, but since it&rsquo;s a dataframe, the first method is preferred.</p>
+<pre><code class="language-r">dataframe1[,1]
+</code></pre>
+<pre><code>##  [1]  2.695641  2.893987  3.414308  4.911392  2.860796  7.274793  6.858376
+##  [8]  6.869655  7.511038  5.048496 78.000000 44.000000
+</code></pre>
+<h2 id="conditional-indexing">Conditional Indexing</h2>
+<p>Now is a good time to talk about indexing an object by using a conditional representation of that object. That is, take a subset of the data based on the data itself. First we need to express a conditional using the &ldquo;==&rdquo; operator. This will tell us if objects in a vector are equal to the other side. For example, we can get R to tell us if each element is greater than 4.</p>
+<pre><code class="language-r">greater_than_1 &lt;- dataframe1$col1 &gt; 4
+
+greater_than_1
+</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+</code></pre>
+<p>Here, we receive a vector of boolean (True or False) values. We can use this vector to index the original vector. So we only receive elements from col1 where greater_than_1 is equal to True.</p>
+<pre><code class="language-r">dataframe1$col1
+</code></pre>
+<pre><code>##  [1]  2.695641  2.893987  3.414308  4.911392  2.860796  7.274793  6.858376
+##  [8]  6.869655  7.511038  5.048496 78.000000 44.000000
+</code></pre>
+<pre><code class="language-r">dataframe1$col1[greater_than_1]
+</code></pre>
+<pre><code>## [1]  4.911392  7.274793  6.858376  6.869655  7.511038  5.048496 78.000000
+## [8] 44.000000
+</code></pre>
+<p>This is an extremely powerful tool in base R. You can also create other conditionals with:</p>
+<ul>
+<li>
+<p>&ldquo;&gt;=&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;&lt;=&rdquo;</p>
+</li>
+<li>
+<p>or &ldquo;!=&rdquo;</p>
+</li>
+</ul>
+<h1 id="base-r-vs-tidyverse">Base R vs. tidyverse</h1>
+<p>Now lets get to the cool stuff. We are gonna pick up the pace a little bit.</p>
+<p>You can manipulate and clean data frames in R very easily, and the tidyverse makes this quite intuitive. Base R handles elementary operations very well, but its in the higher order operations like data cleaning, manipulation, modeling, and graphics that the tidyverse shines.</p>
+<p>Though a built-in package, we can import standard datasets as an object in our R session with ease. We don&rsquo;t have to assign the data as an object, R will do this for us.</p>
+<pre><code class="language-r">data(&quot;mtcars&quot;)
+
+class(mtcars)
+</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;
+</code></pre>
+<p>Lets get some information about this data we just pulled using the <code>head()</code> function, which will show us the first few rows.</p>
+<pre><code class="language-r">head(mtcars)
+</code></pre>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+</code></pre>
+<p>Here we see what we are working with. Take note of some of the column names, what kinds of values each column seems to take, and the row names as well.</p>
+<p>Since mtcars is a dataframe, we can look at the &ldquo;mpg&rdquo; column using the &ldquo;$&rdquo; operator. We want to know the mean mpg of all the cars in this data using the <code>mean()</code> function</p>
+<pre><code class="language-r">mean(mtcars$mpg)
+</code></pre>
+<pre><code>## [1] 20.09062
+</code></pre>
+<h2 class="tabset tabset-fade" id="data-manipulation">Data Manipulation</h2>
+<p>Just like that. Now we&rsquo;ll do a slightly more complex series of calculations using base R and the tidyverse</p>
+<h3 id="base-r">Base R</h3>
+<p>We can get the mean of the whole dataset, but often its more useful if we can take parts of the dataset and compare them. The mean mpg of certain categories can start to give information on how the category might affect the mpg.</p>
+<p>Lets look at the mean mpg of cars with 4 cylinders vs 6 cylinders. We&rsquo;ll do this two ways in base R.</p>
+<p>First, the slower way. Index each group by the number of cylinders and. In English, this reads:</p>
+<blockquote>
+<p>&ldquo;Take the mean mpg where the number of cylinders is equal to 4&rdquo;</p>
+</blockquote>
+<pre><code class="language-r">mean(mtcars$mpg[mtcars$cyl == 4])
+</code></pre>
+<pre><code>## [1] 26.66364
+</code></pre>
+<p>And for 6 cylinders</p>
+<pre><code class="language-r">mean(mtcars$mpg[mtcars$cyl == 6])
+</code></pre>
+<pre><code>## [1] 19.74286
+</code></pre>
+<p>Second, we can use a fancy function called <code>tapply()</code> which can apply a function to a column based on the groups in another vector.</p>
+<pre><code class="language-r">tapply(mtcars$mpg, mtcars$cyl, mean)
+</code></pre>
+<pre><code>##        4        6        8 
+## 26.66364 19.74286 15.10000
+</code></pre>
+<p>What if we do another calculation using just two of the columns, <code>disp</code> and <code>wt</code>?</p>
+<p>Lets get the average displacement to weight ratio of all the cars.</p>
+<pre><code class="language-r"># Make a new object with all rows of the two columns named &quot;disp&quot; and &quot;wt&quot;
+
+mycols &lt;- mtcars[, c(&quot;disp&quot;, &quot;wt&quot;)]
+
+# Divide displacement by weight for each car and take the mean
+
+mean(mycols$disp / mycols$wt)
+</code></pre>
+<pre><code>## [1] 67.77537
+</code></pre>
+<h3 id="tidyverse">tidyverse</h3>
+<p>We can get the mean of the whole dataset, but often its more useful if we can take parts of the dataset and compare them. The mean mpg of certain categories can start to give information on how the category might affect the mpg.</p>
+<p>First, we need to introduce <code>%&gt;%</code>, called the &lsquo;pipe&rsquo; operator in the tidyverse. This is used to connect two pieces of code together, where the output of the code on the left is used as the input of the code on the right. This was created to prevent people from using nested functions.</p>
+<p>For example:</p>
+<pre><code class="language-r">library(tidyverse)
+</code></pre>
+<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.3.2 --
+## v tibble  3.1.8      v dplyr   1.0.10
+## v tidyr   1.2.1      v stringr 1.5.0 
+## v readr   2.1.3      v forcats 0.5.2 
+## v purrr   0.3.5      
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+</code></pre>
+<pre><code class="language-r">class(mtcars)
+</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;
+</code></pre>
+<p>is the same as</p>
+<pre><code class="language-r">mtcars %&gt;%
+    
+    class()
+</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;
+</code></pre>
+<p>One more thing to know about the tidyverse is that it utilizes lazy evaluation and data masking. This sounds fancy, but all it really means is that once we pass data to a tidyverse function, we don&rsquo;t have to call the data anymore, just the column that we are interested in. No more <code>data$column</code>! That&rsquo;s good for us because that&rsquo;s less typing and faster analysis.</p>
+<p>Okay, lets look at the mean mpg of cars with 4 cylinders vs 6 cylinders. To use the tidyverse, we can make use of its built-in functions that can tackle this exact problem.</p>
+<pre><code class="language-r">mtcars %&gt;%
+
+# Here we take the data &quot;mtcars&quot; and use the &quot;group_by()&quot; function to group the data by the cyl value
+# The group is 'hidden' within the function, but have faith its there
+    
+    group_by(cyl) %&gt;%
+  
+# Now we tell R to use the grouped df to take the mean of &quot;mpg&quot; based on each &quot;cyl&quot; group, 
+# independently of one another
+# Lastly we just create a new column for the mean.
+# We can easily create new columns inside &quot;summarise()&quot;  and &quot;mutate()&quot; with the &quot;=&quot; operator
+    
+    summarise(mean_mpg = mean(mpg))
+</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##     cyl mean_mpg
+##   &lt;dbl&gt;    &lt;dbl&gt;
+## 1     4     26.7
+## 2     6     19.7
+## 3     8     15.1
+</code></pre>
+<p>Without the pipe operator, that code would look like this:</p>
+<pre><code class="language-r">summarise(group_by(mtcars, cyl), mean_mpg = mean(mpg))
+</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##     cyl mean_mpg
+##   &lt;dbl&gt;    &lt;dbl&gt;
+## 1     4     26.7
+## 2     6     19.7
+## 3     8     15.1
+</code></pre>
+<p>Not terrible, but with longs chains it can get messy fast, and we couldn&rsquo;t easily add comments between code.</p>
+<p>What if we do another calculation using just two of the columns, <code>disp</code> and <code>wt</code>?</p>
+<p>Lets get the average displacement to weight ratio of all the cars.</p>
+<pre><code class="language-r"># We can do this really fast!
+
+mtcars %&gt;%
+    
+    summarise(avg_ratio = mean(disp/wt))
+</code></pre>
+<pre><code>##   avg_ratio
+## 1  67.77537
+</code></pre>
+<p>The tidyverse is home to other methods as well:</p>
+<ul>
+<li>
+<p>The pipe operator and others from {magrittr} %&gt;%</p>
+</li>
+<li>
+<p>Plotting methods from {ggplot2}</p>
+</li>
+<li>
+<p>and other improved read/write, string, and object type abilities</p>
+</li>
+</ul>
+<h2 class="tabset tabset-fade" id="visualization">Visualization</h2>
+<p>Plotting data is really important for analysis. Both base R and the tidyverse have pretty robust graphics capabilities. Here are the basics.</p>
+<h3 id="base-r-1">Base R</h3>
+<p>The most basic type of plot is the scatter plot. This takes values from one column and values from another to put the points on a two-dimensional coordinate plane. Right out of the box, base R plots look fine.</p>
+<p>Simple plots are pretty easy in base R. Call the <code>plot()</code> function and put in two same-sized vectors. Here we can make sure that the <code>plot()</code> function puts each object where we want by specifying them with a keyword. These keyword symbolize function arguments. Most functions take arguments, and its usually good to specify them with a keyword. In this case, we are telling R to use horsepower on the x axis and mpg on the y axis. We can supply our own labels too.</p>
+<pre><code class="language-r">plot(x = mtcars$hp, mtcars$mpg, xlab = &quot;Horsepower&quot;, ylab = &quot;MPG&quot;)
+</code></pre>
+<img src="/2022/12/01/r-the-tidyverse-and-machine-learning/index_files/figure-html/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" />
+<p>We can make a histogram too. <code>hist()</code> only takes one data argument and automatically counts each group. Although its the more basic of the two methods, plotting in Base R can look quite nice.</p>
+<pre><code class="language-r"># &quot;par()&quot; is a function that adds some extra pizzazz to plots
+
+par(mar = c(3, 3, 2, 1), # margins
+    
+    las = 1, # Y axis text rotated
+    
+    xaxs = &quot;i&quot;, yaxs = &quot;i&quot;) # Remove plot padding
+
+barplot(tapply(mtcars$mpg, mtcars$cyl, length),
+        
+        col = unique(mtcars$cyl), # Fill color
+        
+        xlab = &quot;Cylinders&quot;, ylab = &quot;Count&quot;, # x and y labels
+        
+        xlim = c(0, 4), ylim = c(0, 20)) # Limits
+
+title(&quot;Cylinders of mtcars&quot;, 
+      
+      adj = 0.2, # adjust location of the x axis
+      
+      cex.main = 1.5, font.main = 1, # font size and type
+      
+      col.main = &quot;black&quot;)
+</code></pre>
+<img src="/2022/12/01/r-the-tidyverse-and-machine-learning/index_files/figure-html/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" />
+<h3 id="tidyverse-1">tidyverse</h3>
+<p>The package responsible for handling most graphics in the tidyverse is called ggplot2. ggplot2 uses a layering system to build a graph, where each layer supplies information that is just laid on top of the information that came previously. There are a few quirks to this package in terms of where and how you supply data and the language, but its easy to adjust to.</p>
+<pre><code class="language-r"># ggplot is in the tidyverse so it uses data masking and lazy evaluation
+# We can supply the data when we initialize a plot, with &quot;ggplot()&quot;
+
+ggplot(mtcars) + 
+    
+    # Then we create a geometry layer of points
+    # And supply aesthetics inside &quot;aes()&quot; where we can specify which columns are on the x axis and the y axis
+    
+    geom_point(aes(x = hp, y = mpg))
+</code></pre>
+<img src="/2022/12/01/r-the-tidyverse-and-machine-learning/index_files/figure-html/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" />
+<p>We can make a barplot too.</p>
+<pre><code class="language-r">ggplot(mtcars) + geom_bar(aes(x = cyl, fill = factor(cyl)), stat = 'count') +
+    
+    # Change the colors of the bars
+    
+    scale_fill_manual(values = c(&quot;green&quot;, &quot;darkgreen&quot;, &quot;grey&quot;)) +
+    
+    # We can rename the axes here with the &quot;labs()&quot; function
+    
+    labs(x = &quot;Cylinders&quot;,
+         y = &quot;Count&quot;,
+         title = &quot;Histogram of Cylinders&quot;) +
+    
+    # Since the default ggplot theme is bare-bones, I usually throw on a better one
+    # I'm using a custom theme similar to theme_classic(), but modified for this website
+    
+    my_theme()
+</code></pre>
+<img src="/2022/12/01/r-the-tidyverse-and-machine-learning/index_files/figure-html/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" />
+<p>Data visualization is really important for the analyst to figure out what&rsquo;s going on and to ensure that the information is accurately communicated to others. There are lots of industry-leading tools besides R that use can use to visualize data. More info about one of these tools can be found on <a href="https://www.tableau.com/learn/articles/data-visualization">the Tableau website</a>.</p>
+<p>Also, to learn how I created this custom theme, check out <a href="https://rpubs.com/mclaire19/ggplot2-custom-themes">this tutorial by Maddie Pickens on RPubs</a>.</p>
+<h1 id="machine-learning">Machine Learning</h1>
+<p>There are two main classes of ML:</p>
+<p><img src="img-gfm/regression-vs-classification-in-machine-learning.png" alt="Regression and Classification"></p>
+<ul>
+<li>Classification
+<ul>
+<li>
+<p>Predicts discrete classes</p>
+</li>
+<li>
+<p>The model can find parameters that minimize the prediction of incorrect category labels (Decision Boundary)</p>
+</li>
+</ul>
+</li>
+<li>Regression
+<ul>
+<li>
+<p>Line of best fit</p>
+</li>
+<li>
+<p>Predicts a continuous variable</p>
+</li>
+<li>
+<p>It&rsquo;s the model&rsquo;s job to find parameters that minimize the distance between the line and the observed data</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>In its simplest form, and the form you will see in this tutorial, are 2 steps to Machine Learning</p>
+<p>First, we get a framework to create a model. Broadly, a model is an object that contains a relationship between a sequence of inputs and outputs. The relationship can be extremely simple, such as in a linear model with two parameters, where the output has a direct linear relationship to the input, or extremely complex such as in a neural network with many parameters, where the output has an indirect non-linear relationship to the input. Typically, creating or &ldquo;training&rdquo; a model means establishing a relationship that best describes the output. Using an existing framework, you tell the program to create a relationship. Typically the relationship is restructured many times based on how well the output is described. Once it does a good-enough job, it stops.</p>
+<p>Once the model is trained and a relationship is established, then we can give it new input and receive an expected output. There are many considerations, evaluations, and tests that should be made along the way, but the model should be generalization enough to produce insight into data not available for standard data analysis.</p>
+<p>Using real data, lets see what ML looks like in R. I&rsquo;ll be using a combination of the tidyverse and base R for this, and I won&rsquo;t delve too deep into the exact methods I&rsquo;m using.</p>
+<p>We&rsquo;ll go through some of the steps of creating a model:</p>
+<ul>
+<li>Cleaning up the data</li>
+<li>Visualizing relationships</li>
+<li>Training models</li>
+<li>Model evaluation</li>
+</ul>
+<p>We will use <a href="https://www.kaggle.com/datasets/gloriarc/fitbit-fitness-tracker-data-capstone-project">Fitbit Data</a>, courtesy of Gloria on Kaggle.</p>
+<h2 class="tabset tabset-fade" id="case-1-linear-regression">Case 1: Linear Regression</h2>
+<p>For this exercise, we want to look at the relationship between the number of calories burned <code>Calories</code> and the distance that people traveled according to the device <code>TrackerDistance</code>.</p>
+<pre><code class="language-r"># Read in the csv with &quot;read_csv()&quot; from the tidyverse
+# Specify the path
+
+fitbit &lt;- read_csv(&quot;data/Daily_Activity_2022_27_02.csv&quot;)
+</code></pre>
+<pre><code>## New names:
+## Rows: 940 Columns: 18
+## -- Column specification
+## -------------------------------------------------------- Delimiter: &quot;,&quot; chr
+## (3): ActivityDate, ActivityDay, ...18 dbl (14): Id, TotalSteps, TotalDistance,
+## TrackerDistance, LoggedActivitiesDi... lgl (1): ...17
+## i Use `spec()` to retrieve the full column specification for this data. i
+## Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## * `` -&gt; `...17`
+## * `` -&gt; `...18`
+</code></pre>
+<pre><code class="language-r"># We can see all the classes of each column, very helpful!
+</code></pre>
+<p>Exploring the data is pretty much always the first step.</p>
+<pre><code class="language-r"># view the data with &quot;glimpse()&quot; from tidyverse
+
+glimpse(fitbit)
+</code></pre>
+<pre><code>## Rows: 940
+## Columns: 18
+## $ Id                       &lt;dbl&gt; 1503960366, 1503960366, 1503960366, 150396036~
+## $ ActivityDate             &lt;chr&gt; &quot;4/12/2016&quot;, &quot;4/13/2016&quot;, &quot;4/14/2016&quot;, &quot;4/15/~
+## $ ActivityDay              &lt;chr&gt; &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;, &quot;Mo~
+## $ TotalSteps               &lt;dbl&gt; 13162, 10735, 10460, 9762, 12669, 9705, 13019~
+## $ TotalDistance            &lt;dbl&gt; 8.50, 6.97, 6.74, 6.28, 8.16, 6.48, 8.59, 9.8~
+## $ TrackerDistance          &lt;dbl&gt; 8.50, 6.97, 6.74, 6.28, 8.16, 6.48, 8.59, 9.8~
+## $ LoggedActivitiesDistance &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
+## $ VeryActiveDistance       &lt;dbl&gt; 1.88, 1.57, 2.44, 2.14, 2.71, 3.19, 3.25, 3.5~
+## $ ModeratelyActiveDistance &lt;dbl&gt; 0.55, 0.69, 0.40, 1.26, 0.41, 0.78, 0.64, 1.3~
+## $ LightActiveDistance      &lt;dbl&gt; 6.06, 4.71, 3.91, 2.83, 5.04, 2.51, 4.71, 5.0~
+## $ SedentaryActiveDistance  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
+## $ VeryActiveMinutes        &lt;dbl&gt; 25, 21, 30, 29, 36, 38, 42, 50, 28, 19, 66, 4~
+## $ FairlyActiveMinutes      &lt;dbl&gt; 13, 19, 11, 34, 10, 20, 16, 31, 12, 8, 27, 21~
+## $ LightlyActiveMinutes     &lt;dbl&gt; 328, 217, 181, 209, 221, 164, 233, 264, 205, ~
+## $ SedentaryMinutes         &lt;dbl&gt; 728, 776, 1218, 726, 773, 539, 1149, 775, 818~
+## $ Calories                 &lt;dbl&gt; 1985, 1797, 1776, 1745, 1863, 1728, 1921, 203~
+## $ ...17                    &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N~
+## $ ...18                    &lt;chr&gt; &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;, &quot;Mo~
+</code></pre>
+<p>Let&rsquo;s see what our variables of interest look like.</p>
+<pre><code class="language-r"># plot our variables of interest
+
+plot(fitbit$TrackerDistance, fitbit$Calories, xlab = &quot;Distance&quot;, ylab = &quot;Calories&quot;)
+</code></pre>
+<img src="/2022/12/01/r-the-tidyverse-and-machine-learning/index_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" />
+<h3 id="linear-model">Linear Model</h3>
+<p>We will create the simplest model first. This is a good idea just so we have room to improve from here.</p>
+<p>We can use the <code>glm()</code> function to make a linear model. We supply the data and columns to use data masking. The &ldquo;~&rdquo; notation is a part of the relationship/function. In English, this is:</p>
+<blockquote>
+<p>&ldquo;<code>Calories</code> as a function of <code>TrackerDistance</code>&rdquo;</p>
+</blockquote>
+<pre><code class="language-r">lmodel &lt;- glm(Calories ~ TrackerDistance, data = fitbit)
+</code></pre>
+<p>Now that we have a model, we can view some information about it. This model is linear (we used <code>glm()</code>) and is using only one column to predict <code>Calories</code>.</p>
+<pre><code class="language-r"># View a summary of the model
+
+summary(lmodel)
+</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Calories ~ TrackerDistance, data = fitbit)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2288.82   -334.78    -63.34    409.82   1813.73  
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     1654.177     30.833   53.65   &lt;2e-16 ***
+## TrackerDistance  118.610      4.585   25.87   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 301305.5)
+## 
+##     Null deviance: 484302060  on 939  degrees of freedom
+## Residual deviance: 282624514  on 938  degrees of freedom
+## AIC: 14531
+## 
+## Number of Fisher Scoring iterations: 2
+</code></pre>
+<p>From this summary, we need to look at the coefficients to get an idea of what our model did, and review some statistics to evaluate it.</p>
+<p>This model created a linear relationship or linear function between the input and output. This means that the function we should expect to see will be in the form of <code>\(mx + b\)</code> (the function of a line) where <code>x</code> is <code>TrackerDistance</code>. Our model says that <code>Calories</code> can be best estimated by:</p>
+<blockquote>
+<p>118.610 × <code>TrackerDistance</code> + 1654.77</p>
+</blockquote>
+<p>Let&rsquo;s see what this looks like on a graph.</p>
+<pre><code class="language-r">ggplot(data = fitbit) +
+    
+    geom_point(aes(x = TrackerDistance, y = Calories)) +
+    
+    # Create a line with slope and intercept
+    
+    geom_abline(slope = 118.610, intercept = 1654.77, color = &quot;red&quot;, linewidth = 3) + 
+    
+    # Add title and model call
+    
+    labs(title = &quot;Linear Regression with Fitbit Data&quot;,
+         subtitle = lmodel$call) + 
+    
+    # Add a better theme
+    
+    my_theme()
+</code></pre>
+<img src="/2022/12/01/r-the-tidyverse-and-machine-learning/index_files/figure-html/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" />
+<p>How many calories would we expect someone to burn if they ran 40 miles?</p>
+<p>We could just plug the slope and intercept into an equation, but lets use R&rsquo;s <code>predict()</code> function for this. Since we just need one prediction, we can pass one value as a named list. Using the model, we supply this new data and specify that we want the type of prediction to be on the scale of the response variable.</p>
+<pre><code class="language-r">pred &lt;- predict(lmodel, newdata = list(TrackerDistance = 40), type = &quot;response&quot;)
+
+pred
+</code></pre>
+<pre><code>##        1 
+## 6398.584
+</code></pre>
+<p>Based on the model, we should expect someone who ran 40 km to burn 6398 calories.</p>
+<h3 id="polynomial-model">Polynomial Model</h3>
+<p>A linear model describes the relationship between the input and output with a linear function, but the relationship might be more complex than that. Lets try a different model.</p>
+<p>Here we will use a polynomial model. This kind of model is a cousin of the linear model. Instead of a linear function, this model optimizes a polynomial function of <code>TrackerDistance</code>.</p>
+<pre><code class="language-r">pmodel &lt;- glm(Calories ~ poly(`TrackerDistance`, 3), data = fitbit)
+
+# View summary
+
+summary(pmodel)
+</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Calories ~ poly(TrackerDistance, 3), data = fitbit)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -1637.82   -324.84    -78.52    422.57   1764.06  
+## 
+## Coefficients:
+##                           Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                2303.61      17.78 129.568  &lt; 2e-16 ***
+## poly(TrackerDistance, 3)1 14201.32     545.10  26.053  &lt; 2e-16 ***
+## poly(TrackerDistance, 3)2 -1688.80     545.10  -3.098  0.00201 ** 
+## poly(TrackerDistance, 3)3 -1286.74     545.10  -2.361  0.01845 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 297133.3)
+## 
+##     Null deviance: 484302060  on 939  degrees of freedom
+## Residual deviance: 278116782  on 936  degrees of freedom
+## AIC: 14519
+## 
+## Number of Fisher Scoring iterations: 2
+</code></pre>
+<p>Here are the coefficients of a polynomial relationship between <code>Calories</code> and <code>TrackerDistance</code>. According to the model:</p>
+<blockquote>
+<p><code>Calories</code> = -1286.74 × <code>TrackerDistance</code>³ + -1688.80 × <code>TrackerDistance</code>² + 14201.32 × <code>TrackerDistance</code> + 2303.61</p>
+</blockquote>
+<p>When coefficients are calculated, we can get an estimate of how likely they are to exist as a predictor of the output. The colloquial threshold for this is 0.05. All of the relationships show a significance ( <code>Pr(&gt;|t|)</code> ) below this threshold.</p>
+<p>Let&rsquo;s plot both models together.</p>
+<pre><code class="language-r"># We need to get line data for the polynomial model so we just use the existing data
+
+pred &lt;- predict(pmodel, newdata = fitbit, type = &quot;response&quot;)
+
+# Plot both models
+
+ggplot(data = fitbit) +
+    
+    geom_point(aes(x = `TrackerDistance`, y = Calories)) +
+    
+    geom_abline(slope = 118.610, intercept = 1654.77, color = &quot;red&quot;, linewidth = 3) + 
+    
+    geom_line(aes(x = `TrackerDistance`, y = pred), color = &quot;blue&quot;, linewidth = 3) +
+    
+    # Add title and model call
+    
+    labs(title = &quot;Linear and Polynomial Regression with Fitbit Data&quot;) + 
+    
+    # Add a better theme
+    
+    my_theme()
+</code></pre>
+<img src="/2022/12/01/r-the-tidyverse-and-machine-learning/index_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" />
+<p>The polynomial model in blue seems to follow the linear model exactly until we reach a <code>TrackerDistance</code> of about 18. Then, it bends toward three points that are on the edge of the data.</p>
+<p>If we look at the model&rsquo;s trajectory, it suggests that someone who runs 30 km will actually burn fewer calories than someone who runs 20 km. Without comparing fit or residuals, we can conclude that the first linear model is probably better suited to represent the data and will more accurately represent the relationship between <code>Calories</code> and <code>TrackerDistance</code> beyond the scope of the data.</p>
+<h2 id="case-2-logistic-regression">Case 2: Logistic Regression</h2>
+<p><img src="img-gfm/Simple-Logistic-Regression.jpg" alt="Simple Logistic Regression"></p>
+<p>Even though regression is in the name, it is used for binary classification (TRUE/FALSE, white/black etc.). This model estimates the parameters of a logit function for the probability of an observation residing in a particular class.</p>
+<p>In this example, we want to predict high or low calorie count using the amount of time each participant spent in each activity state. Before we make a model, we have to &ldquo;engineer&rdquo; the data a little bit to make the model work. Since the data doesn&rsquo;t come with a binary categorical column, we can make one using <code>Calories</code>.</p>
+<pre><code class="language-r"># Set a high/low threshold for calories: 2000
+# Use &quot;mutate()&quot; from the tidyverse
+
+fit_new &lt;- mutate(fitbit, dvcal = ifelse(Calories &gt;= 2000, &quot;high&quot;, &quot;low&quot;))
+
+# View our new column in a plot
+
+ggplot(fit_new) +
+    
+    geom_histogram(aes(x = dvcal, fill = dvcal), stat = &quot;count&quot;) +
+    
+    labs(title = &quot;Histogram of dvcal&quot;) + 
+    
+    my_theme()
+</code></pre>
+<pre><code>## Warning in geom_histogram(aes(x = dvcal, fill = dvcal), stat = &quot;count&quot;):
+## Ignoring unknown parameters: `binwidth`, `bins`, and `pad`
+</code></pre>
+<img src="/2022/12/01/r-the-tidyverse-and-machine-learning/index_files/figure-html/unnamed-chunk-44-1.png" width="672" style="display: block; margin: auto;" />
+<p>To create this model, we can use <code>glm()</code> again, but this time set the <code>family</code> argument to &ldquo;binomial&rdquo;.</p>
+<pre><code class="language-r"># create the model
+
+y &lt;- as.factor(fit_new$dvcal)
+
+logmodel &lt;- glm(formula = y ~  SedentaryMinutes + LightlyActiveMinutes + 
+                  FairlyActiveMinutes + VeryActiveMinutes, 
+                data = fit_new, 
+                family = &quot;binomial&quot;)
+
+summary(logmodel)
+</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = y ~ SedentaryMinutes + LightlyActiveMinutes + FairlyActiveMinutes + 
+##     VeryActiveMinutes, family = &quot;binomial&quot;, data = fit_new)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.7327  -0.9297  -0.4144   0.9938   2.1461  
+## 
+## Coefficients:
+##                        Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)           2.2525224  0.4141237   5.439 5.35e-08 ***
+## SedentaryMinutes     -0.0009139  0.0002941  -3.107  0.00189 ** 
+## LightlyActiveMinutes -0.0060521  0.0008028  -7.538 4.76e-14 ***
+## FairlyActiveMinutes  -0.0044428  0.0039916  -1.113  0.26569    
+## VeryActiveMinutes    -0.0368339  0.0042573  -8.652  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 1259.4  on 939  degrees of freedom
+## Residual deviance: 1037.9  on 935  degrees of freedom
+## AIC: 1047.9
+## 
+## Number of Fisher Scoring iterations: 5
+</code></pre>
+<p>Each coefficient generated by the model comes with a significance score. This is a measure of how likely it is that the relationship between the predictor and response variable is zero. A low score means that the model detected a significant relationship, denotes by one, two, or three asterisks. Looking at the coefficients,<code>FairlyActiveMinutes</code> doesn&rsquo;t seem to be statistically significant. Let&rsquo;s evaluate the model to see if removing it will help the model perform better.</p>
+<pre><code class="language-r"># Retrieve a list of predicted values
+
+pred &lt;- predict(logmodel, newdata = fit_new, type = &quot;response&quot;)
+</code></pre>
+<p>Evaluating models is an important part of ML. This not only tells you which model &ldquo;works best&rdquo;, but can also give you information on areas where the model can improve. Since we are working with a classification model, we can use a &ldquo;confusion matrix&rdquo; that tells us how many times the correctly and incorrectly predicted a class.</p>
+<pre><code class="language-r"># Create confusion matrix
+# We need to round the predicted values to be 0 or 1
+
+cmat &lt;- as.matrix(table(Actual_Values = y, Predicted_Values = round(pred)))
+
+cmat
+</code></pre>
+<pre><code>##              Predicted_Values
+## Actual_Values   0   1
+##          high 454 117
+##          low  172 197
+</code></pre>
+<p>The model correctly predicted high values 454 times and correctly predicted low values 197 times. When the calorie class was &ldquo;low&rdquo;, the model incorrectly predicted &ldquo;high&rdquo; 172 times, and when the calorie count was &ldquo;high&rdquo;, the model incorrectly predicted &ldquo;low&rdquo; 117 times.</p>
+<p>To get a better idea of overall performance, we can use a metric called &ldquo;Accuracy&rdquo;. This is defined as the number of times the model guessed correctly divided by the total number of guesses.</p>
+<pre><code class="language-r"># Get accuracy
+
+sum(diag(cmat))/sum(cmat)
+</code></pre>
+<pre><code>## [1] 0.6925532
+</code></pre>
+<p>The model guessed right about 69% of the time. Lets remove <code>FairlyActiveMinutes</code> and see how the model performs.</p>
+<pre><code class="language-r"># Create model without FairlyActiveMinutes
+
+logmodel2 &lt;- glm(formula = y ~ SedentaryMinutes + LightlyActiveMinutes + VeryActiveMinutes, 
+                 data = fit_new, 
+                 family = &quot;binomial&quot;)
+
+# Retrieve a list of predicted values
+
+pred &lt;- predict(logmodel2, newdata = fit_new, type = &quot;response&quot;)
+
+# Create confusion matrix
+
+cmat &lt;- as.matrix(table(Actual_Values = y, Predicted_Values = round(pred)))
+
+# Get accuracy
+
+sum(diag(cmat))/sum(cmat)
+</code></pre>
+<pre><code>## [1] 0.7
+</code></pre>
+<p>The model without <code>FairlyActiveMinutes</code> achieved a slightly better accuracy than the model with it. Since we achieved a better accuracy with a simpler model, it is the clear winner. In ML, simple is almost always better. Read on to learn why.</p>
+<h2 id="case-3-random-forest">Case 3: Random Forest</h2>
+<p>A random forest is an extension of the decision tree class of models, which are usually used for classification problems. A decision tree is a model that divides each feature into two groups that correspond to an output, where the size of each group and which features are chosen is optimized. A random forest creates dozens of unique decision trees and combines the outputs of each tree into a final estimation, a technique called ensemble modeling. Each tree comes up with a guess, and the model tally&rsquo;s up &ldquo;votes&rdquo; from each tree to produce a final guess.</p>
+<p>Random forests are a higher class of ML model, and may be a little to complex for this problem we are working on. They are very powerful for classification, but they can be used for regression too.</p>
+<p>An common issue with more complex ML models is the loss of interpretability. This means that at the end of the modeling process, even though the model may be more accurate, we can&rsquo;t always define an expression that directly relates the input and output. This is especially true for a random forest, because under the hood, its a lot of little models deciding for themselves what the relationship should be. This conflict between model complexity and accuracy is a big issue in ML. Check out <a href="https://towardsdatascience.com/model-complexity-accuracy-and-interpretability-59888e69ab3d">this towardsdatascience.com article</a> to join the conversation.</p>
+<p>To get started with random forest, we need to load a package.</p>
+<pre><code class="language-r">library(caret)
+library(randomForest)
+</code></pre>
+<p>Lets try using a random forest to predict the calorie class of each workout session in the fitbit data.</p>
+<p>First, since a random forest considers all the features, we will need to remove some that contain duplicate information or no information.</p>
+<pre><code class="language-r">data &lt;- fit_new %&gt;%
+    
+    dplyr::select(-Id, -ActivityDate, -Calories, -`...17`, -`...18`)
+</code></pre>
+<p>The caret package has some neat tools to help us run our model. We also need to pick a hyper-parameter: <code>mtry</code>. A hyper-parameter is a term used in higher-order ML models that dictates something about the structure of the model being trained. What we pass as a value for<code>mtry</code> will tell the model how many predictors it should select to be in each tree. Normally we would use cross-validation to test different values for this hyper-parameter, but we will just use a tried-and-true default, the square-root of the number of columns. To learn more about cross-validation, check out <a href="https://machinelearningmastery.com/k-fold-cross-validation/">this article from machinelearningmastery.com</a>.</p>
+<pre><code class="language-r"># Metric to compare models
+
+metric &lt;- &quot;Accuracy&quot;
+
+# Setting a random seed in R is important for code reproducibility
+# This allows someone else to run the code and achieve the same result
+
+set.seed(1299)
+
+forest &lt;- train(dvcal ~ .,
+                    data = data, 
+                    method = 'rf', # use the randomForest method
+                    metric = metric,
+                    ntree = 500, # the number of trees to grow
+                    tuneGrid = data.frame(mtry = sqrt(ncol(data)))) # our hyperparameter
+
+# We can grab the accuracy score directly from the model object
+# The model tried three different configurations, so that's why we see 3 rating for accuracy
+
+forest$results$Accuracy
+</code></pre>
+<pre><code>## [1] 0.7497641
+</code></pre>
+<p>The accuracy of the random forest model is better than the logistic regression, and we successfully improved upon the simpler model. Now, we could use this trained model to predict the class of future data.</p>
+<p>Thanks for taking a look at this tutorial. You can check out a version of this document on <a href="https://github.com/kmarkey/HackCWRU-Workshop">my Github Repo</a>. Check out the <a href="https://www.tidyverse.org/">tidyverse</a> and <a href="https://topepo.github.io/caret/">caret</a> webpages to learn more about R, the tidyverse, and Machine Learning!</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+
