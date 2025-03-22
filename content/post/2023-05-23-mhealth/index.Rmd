@@ -148,6 +148,28 @@ Participants were asked questions about alcohol consumption.
 Those with at least one occurrence are considered to have participated
 in binge drinking in the past month.
 
+
+```{r}
+  # helper fun
+# range01 <- function(x){(x-min(x))/(max(x)-min(x))}
+# 
+#   # creating scale breaks and color palette
+# all_scaled_breaks <- range01(c(min(data[['per']], na.rm = TRUE), c(0.12, 0.14, 0.16, 0.18, 0.20), max(data[['per']], na.rm = TRUE)))
+# 
+# z_colors <- brewer.pal(length(all_scaled_breaks) - 1, "Oranges")
+# 
+#   # list of z breaks
+#   z_list <- embed(all_scaled_breaks, 2)[, 2:1] |>
+#     as.vector() |>
+#     sort() %>%
+#     data.frame(z = .)
+# 
+#   # final color scale df
+#   colorScale <- bind_cols(z_list, cols = rep(z_colors, each = 2))
+# 
+
+```
+
 ```{r chunk2}
 
 us_states <- us_map(regions = "state")
@@ -162,9 +184,13 @@ data <- drillb(X_RFBING5) %>%
   
   right_join(us_states, by = c("state" = "full"))
 
-plotly_chloropleth(data = data, z = "per", colors = "Oranges", tick_breaks = c(0.12, 0.14, 0.16, 0.18, 0.20), symbol = "%") %>%
+plotly_chloropleth(data = data, 
+                   z = "per", 
+                   colors = "Oranges", 
+                   tick_breaks = c(0.12, 0.14, 0.16, 0.18, 0.20), 
+                   symbol = "%") %>%
+  
     plotly_anno(text = "Data source: BRFSS 2020")
-
 ```
 
 
@@ -189,7 +215,10 @@ data <- drillb(AVEDRNK3) %>%
   
   right_join(us_states, by = c("state" = "full"))
 
-plotly_chloropleth(data = data, z = "total", title = "Hello", colors = "Oranges", tick_breaks = c(0.80, 1.00, 1.20, 1.40)) %>%
+plotly_chloropleth(data = data, 
+                   z = "avg", 
+                   colors = "Oranges", 
+                   tick_breaks = c(0.80, 1.00, 1.20, 1.40)) %>%
     plotly_anno(text = "Data source: BRFSS 2020")
 
 ```

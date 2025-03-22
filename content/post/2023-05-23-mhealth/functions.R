@@ -3,11 +3,11 @@
 
 # process-functions
 
-statekey <- tibble(name = str_to_lower(state.name), abb = state.abb, num = c(1:8, 10:51)) %>%
+statekey <- tibble(state = state.name, abb = state.abb, fips = as.numeric(fips(state))) %>%
   
-  rows_insert(tibble(name = "district of columbia", abb = "DC", num = 9), by = "name") %>%
+  rows_insert(tibble(state = "District of Columbia", abb = "DC", fips = 9), by = "state") %>%
   
-  arrange(name)
+  arrange(state)
 
 #==================================== functions ================================
 `%!in%` <- Negate(`%in%`)
@@ -171,8 +171,9 @@ plotly_chloropleth <- function(data, z, tick_breaks = c(0.12, 0.14, 0.16, 0.18, 
   # helper fun
   range01 <- function(x){(x-min(x))/(max(x)-min(x))}
   
-  # creating scale breaks and color paleette 
+  # creating scale breaks and color palette 
   all_scaled_breaks <- range01(c(min(data[[z]], na.rm = TRUE), tick_breaks, max(data[[z]], na.rm = TRUE)))
+
   z_colors <- brewer.pal(length(all_scaled_breaks) - 1, colors)
   
   # list of z breaks
