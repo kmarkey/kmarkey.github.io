@@ -15,10 +15,25 @@ menu:
   main:
     - name: About
       url: /about/
+      weight: 10
+    - name: Kaggle
+      url: https://www.kaggle.com/kmarkey
+      weight: 20
     - name: Github
-      url: https://github.com/kmarkey
+      url: https://github.com/kmarkey?tab=repositories
+      params:
+        path: /logos/github-mark.png
+      weight: 31
     - name: LinkedIn
       url: https://www.linkedin.com/in/keaton-markey-7822b3205/
+      params:
+        path: /logos/LI-In-Bug.png
+      weight: 40
+    - name: Tableau
+      url: https://public.tableau.com/app/profile/keaton.markey5262/vizzes
+      params:
+        path: /logos/tableau_logo.png
+      weight: 30
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5

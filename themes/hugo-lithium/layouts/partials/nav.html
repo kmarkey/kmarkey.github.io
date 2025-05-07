@@ -8,7 +8,14 @@
 
   <ul class="nav-links">
     {{ range .Site.Menus.main }}
-    <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+      {{ if .Params }}
+        <li><a href="{{ .URL }}"><img src="{{ .Params.PATH }}" onerror="this.style.display='none'" alt={{ .Name }} style="width:35px;height:35px"></a></li>
+      {{ else }}
+        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+      {{ end }}
+    
     {{ end }}
   </ul>
 </nav>
+
+

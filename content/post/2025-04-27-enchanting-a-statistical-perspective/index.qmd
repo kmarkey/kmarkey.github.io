@@ -1,0 +1,100 @@
+---
+title: "index"
+format: html
+---
+
+# Introduction
+
+One of the things I do in my free time is play a very popular game called [Minecraft](https://www.minecraft.net/en-us). In Minecraft, players traverse a block world to gather resources, craft items, and defeat enemies. After reaching a certain point in the game, players may wish to improve their their tools and armor by 'enchanting' them, which offers benefits like increased damage done to enemies, decreased damage received, and many more. There are many paths to enchant items, but the most reliable way is to build a structure called a [Villager Trading Hall](https://minecraft.fandom.com/wiki/Tutorials/Villager_trading_hall). However, building this structure comes with its own challenges.
+
+Generally, in a Villager Trading Hall, several NPC's called villagers are corralled into a building and can offer various [trades](https://minecraft.fandom.com/wiki/Trading) for a price. The player may be able to **trade** an item with the villager and receive an enchanted book that can be used to enchant to a tool or piece of armor. 
+
+The real difficulty is that not all trades are created equal.
+
+When a villager join the trading hall they offer a trade for emeralds (an in-game currency) selected at 'random' from a set of all possible enchantments and a bookshelf (More on the bookshelf part later). In order to receive the 'best' trade from each villager, players can 're-roll' a trade by destroying a specific block associated with the villager. Upon destroying this block, a new trade will be offered. This can be repeated infinitely (or until you get tired).
+
+If a player 're-rolls' a trade enough times, they are bound to achieve the trade they desire: often a high-tier enchantment that will improve their ability to survive in the game. Unfortunately, it can take hours to achieve such a trade.
+
+In sum, we can use known probabilities to understand how many re-rolls it will take to achieve a set of enchantments as a geometric distribution, modeled after the [coupon collector's problem](https://en.wikipedia.org/wiki/Coupon_collector%27s_problem).
+
+# Crafting a Distribution
+
+First, lets suppose we want to model all possible enchantments. To achieve a successful trade, we have to ensure:
+    1. The villager offers an enchantment trade
+      - a 50% chance
+    2. The enchantment is new to our collection
+      - enchantments are offered randomly from all possible enchantments
+
+Lets simulate this process 3000 times and take the average for each number of tries.
+
+```{python}
+import numpy as np
+import random
+from statistics import mean
+import matplotlib.pyplot as plt
+
+def trader(n_enchantments = 36, max_n = 100):
+  
+  trades = [] # an empty set
+  
+  for i in range(max_n):
+    
+    # is it an enchantment trade?
+    # there is a 50% chance
+    random_trade = random.randint(0, 1)
+    
+    if random_trade == 1:
+      
+      # is the trade for a new book?
+      random_trade = random.randint(0, n_enchantments - 1)
+    
+      if random_trade not in trades:
+          trades.append(random_trade)
+  
+  return len(trades) # out of n_enchantments
+
+rolls_list = []
+
+x = []
+
+for i in range(0, 300, 10):
+  
+  x.append(i + 1)
+  
+  # simulate rolling 10 times
+  rolls_list.append(mean([trader(n_enchantments = 36, max_n = i) for _ in range(100)]))
+  
+```
+
+```{python}
+plt.plot(x, rolls_list)
+plt.title('Avg. X Number of Rolls to Recieve Y Unique Enchantments')
+plt.show()
+plt.clf()
+```
+
+This process is similar to the coupon collector's problem, in that we are trying to achieve all possible randomly-distributed outcomes. As we start collecting more enchantments, the probability that we find a new one decreases with a geometric distribution.
+
+```{python}
+
+def new_enchant_prob(i, n):
+  
+  # where i is the ith enchantment and n is the total number of possible enchantments
+  
+  return np.random.geometric((n - i + 1) / n)
+
+new_enchant_prob(10, 20)
+
+for i in rolls_list:
+  
+  prob_list.append(new_enchant_prob(int(i), 36))
+  
+```
+
+
+
+# Getting the Best Enchantments
+
+# The Cost of Enchanting
+
+# Combining Enchantments

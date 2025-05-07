@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.117.0">
+
+
+<title>Show &amp; Tell Session 1 - Data Visualization in R  - Keaton Markey | Portfolio Website</title>
+<meta property="og:title" content="Show &amp; Tell Session 1 - Keaton Markey | Portfolio Website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+      
+        <li><a href="/about/">About</a></li>
+      
+    
+    
+      
+        <li><a href="https://github.com/kmarkey"><img src="logos/github-mark.png" onerror="this.style.display='none'" alt=Github style="width:35px;height:35px"></a></li>
+      
+    
+    
+      
+        <li><a href="https://www.linkedin.com/in/keaton-markey-7822b3205/"><img src="logos/LI-In-Bug.png" onerror="this.style.display='none'" alt=LinkedIn style="width:35px;height:35px"></a></li>
+      
+    
+    
+      
+        <li><a href="https://www.kaggle.com/kmarkey">Kaggle</a></li>
+      
+    
+    
+  </ul>
+</nav>
+
+
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">4 min read</span>
+    
+
+    <h1 class="article-title">Show &amp; Tell Session 1</h1>
+
+    
+    <span class="article-date">2024-03-01</span>
+    
+
+    <div class="article-content">
+      
+      <link href="index_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="index_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="index_files/libs/d3-4.5.0/d3.min.js"></script>
+<script src="index_files/libs/sankey-1/sankey.js"></script>
+<script src="index_files/libs/sankeyNetwork-binding-0.4/sankeyNetwork.js"></script>
+<h1 id="intro">Intro</h1>
+<p>Data Visualization is a super important part of any project!</p>
+<ul>
+<li>Understand our data</li>
+<li>Understand what we are doing to the data</li>
+<li>Check our work</li>
+</ul>
+<h1 id="todays-agenda">Today’s agenda</h1>
+<ul>
+<li>Answer questions with data viz</li>
+<li>Explore what R has to offer</li>
+<li>Look at some other R visualizations</li>
+</ul>
+<h2 id="first-steps">First steps</h2>
+<p>Let’s see what this data looks like:</p>
+<pre><code class="language-r">head(penguins)
+</code></pre>
+<pre><code># A tibble: 6 × 8
+  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+1 Adelie  Torgersen           39.1          18.7               181        3750
+2 Adelie  Torgersen           39.5          17.4               186        3800
+3 Adelie  Torgersen           40.3          18                 195        3250
+4 Adelie  Torgersen           NA            NA                  NA          NA
+5 Adelie  Torgersen           36.7          19.3               193        3450
+6 Adelie  Torgersen           39.3          20.6               190        3650
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
+</code></pre>
+<p>How big is it?</p>
+<pre><code class="language-r">dim(penguins)
+</code></pre>
+<pre><code>[1] 344   8
+</code></pre>
+<h2 id="lets-get-plotting">Let’s get plotting!</h2>
+<p>Some questions:</p>
+<ul>
+<li>How many penguins are in each species</li>
+<li>How does weight differ by island?</li>
+<li>How are bill length and bill depth related?</li>
+</ul>
+<p><strong>We’ll use ggplot (ggplot2)</strong></p>
+<!-- ::: {.callout-tip} -->
+<!-- ## There's a package for that! -->
+<!-- ::: -->
+<h2 id="how-many-penguins-are-in-each-species">How many penguins are in each species?</h2>
+<pre><code class="language-r">ggplot(data = penguins, mapping = aes(x = species)) +
+  geom_bar()
+</code></pre>
+<p><img src="index_files/figure-commonmark/question-1-before-1.png" alt=""></p>
+<h2 id="how-many-penguins-are-in-each-species-1">How many penguins are in each species?</h2>
+<!-- :::: {.columns} -->
+<!-- ::: {.column width="25%"} -->
+<h4 id="goals">Goals</h4>
+<ul>
+<li>Add a title</li>
+<li>Make it look a little nicer</li>
+</ul>
+<!-- ::: -->
+<!-- ::: {.column width="75%"} -->
+<pre><code class="language-r">ggplot(data = penguins) + 
+  
+  geom_bar(aes(x = species)) +
+  
+  # add a title
+  labs(title = &quot;Penguins by Species&quot;) +
+  
+  # make it look a little nicer
+  theme_classic()
+</code></pre>
+<p><img src="index_files/figure-commonmark/question-1-after-1.png" alt=""></p>
+<!-- ::: -->
+<!-- :::: -->
+<h2 id="how-does-weight-differ-by-island">How does weight differ by island?</h2>
+<pre><code class="language-r">penguins %&gt;%
+  
+  ggplot() +
+  
+  geom_boxplot(aes(x = island, y = body_mass_g))
+</code></pre>
+<p><img src="index_files/figure-commonmark/question-2-before-1.png" alt=""></p>
+<h2 id="how-does-weight-differ-by-island-1">How does weight differ by island?</h2>
+<!-- :::: {.columns} -->
+<!-- ::: {.column width="25%"} -->
+<h4 id="goals-1">Goals</h4>
+<ul>
+<li>Add some axis labels and a title</li>
+<li>Change to pounds</li>
+<li>Make sure 0 is included in y scale</li>
+<li>Add some color – let’s use some branded colors!</li>
+</ul>
+<!-- ::: -->
+<!-- ::: {.column width="75%"} -->
+<pre><code class="language-r">penguins %&gt;%
+  
+  ggplot() +
+  
+  # change to pounds, add color
+  geom_boxplot(aes(x = island, y = body_mass_g * 0.00220462, fill = island)) +
+  
+  # change labels and title
+  labs(title = &quot;A Buffet for Biscoe Penguins&quot;,
+       x = &quot;Island&quot;,
+       y = &quot;Body Mass (Lbs)&quot;) +
+  
+  # include 0 in scale
+  lims(y = c(0, 6500 * 0.00220462)) +
+  
+  theme_economist() +
+  
+  # specify color
+  scale_fill_manual(values = c(&quot;#003087&quot;, &quot;#84BD00&quot;, &quot;#00AEC7&quot;), guide = &quot;none&quot;)
+</code></pre>
+<p><img src="index_files/figure-commonmark/question-2-after-1.png" alt=""></p>
+<h2 id="how-are-bill-length-and-bill-depth-related">How are bill length and bill depth related?</h2>
+<pre><code class="language-r">penguins %&gt;%
+  
+  ggplot() + 
+  
+  geom_point(aes(x = bill_length_mm, y = bill_depth_mm)) +
+
+  # change labels and title
+  labs(title = &quot;Scatterplot of Bill Sizes&quot;,
+       x = &quot;Bill Length (mm)&quot;,
+       y = &quot;Bill Depth (mm)&quot;) +
+  
+  theme_classic()
+</code></pre>
+<p><img src="index_files/figure-commonmark/question-3-before-1.png" alt=""></p>
+<h2 id="how-are-bill-length-and-bill-depth-related-1">How are bill length and bill depth related?</h2>
+<!-- :::: {.columns} -->
+<!-- ::: {.column width="25%"} -->
+<h4 id="goals-2">Goals</h4>
+<ul>
+<li>Color by groups</li>
+<li>Where is Martin?</li>
+</ul>
+<!-- ::: -->
+<!-- ::: {.column width="75%"} -->
+<pre><code class="language-r">library(ggrepel)
+
+named_penguins %&gt;%
+  
+  ggplot() +
+  # add color and transparency with alpha
+  geom_point(aes(x = bill_length_mm, y = bill_depth_mm, color = species), 
+             size = 3, alpha = 0.70) +
+  # point out Martin!
+  geom_text_repel(
+    aes(x = bill_length_mm, y = bill_depth_mm, label = highlight),
+    size = 5,
+    nudge_x = .5,
+    nudge_y = 1.5
+  ) +
+  # change labels and title
+  labs(title = &quot;Scatterplot of Bill Sizes&quot;,
+       x = &quot;Bill Length (mm)&quot;,
+       y = &quot;Bill Depth (mm)&quot;) +
+  theme_classic() +
+  # specify colors
+  scale_color_manual(values = c(&quot;#003087&quot;, &quot;#84BD00&quot;, &quot;#00AEC7&quot;),
+                     name = &quot;Species&quot;) +
+  # move legend
+  theme(legend.position = &quot;top&quot;)
+</code></pre>
+<p><img src="index_files/figure-commonmark/question-3-after-1.png" alt=""></p>
+<h2 id="dont-forget-about-data-manipulation">Don’t forget about data manipulation!</h2>
+<ul>
+<li>
+<p>Half of the battle is getting the data formatted correctly before you
+start messing around with plots.</p>
+</li>
+<li>
+<p>It’s important to have a good foundation in data manipulation!</p>
+</li>
+</ul>
+<h2 id="remove-all-of-the-nas-in-the-data">Remove all of the NA’s in the data</h2>
+<pre><code class="language-r">penguins_clean &lt;- penguins %&gt;%
+  
+  na.omit()
+</code></pre>
+<!-- [!TIP] -->
+<!-- ## Use the `%>%` pipe! -->
+<h4 id="without">Without</h4>
+<pre><code class="language-r">penguins_species_mean &lt;-
+  summarise(group_by(.data = penguins_clean, species), mass = mean(body_mass_g))
+</code></pre>
+<h4 id="with">With</h4>
+<pre><code class="language-r">penguins_species_mean &lt;- penguins_clean %&gt;%
+  
+  group_by(species) %&gt;%
+  # put comment here
+  summarise(mass = mean(body_mass_g))
+
+penguins_species_mean
+</code></pre>
+<pre><code># A tibble: 3 × 2
+  species    mass
+  &lt;fct&gt;     &lt;dbl&gt;
+1 Adelie    3706.
+2 Chinstrap 3733.
+3 Gentoo    5092.
+</code></pre>
+<h2 id="plot">Plot</h2>
+<pre><code class="language-r">penguins_species_mean %&gt;%
+  
+  ggplot() + geom_bar(aes(x = mass, y = species), stat = &quot;identity&quot;)
+</code></pre>
+<p><img src="index_files/figure-commonmark/unnamed-chunk-8-1.png" alt=""></p>
+<h1 id="more-examples">More examples!</h1>
+<h2 id="lollipop-plot">Lollipop Plot</h2>
+<p><img src="index_files/figure-commonmark/unnamed-chunk-9-1.png" alt=""></p>
+<h2 id="ridgeline-plot">Ridgeline Plot</h2>
+<p><img src="index_files/figure-commonmark/unnamed-chunk-10-1.png" alt=""></p>
+<h2 id="sankey-plot">Sankey Plot</h2>
+<div class="sankeyNetwork html-widget html-fill-item" id="htmlwidget-8d84c9cad6f435b8569d" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-8d84c9cad6f435b8569d">{"x":{"links":{"source":[0,0,0,1,2,3,3,4,4,5,5],"target":[3,4,5,4,3,6,7,6,7,6,7],"value":[44,55,47,68,119,80,83,61,62,24,23]},"nodes":{"name":["Adelie ","Chinstrap ","Gentoo ","Biscoe ","Dream ","Torgersen ","female ","male "],"group":["Adelie ","Chinstrap ","Gentoo ","Biscoe ","Dream ","Torgersen ","female ","male "]},"options":{"NodeID":"name","NodeGroup":"name","LinkGroup":null,"colourScale":"d3.scaleOrdinal(d3.schemeCategory20);","fontSize":13,"fontFamily":null,"nodeWidth":40,"nodePadding":20,"units":"","margin":{"top":null,"right":null,"bottom":null,"left":null},"iterations":32,"sinksRight":false}},"evals":[],"jsHooks":[]}</script>
+<h2 id="more-abstract">More Abstract</h2>
+<p><img src="img/genesisThomasPedersen.png" alt=""></p>
+<h1 id="final-thoughts">Final Thoughts</h1>
+<ul>
+<li>There’s tons of theory and other things to worry about during data
+visualization!</li>
+<li>Next time: More visualization in R–maps, interactivity, dashboards</li>
+<li>Thank you!</li>
+</ul>
+<h2 id="more-resources">More Resources</h2>
+<ul>
+<li><a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">More in-depth ggplot
+tutorial</a></li>
+<li>Visual Communication, Stephen Few</li>
+<li><a href="https://depictdatastudio.teachable.com/p/soar-beyond-the-dusty-shelf-report">Soar Beyond the Dusty Shelf
+Report</a></li>
+<li>Most of these figures were inspired by <a href="https://r-graph-gallery.com/index.html">The R Graph
+Gallery</a></li>
+</ul>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+
